@@ -50,4 +50,4 @@ def chat():
     return jsonify({'text': bot_reply})
 
 if __name__ == '__main__':
-    app.run(debug=False)
+    app.run(debug=True)
