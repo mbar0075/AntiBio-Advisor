@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text-to-Speech Example</title>
+
+    <!-- Include the Google Cloud Text-to-Speech API client library -->
+    <script src="https://apis.google.com/js/api.js"></script>
+
+    <script>
+        // Initialize the Google Cloud Text-to-Speech API client library with your API key
+        function init() {
+            gapi.load('client', function () {
+                gapi.client.init({
+                    apiKey: 'AIzaSyDbHvhyPYuKWnF3VXczZVfeM0G_Wyo8IWM'
+                }).then(function () {
+                    console.log('API client loaded and initialized');
+                });
+            });
+        }
+
+        // Function to generate speech synthesis
+        function generateSpeech(text) {
+            // Call the Text-to-Speech API to generate speech synthesis
+            var synthesisRequest = gapi.client.request({
+                'path': 'https://texttospeech.googleapis.com/v1/text:synthesize',
+                'method': 'POST',
+                'body': {
+                    'input': {
+                        'text': text
+                    },
+                    'voice': {
+                        'languageCode': 'en-US',
+                        'name': 'en-US-Wavenet-D'
+                    },
+                    'audioConfig': {
+                        'audioEncoding': 'MP3'
+                    }
+                }
+            });
+            console.log(synthesisRequest);
+            synthesisRequest.execute(function (response) {
+                // Play the generated audio file
+                var audio = new Audio('data:audio/mp3;base64,' + response.audioContent);
+                audio.play();
+            });
+        }
+    </script>
+</head>
+
+<body onload="init()">
+    <h1>Test</h1>
+    <p>Read me this sentence. Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has
+        been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
+        scrambled it to make a type specimen book.</p>
+
+    <!-- Call the generateSpeech function with your desired text -->
+    <button onclick="generateSpeech('Hello, world!')">Generate Speech</button>
+</body>
+
+</html>
