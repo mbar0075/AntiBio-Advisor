@@ -63,7 +63,9 @@
 
                 marker.addListener("click", function() {
                     calculateAndDisplayRoute({lat: userLatitude, lng: userLongitude}, place.geometry.location);
-                    infoWindow.setContent(`<strong>${place.name}</strong><br>${place.formatted_address}`);
+                    var content = `<strong>${place.name}</strong><br>${place.formatted_address}<br>`;
+                    content += `<a href="https://www.google.com/maps?q=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Open in Google Maps</a>`;
+                    infoWindow.setContent(content);                    
                     infoWindow.open(marker.getMap(), marker);
                 });
             }
