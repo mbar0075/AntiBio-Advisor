@@ -17,8 +17,12 @@
         rel="stylesheet" />
     <!-- Core theme CSS (includes Bootstrap)-->
 
-    <link rel="stylesheet" type= "text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
     <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <!-- Map -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbHvhyPYuKWnF3VXczZVfeM0G_Wyo8IWM&libraries=places&callback=initMap"
+        async defer></script>
 
 </head>
 
@@ -27,7 +31,8 @@
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container px-4 px-lg-5">
-            <a class="navbar-brand" href="#page-top"><img src="{{ url_for('static', filename='assets/img/icons.gif') }}" width="70" height="70" alt="Home"></a>
+            <a class="navbar-brand" href="#page-top"><img src="{{ url_for('static', filename='assets/img/icons.gif') }}"
+                    width="70" height="70" alt="Home"></a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
                 data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
                 aria-label="Toggle navigation">
@@ -78,7 +83,8 @@
         <div class="container px-4 px-lg-5">
             <!-- Featured Project Row-->
             <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0" src="{{ url_for('static', filename='assets/img/bg-masthead.jpg') }}" alt="..." /></div>
+                <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0"
+                        src="{{ url_for('static', filename='assets/img/bg-masthead.jpg') }}" alt="..." /></div>
                 <div class="col-xl-4 col-lg-5">
                     <div class="featured-text text-center text-lg-left">
                         <h4>Shoreline</h4>
@@ -90,7 +96,8 @@
             </div>
             <!-- Project One Row-->
             <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                <div class="col-lg-6"><img class="img-fluid" src="{{ url_for('static', filename='assets/img/demo-image-01.jpg') }}" alt="..." /></div>
+                <div class="col-lg-6"><img class="img-fluid"
+                        src="{{ url_for('static', filename='assets/img/demo-image-01.jpg') }}" alt="..." /></div>
                 <div class="col-lg-6">
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
@@ -105,7 +112,8 @@
             </div>
             <!-- Project Two Row-->
             <div class="row gx-0 justify-content-center">
-                <div class="col-lg-6"><img class="img-fluid" src="{{ url_for('static', filename='assets/img/demo-image-02.jpg') }}" alt="..." /></div>
+                <div class="col-lg-6"><img class="img-fluid"
+                        src="{{ url_for('static', filename='assets/img/demo-image-02.jpg') }}" alt="..." /></div>
                 <div class="col-lg-6 order-lg-first">
                     <div class="bg-black text-center h-100 project">
                         <div class="d-flex h-100">
@@ -173,6 +181,7 @@
         </div>
     </section>
 
+
     <!-- Chat-Bot Text Box Section -->
     <section class="contact-section bg-black">
         <div id="chat-container">
@@ -182,14 +191,26 @@
         </div>
     </section>
 
+    <!-- Map Box Section -->
+    <section class="contact-section bg-black">
+        <h1>Find Nearby Hospitals</h1>
+
+        <div id="result"></div>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+
+        <script>
+            showPosition();
+        </script>
+    </section>
+
     <script>
         function sendMessage() {
             const userInput = document.getElementById("user-input").value;
             const chatbox = document.getElementById("chat-box");
-            
+
             // Display the user's message in the chatbox
             chatbox.innerHTML += `<p>User: ${userInput}</p>`;
-            
+
             // Make an API call to GPT-3 using JavaScript's fetch() function
             fetch('/api/chat', {
                 method: 'POST',
@@ -198,15 +219,15 @@
                     'Content-Type': 'application/json'
                 }
             })
-            .then(response => response.json())
-            .then(data => {
-                // Display the response from GPT-3 in the chatbox
-                chatbox.innerHTML += `<p>Bot: ${data.text}</p>`;
-            })
-            .catch(error => {
-                console.error(error);
-            });
-            
+                .then(response => response.json())
+                .then(data => {
+                    // Display the response from GPT-3 in the chatbox
+                    chatbox.innerHTML += `<p>Bot: ${data.text}</p>`;
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
             // Clear the user input field
             document.getElementById("user-input").value = '';
         }
