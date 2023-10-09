@@ -42,6 +42,12 @@
             
             service.textSearch(request, function(results, status) {
                 if (status === google.maps.places.PlacesServiceStatus.OK) {
+                    // Sort places by distance
+                    results.sort(function (a, b) {
+                        var distanceA = google.maps.geometry.spherical.computeDistanceBetween({lat: userLatitude, lng: userLongitude}, a.geometry.location);
+                        var distanceB = google.maps.geometry.spherical.computeDistanceBetween({lat: userLatitude, lng: userLongitude}, b.geometry.location);
+                        return distanceA - distanceB;
+                    });
                     for (var i = 0; i < results.length; i++) {
                         createMarker(results[i]);
                     }
@@ -57,8 +63,7 @@
 
                 marker.addListener("click", function() {
                     calculateAndDisplayRoute({lat: userLatitude, lng: userLongitude}, place.geometry.location);
-                    displayPlaceDetails(place);
-                    infoWindow.setContent(place.name);
+                    infoWindow.setContent(`<strong>${place.name}</strong><br>${place.formatted_address}`);
                     infoWindow.open(marker.getMap(), marker);
                 });
             }
