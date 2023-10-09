@@ -21,9 +21,7 @@
             });
         }
 
-        // Function to generate speech synthesis
         function generateSpeech(text) {
-            // Call the Text-to-Speech API to generate speech synthesis
             var synthesisRequest = gapi.client.request({
                 'path': 'https://texttospeech.googleapis.com/v1/text:synthesize',
                 'method': 'POST',
@@ -40,12 +38,49 @@
                     }
                 }
             });
-            console.log(synthesisRequest);
+
             synthesisRequest.execute(function (response) {
-                // Play the generated audio file
-                var audio = new Audio('data:audio/mp3;base64,' + response.audioContent);
-                audio.play();
+                if (response && response.error) {
+                    console.error('Error in Text-to-Speech API response:', response.error.message);
+                } else if (response && response.audioContent) {
+                    // Create a Blob from the base64-encoded audio content
+                    var blob = new Blob([base64ToArrayBuffer(response.audioContent)], { type: 'audio/mp3' });
+
+                    // Create an object URL for the Blob
+                    var url = URL.createObjectURL(blob);
+
+                    // Play the audio using the object URL
+                    var audio = new Audio(url);
+
+                    audio.volume = 0.5;
+
+                    audio.play();
+                } else {
+                    console.error('Unexpected response from Text-to-Speech API:', response);
+                }
             });
+        }
+
+
+
+        // Helper function to convert base64 to ArrayBuffer
+        function base64ToArrayBuffer(base64) {
+            var binaryString = window.atob(base64);
+            var bytes = new Uint8Array(binaryString.length);
+            for (var i = 0; i < binaryString.length; i++) {
+                bytes[i] = binaryString.charCodeAt(i);
+            }
+            return bytes.buffer;
+        }
+
+        // Function to read all the text within the <p> element
+        function readParagraph() {
+            var paragraph = document.querySelector('p');
+            if (paragraph) {
+                var text = paragraph.textContent;
+                console.log(text);
+                generateSpeech(text);
+            }
         }
     </script>
 </head>
@@ -56,8 +91,8 @@
         been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and
         scrambled it to make a type specimen book.</p>
 
-    <!-- Call the generateSpeech function with your desired text -->
-    <button onclick="generateSpeech('Hello, world!')">Generate Speech</button>
+    <!-- Call the readParagraph function to generate speech for the entire paragraph -->
+    <button onclick="readParagraph()">Generate Speech for Paragraph</button>
 </body>
 
 </html>
