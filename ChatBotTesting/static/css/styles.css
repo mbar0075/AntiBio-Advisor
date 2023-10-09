@@ -13046,18 +13046,33 @@ body {
 #chat-container {
   border: 1px solid #ccc;
   padding: 10px;
-  max-width: 400px;
+  width: 50vw;
   margin: 0 auto;
 }
-#chat-messages {
+#chat-box {
   border: 1px solid #ccc;
   padding: 10px;
   background-color: #f9f9f9;
-  max-height: 300px;
+  height: 300px;
   overflow-y: auto;
+  border-radius: 10px;
 }
+
 #user-input {
-  width: 100%;
+  width: 88%;
   padding: 5px;
   margin-top: 10px;
+  border-radius: 10px;
+}
+
+#chat-bot-button {
+  background-color: var(--bs-gray-dark);
+  border: none;
+  color: white;
+  padding: 15px 32px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 20px;
 }
