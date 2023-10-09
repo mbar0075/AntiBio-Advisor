@@ -50,38 +50,14 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
-
-    // function sendMessage() {
-    //     console.log('sendMessage');
-    //     const userInput = document.getElementById("userInput").value;
-    //     const chatbox = document.getElementById("chatbox");
-
-    //     // Display the user's message in the chatbox
-    //     chatbox.innerHTML += `<p>User: ${userInput}</p>`;
-
-    //     // Make an API call to GPT-3 using JavaScript's fetch() function
-    //     fetch('/api/chat', {
-    //         method: 'POST',
-    //         body: JSON.stringify({ text: userInput }),
-    //         headers: {
-    //             'Content-Type': 'application/json'
-    //         }
-    //     })
-    //     .then(response => response.json())
-    //     .then(data => {
-    //         // Display the response from GPT-3 in the chatbox
-    //         chatbox.innerHTML += `<p>Bot: ${data.text}</p>`;
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
-
-    //     // Clear the user input field
-    //     document.getElementById("userInput").value = '';
-    // }
 });
 
-// Map 
+//Waiting for the entire page to finish loading, then executing the showPosition() function
+window.addEventListener('load', function () {
+    showPosition();
+});
+
+//Declaring the map variables to be used
 var infoWindow;
 var directionsService;
 var directionsRenderer;
@@ -91,6 +67,7 @@ function showPosition() {
     if (navigator.geolocation) {
         navigator.geolocation.getCurrentPosition(function (position) {
             initMap(position.coords.latitude, position.coords.longitude);
+            console.log(position.coords.latitude, position.coords.longitude);
         });
     } else {
         alert("Sorry, your browser does not support HTML5 geolocation.");
