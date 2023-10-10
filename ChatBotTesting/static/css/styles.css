@@ -13146,3 +13146,7 @@ body {
 .ChatItem-chatText > div {
   display: inline
 }
+
+.text-bottom-margin {
+  margin-bottom: 20px;
+}
