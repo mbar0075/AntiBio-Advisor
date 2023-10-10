@@ -1,5 +1,5 @@
 # Importing the required library
-from flask import Flask, request, jsonify, send_from_directory, render_template
+from flask import Flask, request, jsonify, send_from_directory, render_template, url_for
 import openai
 import sys
 import os
@@ -16,7 +16,9 @@ conversation = []
 # Serving the website assets (HTML, CSS, JavaScript, etc.) from the "Website" directory
 @app.route('/')
 def serve_website():
-    return render_template("index.html")
+    user_icon = url_for('static', filename='assets/img/user-icon.png')
+    bot_icon = url_for('static', filename='assets/img/bot-icon.png')
+    return render_template("index.html", user_icon=user_icon, bot_icon = bot_icon)
 
 # Handling the chatbot functionality
 @app.route('/api/chat', methods=['POST'])

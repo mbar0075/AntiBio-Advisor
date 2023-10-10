@@ -159,12 +159,21 @@ function calculateAndDisplayRoute(origin, destination) {
 }
 
 //Function to communicate with the Chatbot
-function sendMessage() {
+function sendMessage(user_icon, bot_icon) {
     const userInput = document.getElementById("user-input").value;
     const chatbox = document.getElementById("chat-box");
 
     //Displaying the user's message in the chatbox
-    chatbox.innerHTML += `<p>User: ${userInput}</p>`;
+    chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
+    <div class="ChatItem-meta">
+      <div class="ChatItem-avatar">
+        <img class="ChatItem-avatarImage" src="` + user_icon + `">
+      </div>
+    </div>
+    <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText">${userInput}</div>
+    </div>
+  </div>`;
 
     //Making an API call to GPT-3 using JavaScript's fetch() function
     fetch('/api/chat', {
@@ -177,7 +186,16 @@ function sendMessage() {
         .then(response => response.json())
         .then(data => {
             //Displaying the response from GPT-3 in the chatbox
-            chatbox.innerHTML += `<p>Bot: ${data.text}</p>`;
+            chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
+              <div class="ChatItem-meta">
+                <div class="ChatItem-avatar">
+                  <img class="ChatItem-avatarImage" src="` + bot_icon + `">
+                </div>
+              </div>
+              <div class="ChatItem-chatContent">
+                <div class="ChatItem-chatText">${data.text}</div>
+              </div>
+            </div>`
         })
         .catch(error => {
             console.error(error);
