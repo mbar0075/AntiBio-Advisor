@@ -204,3 +204,25 @@ function sendMessage(user_icon, bot_icon) {
     //Clearing the user input field
     document.getElementById("user-input").value = '';
 }
+
+
+//Waiting for the entire page to finish loading, then executing the showPosition() function
+window.addEventListener('load', function () {
+    const divToObserve = document.getElementById('chat-box'); // Replace 'myDiv' with the actual ID of your div
+
+    if (divToObserve) {
+    const observer = new MutationObserver((mutationsList, observer) => {
+        for (let mutation of mutationsList) {
+        if (mutation.type === 'childList') {
+            // Content of the div was changed
+            divToObserve.scrollTop = divToObserve.scrollHeight;
+        }
+        }
+    });
+
+    const config = { childList: true };
+    observer.observe(divToObserve, config);
+    } else {
+    console.error('The specified div element was not found.');
+    }
+});

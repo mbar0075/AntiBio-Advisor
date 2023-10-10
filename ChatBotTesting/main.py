@@ -7,7 +7,7 @@ import os
 app = Flask(__name__)
 
 # Setting the OpenAI API key
-openai.api_key = "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"
+openai.api_key = "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"
 
 # Defining required libraries
 # userQueries = []
