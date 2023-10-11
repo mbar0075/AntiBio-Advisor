@@ -1,0 +1,3 @@
+{"prompt": "What is the capital city of France?", "completion": "Paris END"}
+{"prompt": "What is the largest ocean in the world?", "completion": "Pacific Ocean END"}
+{"prompt": "What is the name of the actor who played the character of Harry Potter?", "completion": "Daniel Radcliffe END"}
