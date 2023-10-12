@@ -148,12 +148,12 @@
         </div>
     </section>
     <!-- Signup-->
-    <section class="signup-section" id="signup">
+    <!-- <section class="signup-section" id="signup">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
                 <div class="col-md-10 col-lg-8 mx-auto text-center">
                     <i class="far fa-paper-plane fa-2x mb-2 text-white"></i>
-                    <h2 class="text-white mb-5">Subscribe to receive updates!</h2>
+                    <h2 class="text-white mb-5">Subscribe to receive updates!</h2> -->
                     <!-- * * * * * * * * * * * * * * *-->
                     <!-- * * SB Forms Contact Form * *-->
                     <!-- * * * * * * * * * * * * * * *-->
@@ -161,9 +161,9 @@
                     <!-- To make this form functional, sign up at-->
                     <!-- https://startbootstrap.com/solution/contact-forms-->
                     <!-- to get an API token!-->
-                    <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN">
+                    <!-- <form class="form-signup" id="contactForm" data-sb-form-api-token="API_TOKEN"> -->
                         <!-- Email address input-->
-                        <div class="row input-group-newsletter">
+                        <!-- <div class="row input-group-newsletter">
                             <div class="col"><input class="form-control" id="emailAddress" type="email"
                                     placeholder="Enter email address..." aria-label="Enter email address..."
                                     data-sb-validations="required,email" /></div>
@@ -173,12 +173,12 @@
                         <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:required">An email is
                             required.</div>
                         <div class="invalid-feedback mt-2" data-sb-feedback="emailAddress:email">Email is not valid.
-                        </div>
+                        </div> -->
                         <!-- Submit success message-->
                         <!---->
                         <!-- This is what your users will see when the form-->
                         <!-- has successfully submitted-->
-                        <div class="d-none" id="submitSuccessMessage">
+                        <!-- <div class="d-none" id="submitSuccessMessage">
                             <div class="text-center mb-3 mt-2 text-white">
                                 <div class="fw-bolder">Form submission successful!</div>
                                 To activate this form, sign up at
@@ -186,30 +186,37 @@
                                 <a
                                     href="https://startbootstrap.com/solution/contact-forms">https://startbootstrap.com/solution/contact-forms</a>
                             </div>
-                        </div>
+                        </div> -->
                         <!-- Submit error message-->
                         <!---->
                         <!-- This is what your users will see when there is-->
                         <!-- an error submitting the form-->
-                        <div class="d-none" id="submitErrorMessage">
+                        <!-- <div class="d-none" id="submitErrorMessage">
                             <div class="text-center text-danger mb-3 mt-2">Error sending message!</div>
                         </div>
                     </form>
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- Chat-Bot Text Box Section -->
     <section class="contact-section bg-black">
-        <h1 class="outlined-box text-white text-bottom-margin ">Lets have a Chat</h1>
+        <h1 class="outlined-box text-white text-bottom-margin text-center">Let's have a Chat!</h1>
         <div id="chat-container">
             <div id="chat-box"></div>
-            <input type="text" id="user-input" placeholder="Type your questions here.">
-            <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
-            <button id="speak" onclick="speak()">Speak</button>
+            <div style="display: flex; align-items: center; margin-top: 10px;">
+                <input type="text" id="user-input" placeholder="Type your questions here." onkeydown="handleKeyPress(event)" style="margin-right: 10px;">
+                <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
+                <div style="width: 10px;"></div> <!-- Add some space between buttons -->
+                <button id="speak" onclick="speak()" style="border: none; padding: 0; background: transparent;">
+                    <img src="../static/assets/img/testingSpeaker.png" style="width: 30px; height: 30px;">
+                </button>
+            </div>
         </div>
     </section>
+
+
 
     <h1>Upload a File</h1>
     <input type="file" id="fileInput" accept="image/*">
@@ -231,7 +238,7 @@
     <section class="contact-section bg-black">
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5">
-                <div class="col-md-4 mb-3 mb-md-0">
+                <!-- <div class="col-md-4 mb-3 mb-md-0">
                     <div class="card py-4 h-100">
                         <div class="card-body text-center">
                             <i class="fas fa-map-marked-alt text-primary mb-2"></i>
@@ -260,11 +267,11 @@
                             <div class="small text-black-50">+1 (555) 902-8832</div>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
             <div class="social d-flex justify-content-center">
-                <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
+                <!-- <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a> -->
                 <a class="mx-2" href="https://github.com/mbar0075/AntiBio-Advisor"><i class="fab fa-github"></i></a>
             </div>
         </div>

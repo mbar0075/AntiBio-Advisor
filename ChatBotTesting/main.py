@@ -1,3 +1,4 @@
+
 # Importing the required library
 from flask import Flask, request, jsonify, send_from_directory, render_template, url_for
 import openai
@@ -49,7 +50,7 @@ def chat():
 def process_file():
     uploaded_file = request.files["fileInput"]
     
-    pytesseract.pytesseract.tesseract_cmd = r'Tesseract-OCR\\tesseract.exe'
+    pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
 
     # Open an image using Pillow
     image = Image.open(uploaded_file)  
