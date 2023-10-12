@@ -1,8 +1,10 @@
 # Importing the required library
 from flask import Flask, request, jsonify, send_from_directory, render_template, url_for
 import openai
-import sys
-import os
+# import sys
+# import os
+import pytesseract
+from PIL import Image
 
 app = Flask(__name__)
 
@@ -41,6 +43,22 @@ def chat():
     conversation.append({"role": "assistant", "content": bot_reply})
 
     return jsonify({'text': bot_reply})
+
+# Define a route to handle file upload and processing
+@app.route("/process", methods=["POST"])
+def process_file():
+    uploaded_file = request.files["fileInput"]
+    
+    pytesseract.pytesseract.tesseract_cmd = r'Tesseract-OCR\\tesseract.exe'
+
+    # Open an image using Pillow
+    image = Image.open(uploaded_file)  
+
+    # Use pytesseract to extract text from the image
+    text = pytesseract.image_to_string(image, config='--psm 3')
+
+    # Print the extracted text
+    return text
 
 if __name__ == '__main__':
     app.run(debug=True)

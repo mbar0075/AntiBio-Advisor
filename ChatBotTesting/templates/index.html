@@ -26,7 +26,7 @@
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbHvhyPYuKWnF3VXczZVfeM0G_Wyo8IWM&libraries=places&callback=initMap"
         async defer>
         </script>
-
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
 </head>
 
 
@@ -196,15 +196,24 @@
 
     <!-- Chat-Bot Text Box Section -->
     <section class="contact-section bg-black">
-        <center>
-            <h1 class="outlined-box text-white text-bottom-margin">Lets have a Chat</h1>
-        </center>
+        <h1 class="outlined-box text-white text-bottom-margin ">Lets have a Chat</h1>
         <div id="chat-container">
             <div id="chat-box"></div>
             <input type="text" id="user-input" placeholder="Type your questions here.">
             <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
         </div>
     </section>
+
+    <h1>Upload a File</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    <button onclick="processImage()">Run OCR</button>
+    <div id="result"></div>
+
+
+    <!-- <form action="/process" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" id="file">
+        <input type="submit" value="Upload and Process">
+    </form> -->
 
     <!-- Map Box Section -->
     <section class="contact-section bg-black text-center">

@@ -226,3 +226,41 @@ window.addEventListener('load', function () {
     console.error('The specified div element was not found.');
     }
 });
+
+function processImage() {
+    // var fileInput = document.getElementById('fileInput');
+
+    // var file = fileInput.files[0];
+
+    // //Making an API call to GPT-3 using JavaScript's fetch() function
+    // fetch('/process', {
+    //     method: 'POST',
+    //     body: file,
+    // })
+    //     .then(data => {
+    //         console.log(data)
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+
+
+    // Assuming 'file' is the File object obtained from the input element
+    var fileInput = document.getElementById('fileInput');
+    var file = fileInput.files[0];
+
+    var formData = new FormData();
+    formData.append('fileInput', file);
+
+    fetch('/process', {
+        method: 'POST',
+        body: formData,
+    })
+        .then(response => response.text())
+        .then(data => {
+            console.log(data);
+        })
+        .catch(error => {
+            console.error(error);
+        });
+}
