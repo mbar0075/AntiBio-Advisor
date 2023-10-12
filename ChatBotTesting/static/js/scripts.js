@@ -228,23 +228,6 @@ window.addEventListener('load', function () {
 });
 
 function processImage() {
-    // var fileInput = document.getElementById('fileInput');
-
-    // var file = fileInput.files[0];
-
-    // //Making an API call to GPT-3 using JavaScript's fetch() function
-    // fetch('/process', {
-    //     method: 'POST',
-    //     body: file,
-    // })
-    //     .then(data => {
-    //         console.log(data)
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
-
-
     // Assuming 'file' is the File object obtained from the input element
     var fileInput = document.getElementById('fileInput');
     var file = fileInput.files[0];
@@ -263,4 +246,27 @@ function processImage() {
         .catch(error => {
             console.error(error);
         });
+}
+
+function speak() {
+    var textarea = document.getElementsByClassName('ChatItem-chatText');
+    for (var i = 0; i < textarea.length; i++) {
+        var text = textarea[i].innerHTML;
+        var synth = window.speechSynthesis;
+        
+        // // Wait for voices to be loaded
+        // synth.addEventListener('voiceschanged', function () {
+        //     var voices = synth.getVoices();
+
+        //     utterance.volume = 0.5; // You can adjust this value
+
+        //     // Set voice (you can change the index to select a different voice)
+        //     utterance.voice = voices[1]; // You can change this index           
+        // });
+
+        // Set volume (0.1 to 1.0)
+        var utterance = new SpeechSynthesisUtterance(text);
+
+        synth.speak(utterance);
+    }
 }

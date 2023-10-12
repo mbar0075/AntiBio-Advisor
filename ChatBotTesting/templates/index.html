@@ -27,10 +27,16 @@
         async defer>
         </script>
     <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
 
 <body id="page-top">
+    <div class="slide-in">
+        <h1>Welcome to My Website!</h1>
+    </div>
+
+
     <!-- Required to retrieve the user/bot icons -->
     <script>
         var user_icon_src = "{{ user_icon }}";
@@ -201,6 +207,7 @@
             <div id="chat-box"></div>
             <input type="text" id="user-input" placeholder="Type your questions here.">
             <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
+            <button id="speak" onclick="speak()">Speak</button>
         </div>
     </section>
 
@@ -208,12 +215,6 @@
     <input type="file" id="fileInput" accept="image/*">
     <button onclick="processImage()">Run OCR</button>
     <div id="result"></div>
-
-
-    <!-- <form action="/process" method="post" enctype="multipart/form-data">
-        <input type="file" name="file" id="file">
-        <input type="submit" value="Upload and Process">
-    </form> -->
 
     <!-- Map Box Section -->
     <section class="contact-section bg-black text-center">
@@ -286,5 +287,4 @@
     <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
     <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
 </body>
-
 </html>
