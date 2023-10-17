@@ -50,7 +50,8 @@ def chat():
 def process_file():
     uploaded_file = request.files["fileInput"]
     
-    pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
+    pytesseract.pytesseract.tesseract_cmd = r'Tesseract-OCR\\tesseract.exe'
+    #pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
 
     # Open an image using Pillow
     image = Image.open(uploaded_file)  
