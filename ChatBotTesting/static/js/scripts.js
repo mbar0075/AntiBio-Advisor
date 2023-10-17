@@ -291,9 +291,15 @@ function showExplanation() {
       "OD": "Represents 'once daily'.",
       "BD": "Short for 'bis in die', or 'twice a day'."
     };
-  
+    
     if (explanations[selectedValue]) {
-      explanationText.textContent = explanations[selectedValue];
+        explanationText.textContent = explanations[selectedValue];
+        explanationDiv.style.display = "block";
+    } else {
+        explanationText.textContent = "Testing"
+        explanationDiv.style.display = "block";
     }
-    explanationDiv.style.display = "block";
+    
   }
+
+  window.onload = showExplanation;

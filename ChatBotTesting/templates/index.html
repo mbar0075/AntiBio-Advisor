@@ -57,7 +57,9 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#signup">Contact</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#chatbot">Chatbot</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#notations">Notations</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#pharmacies">Pharmacies</a></li>
                 </ul>
             </div>
         </div>
@@ -70,7 +72,7 @@
                     <h1 class="mx-auto my-0 text-uppercase">Antibio Advisor</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">An intelligent interface project targeted towards
                         educating people of different ages about when and why to use antibiotic medication.</h2>
-                    <a class="btn btn-primary" href="#chat-section">Lets Chat!</a>
+                    <a class="btn btn-primary" href="#chatbot">Lets Chat!</a>
                 </div>
             </div>
         </div>
@@ -80,7 +82,7 @@
         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-lg-8">
-                    <h2 class="text-white mb-4">What is Anti-Microbial Resistance?</h2>
+                    <h2 class="mb-4 animated-text">What is Anti-Microbial Resistance?</h2>
                     <p class="text-white-50 mb-4">
                         "Antimicrobial resistance (AMR) threatens the effective prevention and treatment of an
                         ever-increasing range of infections caused by bacteria, parasites, viruses and fungi." - WHO
@@ -200,9 +202,11 @@
     </section> -->
 
     <!-- Chat-Bot Text Box Section -->
-    <section class="contact-section bg-black" id="chat-section">
-        <h1 class="outlined-box text-white text-bottom-margin text-center">Let's have a Chat!
-        <img src="{{ url_for('static', filename='assets/img/chat-icon.png') }}" width="35" height="35"></h1>
+    <section class="contact-section bg-black py-4" id="chatbot">
+        <div class="text-center">
+            <h1 class="animated-text">Let's have a Chat!
+            <img src="{{ url_for('static', filename='assets/img/chat-icon-rotation.gif') }}" width="70" height="40"></h1>
+        </div>
         <div id="chat-container">
             <div id="chat-box">
                 <!--Initial ChatBot Message-->
@@ -228,25 +232,7 @@
         </div>
     </section>
 
-
-
-    <h1>Upload a File</h1>
-    <input type="file" id="fileInput" accept="image/*">
-    <button onclick="processImage()">Run OCR</button>
-    <div id="result"></div>
-
-    <!-- Map Box Section -->
-    <section class="map-section bg-black text-center">
-        <h1 class="outlined-box text-white text-bottom-margin">Find Nearby Pharmacies</h1>
-        <div id="result"></div>
-        <div id="map" style="height: 400px; width: 100%;"></div>
-
-        <script>
-            showPosition();
-        </script>
-    </section>
-
-    <section class="section-notation bg-black text-center">
+    <section class="section-notation bg-black text-center" id="notations">
         <h2 class="text-white">Select an Abbreviation / Notation:</h2>
         <select id="abbreviations" onchange="showExplanation()">
         <option value="0-1-0">0-1-0</option>
@@ -262,10 +248,27 @@
 
         <div class="bg-black" id="explanation">
             <br>
-            <h3 class="text-white">Explanation:</h3>
-            <p id="explanationText" class="text-white"></p>
+            <h3 class="text-white py-3">Explanation:</h3>
+            <p id="explanationText" class="text-white explanation-box"></p>
         </div>
 
+    </section>
+
+
+    <h1>Upload a File</h1>
+    <input type="file" id="fileInput" accept="image/*">
+    <button onclick="processImage()">Run OCR</button>
+    <div id="result"></div>
+
+    <!-- Map Box Section -->
+    <section class="py-4 bg-black text-center" id="pharmacies">
+        <h1 class="text-bottom-margin animated-text">Find Nearby Pharmacies</h1>
+        <div id="result"></div>
+        <div id="map" style="height: 400px; width: 100%;"></div>
+
+        <script>
+            showPosition();
+        </script>
     </section>
 
     <!-- Contact-->

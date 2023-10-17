@@ -82,6 +82,7 @@
   --bs-link-hover-color: #50817e;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #faf4e0;
+  --bs-animated-text-color: #99DBF9;
 }
 
 *,
@@ -13122,6 +13123,7 @@ body {
   position: relative;
   flex: 1 0 auto;
   width: 100%;
+  animation: chat-bubble-animation 0.5s ease-in-out;
 }
 
 .ChatItem-avatar {
@@ -13163,6 +13165,17 @@ body {
   display: inline
 }
 
+@keyframes chat-bubble-animation {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .text-bottom-margin {
   margin-bottom: 20px;
 }
@@ -13195,8 +13208,18 @@ body {
   margin-bottom: 0;
 }
 
-#explanationText {
-  margin: 0;
+.explanation-box {
+  margin: 0px;
+  background-color: #333; /* Background color */
+  color: #fff; /* Text color */
+  padding: 10px; /* Padding around the content */
+   
+  border: 2px solid #555; /* Border */
+  border-radius: 5px; /* Rounded corners */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+
+  display: inline-block; /* Make it an inline block */
+  width: auto; /* Set width to auto to fit content */
 }
 
 .section-notation {
@@ -13220,11 +13243,18 @@ body {
 
 /* Basic styles for your text */
 .animated-text {
-  font-size: 24px;
-  color: #333;
+  display: flex;
+  align-items: center;
   text-align: center;
   opacity: 0; /* Hide the text initially */
   animation: fadeIn 1.5s ease-in-out forwards; /* Animation */
+  color: #fff;
+  display: inline-block; /* Make it an inline block */
+  width: auto; /* Set width to auto to fit content */
+}
+
+.animated-text:hover {
+  color: var(--bs-animated-text-color);
 }
 
 /* Keyframes for the animation */
@@ -13235,4 +13265,23 @@ body {
   to {
     opacity: 1;
   }
+}
+
+/*  */
+.outlined-box {
+  background: #333;
+  padding: 10px;
+  display: inline-block;
+}
+
+.text-white {
+  color: #fff;
+}
+
+.text-bottom-margin {
+  margin-bottom: 10px;
+}
+
+.icon {
+  vertical-align: middle;
 }
