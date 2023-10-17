@@ -30,7 +30,6 @@
     <script src="https://apis.google.com/js/api.js"></script>
 </head>
 
-
 <body id="page-top">
     <div class="slide-in">
         <h1>Welcome to My Website!</h1>
@@ -71,7 +70,7 @@
                     <h1 class="mx-auto my-0 text-uppercase">Antibio Advisor</h1>
                     <h2 class="text-white-50 mx-auto mt-2 mb-5">An intelligent interface project targeted towards
                         educating people of different ages about when and why to use antibiotic medication.</h2>
-                    <a class="btn btn-primary" href="#about">Get Started</a>
+                    <a class="btn btn-primary" href="#chat-section">Lets Chat!</a>
                 </div>
             </div>
         </div>
@@ -201,10 +200,23 @@
     </section> -->
 
     <!-- Chat-Bot Text Box Section -->
-    <section class="contact-section bg-black">
-        <h1 class="outlined-box text-white text-bottom-margin text-center">Let's have a Chat!</h1>
+    <section class="contact-section bg-black" id="chat-section">
+        <h1 class="outlined-box text-white text-bottom-margin text-center">Let's have a Chat!
+        <img src="{{ url_for('static', filename='assets/img/chat-icon.png') }}" width="35" height="35"></h1>
         <div id="chat-container">
-            <div id="chat-box"></div>
+            <div id="chat-box">
+                <!--Initial ChatBot Message-->
+                <div class="ChatItem ChatItem--customer">
+                    <div class="ChatItem-meta">
+                      <div class="ChatItem-avatar">
+                        <img class="ChatItem-avatarImage" src="{{ url_for('static', filename='assets/img/bot-icon.png') }}">
+                      </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                      <div class="ChatItem-chatText">Type your messages here to talk to the Chat-bot.</div>
+                    </div>
+                  </div>
+            </div>
             <div style="display: flex; align-items: center; margin-top: 10px;">
                 <input type="text" id="user-input" placeholder="Type your questions here." onkeydown="handleKeyPress(event)" style="margin-right: 10px;">
                 <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
