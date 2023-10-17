@@ -273,3 +273,27 @@ function handleKeyPress(event) {
     }
 }
 
+function showExplanation() {
+    var select = document.getElementById("abbreviations");
+    var explanationText = document.getElementById("explanationText");
+    var explanationDiv = document.getElementById("explanation");
+  
+    var selectedValue = select.value;
+  
+    var explanations = {
+      "0-1-0": "Take no pills in the morning, one pill at midday, and no pills in the evening.",
+      "1-0-1": "One pill in the morning, skip midday, and one pill in the evening.",
+      "1-1-1": "Take one pill three times a day: morning, midday, and evening.",
+      "2-2-2": "Two pills in the morning, two at midday, and two in the evening.",
+      "1/2-1-1/2": "Half a pill in the morning, one full pill at midday, and half a pill in the evening.",
+      "HS": "Stands for 'hora somni', meaning 'at bedtime'.",
+      "PRN": "Abbreviation for 'pro re nata', or 'as needed'.",
+      "OD": "Represents 'once daily'.",
+      "BD": "Short for 'bis in die', or 'twice a day'."
+    };
+  
+    if (explanations[selectedValue]) {
+      explanationText.textContent = explanations[selectedValue];
+    }
+    explanationDiv.style.display = "block";
+  }

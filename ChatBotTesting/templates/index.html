@@ -236,7 +236,7 @@
     <div id="result"></div>
 
     <!-- Map Box Section -->
-    <section class="contact-section bg-black text-center">
+    <section class="map-section bg-black text-center">
         <h1 class="outlined-box text-white text-bottom-margin">Find Nearby Pharmacies</h1>
         <div id="result"></div>
         <div id="map" style="height: 400px; width: 100%;"></div>
@@ -244,6 +244,28 @@
         <script>
             showPosition();
         </script>
+    </section>
+
+    <section class="section-notation bg-black text-center">
+        <h2 class="text-white">Select an Abbreviation / Notation:</h2>
+        <select id="abbreviations" onchange="showExplanation()">
+        <option value="0-1-0">0-1-0</option>
+        <option value="1-0-1">1-0-1</option>
+        <option value="1-1-1">1-1-1</option>
+        <option value="2-2-2">2-2-2</option>
+        <option value="1/2-1-1/2">1/2-1-1/2</option>
+        <option value="HS">HS</option>
+        <option value="PRN">PRN</option>
+        <option value="OD">OD</option>
+        <option value="BD">BD</option>
+        </select>
+
+        <div class="bg-black" id="explanation">
+            <br>
+            <h3 class="text-white">Explanation:</h3>
+            <p id="explanationText" class="text-white"></p>
+        </div>
+
     </section>
 
     <!-- Contact-->
