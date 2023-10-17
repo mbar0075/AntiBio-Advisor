@@ -12994,7 +12994,7 @@ body {
 }
 
 .contact-section {
-  padding-top: 5rem;
+  padding-top: 0.25rem;
 }
 
 .contact-section .card {
@@ -13188,4 +13188,33 @@ body {
 
 .slide-in:hover h1 {
   transform: translateY(0%);
+}
+
+#explanation {
+  display: none;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+
+#explanationText {
+  margin: 0;
+}
+
+.section-notation {
+  padding-top: 2rem;
+  /* padding-bottom: 15rem; */
+}
+
+#abbreviations {
+  margin-top: 1rem;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: #fff; /* Adjust background color as needed */
+}
+
+.map-section {
+  padding-top: 1rem;
 }
