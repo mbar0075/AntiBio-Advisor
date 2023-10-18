@@ -13170,6 +13170,7 @@ body {
     opacity: 0;
     transform: translateY(10px);
   }
+
   100% {
     opacity: 1;
     transform: translateY(0);
@@ -13210,16 +13211,24 @@ body {
 
 .explanation-box {
   margin: 0px;
-  background-color: #333; /* Background color */
-  color: #fff; /* Text color */
-  padding: 10px; /* Padding around the content */
-   
-  border: 2px solid #555; /* Border */
-  border-radius: 5px; /* Rounded corners */
-  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5); /* Box shadow for depth */
+  background-color: #333;
+  /* Background color */
+  color: #fff;
+  /* Text color */
+  padding: 10px;
+  /* Padding around the content */
 
-  display: inline-block; /* Make it an inline block */
-  width: auto; /* Set width to auto to fit content */
+  border: 2px solid #555;
+  /* Border */
+  border-radius: 5px;
+  /* Rounded corners */
+  box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
+  /* Box shadow for depth */
+
+  display: inline-block;
+  /* Make it an inline block */
+  width: auto;
+  /* Set width to auto to fit content */
 }
 
 .section-notation {
@@ -13234,7 +13243,8 @@ body {
   border: 1px solid #ccc;
   border-radius: 4px;
   margin-bottom: 10px;
-  background-color: #fff; /* Adjust background color as needed */
+  background-color: #fff;
+  /* Adjust background color as needed */
 }
 
 .map-section {
@@ -13246,11 +13256,31 @@ body {
   display: flex;
   align-items: center;
   text-align: center;
-  opacity: 0; /* Hide the text initially */
-  animation: fadeIn 1.5s ease-in-out forwards; /* Animation */
+  opacity: 0;
+  /* Hide the text initially */
+  animation: fadeIn 1.5s ease-in-out forwards;
+  /* Animation */
   color: #fff;
-  display: inline-block; /* Make it an inline block */
-  width: auto; /* Set width to auto to fit content */
+  display: inline-block;
+  /* Make it an inline block */
+  width: auto;
+  /* Set width to auto to fit content */
+}
+
+.animated-text-masthead {
+  animation: fadeIn 3s ease-in-out forwards;
+}
+
+.animated-text-info {
+  animation: fadeIn 5s ease-in-out forwards;
+}
+
+.animated-text-button {
+  animation: fadeIn 7s ease-in-out forwards;
+}
+
+.animated-text-button:hover {
+  color: var(--bs-animated-text-color)
 }
 
 .animated-text:hover {
@@ -13262,6 +13292,7 @@ body {
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
