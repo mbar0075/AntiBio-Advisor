@@ -247,24 +247,50 @@ function processImage() {
         });
 }
 
+var synth = window.speechSynthesis;
+var voices = synth.getVoices();
+var currentTextIndex = 0; // To keep track of the text being spoken
+
+function showVolumeSlider(event) {
+    event.preventDefault();
+    var slider = document.getElementById("volumeSlider");
+    slider.style.display = "block";
+    var volumeRange = document.getElementById("volumeRange");
+    volumeRange.value = parseFloat(utterance.getAttribute("data-volume")) || 0.5;
+}
+
+function updateVolume() {
+    var volumeRange = document.getElementById("volumeRange");
+    var value = parseFloat(volumeRange.value);
+    utterance.setAttribute("data-volume", value);
+}
+
 function speak() {
     var textarea = document.getElementsByClassName('ChatItem-chatText');
-    for (var i = 0; i < textarea.length; i++) {
-        var text = textarea[i].innerHTML;
-        var synth = window.speechSynthesis;
+    if (currentTextIndex < textarea.length) {
+        var text = textarea[currentTextIndex].innerHTML;
 
-        // Wait for voices to be loaded
+        // Create a new SpeechSynthesisUtterance for each text
         var utterance = new SpeechSynthesisUtterance(text);
-        var voices = synth.getVoices();
+        utterance.voice = voices[1]; // You can change this index
 
-        utterance.volume = 0.1; // You can adjust this value
-
-        // Set voice (you can change the index to select a different voice)
-        utterance.voice = voices[1]; // You can change this index           
+        // Set the volume from the slider
+        var volumeRange = document.getElementById("volumeRange");
+        var value = parseFloat(volumeRange.value);
+        utterance.volume = value;
 
         synth.speak(utterance);
+
+        // Increment the index to speak the next text on the next button click
+        currentTextIndex++;
+
+        // Hide the volume slider
+        var slider = document.getElementById("volumeSlider");
+        slider.style.display = "none";
     }
 }
+
+
 
 function handleKeyPress(event) {
     if (event.key === "Enter") {
@@ -293,13 +319,19 @@ function showExplanation() {
     };
 
     if (explanations[selectedValue]) {
-        explanationText.textContent = explanations[selectedValue];
         explanationDiv.style.display = "block";
+
+        // Remove and add the class to trigger the animation
+        explanationText.classList.remove("prescription-fade-in");
+        void explanationText.offsetWidth; // This line is needed to force a reflow
+        explanationText.classList.add("prescription-fade-in");
+
+        explanationText.textContent = explanations[selectedValue];
     } else {
-        explanationText.textContent = "Testing"
+        explanationText.textContent = "No explanation available for this selection.";
         explanationDiv.style.display = "block";
     }
-
 }
+
 
 window.onload = showExplanation;

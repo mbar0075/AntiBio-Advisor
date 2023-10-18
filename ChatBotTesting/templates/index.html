@@ -233,9 +233,14 @@
                     onkeydown="handleKeyPress(event)" style="margin-right: 10px;">
                 <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
                 <div style="width: 10px;"></div> <!-- Add some space between buttons -->
-                <button id="speak" onclick="speak()" style="border: none; padding: 0; background: transparent;">
+                <button id="speak" onclick="speak()" oncontextmenu="showVolumeSlider(event)"
+                    style="border: none; padding: 0; background: transparent;">
                     <img src="../static/assets/img/testingSpeaker.png" style="width: 30px; height: 30px;">
                 </button>
+                <div id="volumeSlider" style="display: none;">
+                    <input type="range" id="volumeRange" min="0" max="3" step="0.3" value="0.7"
+                        oninput="updateVolume()">
+                </div>
             </div>
         </div>
     </section>

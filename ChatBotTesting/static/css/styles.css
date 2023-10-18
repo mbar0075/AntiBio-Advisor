@@ -13316,3 +13316,19 @@ body {
 .icon {
   vertical-align: middle;
 }
+
+/* Prescription Fade-in*/
+.prescription-fade-in {
+  opacity: 0;
+  animation: fadeIn 2.7s ease-in-out forwards;
+}
+
+@keyframes prescription-fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
