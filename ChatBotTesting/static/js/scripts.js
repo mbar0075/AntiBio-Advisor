@@ -267,27 +267,24 @@ function updateVolume() {
 
 function speak() {
     var textarea = document.getElementsByClassName('ChatItem-chatText');
-    if (currentTextIndex < textarea.length) {
-        var text = textarea[currentTextIndex].innerHTML;
 
-        // Create a new SpeechSynthesisUtterance for each text
-        var utterance = new SpeechSynthesisUtterance(text);
-        utterance.voice = voices[1]; // You can change this index
+    var text = textarea[currentTextIndex].innerHTML;
 
-        // Set the volume from the slider
-        var volumeRange = document.getElementById("volumeRange");
-        var value = parseFloat(volumeRange.value);
-        utterance.volume = value;
+    // Create a new SpeechSynthesisUtterance for each text
+    var utterance = new SpeechSynthesisUtterance(text);
+    utterance.voice = voices[1]; // You can change this index
 
-        synth.speak(utterance);
+    // Set the volume from the slider
+    var volumeRange = document.getElementById("volumeRange");
+    var value = parseFloat(volumeRange.value);
+    utterance.volume = value;
 
-        // Increment the index to speak the next text on the next button click
-        currentTextIndex++;
+    console.log(value);
+    console.log(utterance.volume);
 
-        // Hide the volume slider
-        var slider = document.getElementById("volumeSlider");
-        slider.style.display = "none";
-    }
+    synth.speak(utterance);
+
+    // Increment the index to speak the next text on the next button click
 }
 
 

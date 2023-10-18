@@ -34,8 +34,7 @@ def chat():
 
     # Making the API call
     response = openai.ChatCompletion.create(
-        # model="gpt-3.5-turbo",
-        model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",
+        model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",#"gpt-3.5-turbo",
         messages=conversation
     )
 
@@ -51,8 +50,7 @@ def chat():
 def process_file():
     uploaded_file = request.files["fileInput"]
     
-    pytesseract.pytesseract.tesseract_cmd = r'Tesseract-OCR\\tesseract.exe'
-    #pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
+    pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
 
     # Open an image using Pillow
     image = Image.open(uploaded_file)  
