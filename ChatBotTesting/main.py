@@ -7,6 +7,18 @@ import openai
 import pytesseract
 from PIL import Image
 
+# ------------------- Llama2 -------------------
+import os
+# To get API tken, go https://replicate.com/account/api-tokens
+os.environ["REPLICATE_API_TOKEN"] = "r8_VJUqAZVYc1qpxVK7lf9RiYM3XizCegh2iU7iq"
+
+import replicate
+
+# Prompts
+pre_prompt = "You are a helpful assistant. You do not respond as 'User' or pretend to be 'User'. You only respond once as 'Assistant'."
+
+
+# ------------------- Llama2 -------------------
 app = Flask(__name__)
 
 # Setting the OpenAI API key
@@ -26,24 +38,47 @@ def serve_website():
 # Handling the chatbot functionality
 @app.route('/api/chat', methods=['POST'])
 def chat():
+    # # Retrieivng the user query
+    # user_query = request.json.get('text')
+
+    # # Defining the conversation
+    # conversation.append({"role": "user", "content": user_query})
+
+    # # Making the API call
+    # response = openai.ChatCompletion.create(
+    #     model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",#"gpt-3.5-turbo",
+    #     messages=conversation
+    # )
+
+    # # Extracting the bot's reply
+    # bot_reply = response['choices'][0]['message']['content']
+
+    # conversation.append({"role": "assistant", "content": bot_reply})
+
+    # return jsonify({'text': bot_reply})
+
+# ------------------- Llama2 -------------------
     # Retrieivng the user query
     user_query = request.json.get('text')
 
     # Defining the conversation
     conversation.append({"role": "user", "content": user_query})
 
-    # Making the API call
-    response = openai.ChatCompletion.create(
-        model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",#"gpt-3.5-turbo",
-        messages=conversation
-    )
+    # Generate LLM response
+    output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', # LLM model
+                        input={"prompt": f"{pre_prompt} {user_query} Assistant: ", # Prompts
+                        "temperature":0.1, "top_p":0.9, "max_length":128, "repetition_penalty":1})  # Model parameters
+    
+    bot_reply = ""
 
-    # Extracting the bot's reply
-    bot_reply = response['choices'][0]['message']['content']
+    for item in output:
+        bot_reply += item
+
 
     conversation.append({"role": "assistant", "content": bot_reply})
 
     return jsonify({'text': bot_reply})
+# ------------------- Llama2 -------------------
 
 # Define a route to handle file upload and processing
 @app.route("/process", methods=["POST"])
