@@ -25,7 +25,6 @@ app = Flask(__name__)
 openai.api_key = "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"
 
 # Defining required libraries
-# userQueries = []
 conversation = []
 
 # Serving the website assets (HTML, CSS, JavaScript, etc.) from the "Website" directory

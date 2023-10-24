@@ -203,21 +203,20 @@
     </section> -->
 
     <!-- Chat-Bot Text Box Section -->
-    <section class="contact-section bg-black py-4" id="chatbot">
-        <div class="text-center">
-            <h1 class="animated-text">Let's have a Chat!
-                <img src="{{ url_for('static', filename='assets/img/chat-icon-rotation.gif') }}" width="70" height="40"
-                    style="padding-bottom: 0.9%;">
-            </h1>
+    <section class="contact-section bg-black py-4" id="chatBot">
+        <div class="text-center header-container">
+            <h1 id="chatTitle" class="animated-text">Let's have a Chat!</h1>
+            <img id="chatIcon" src="{{ url_for('static', filename='assets/img/chat-icon-rotation.gif') }}"
+                alt="Chat Icon">
         </div>
-        <div id="chat-container">
-            <div id="chat-box">
-                <!--Initial ChatBot Message-->
+        <div id="chatContainer">
+            <div id="chatBox">
+                <!-- Initial ChatBot Message -->
                 <div class="ChatItem ChatItem--customer">
                     <div class="ChatItem-meta">
                         <div class="ChatItem-avatar">
                             <img class="ChatItem-avatarImage"
-                                src="{{ url_for('static', filename='assets/img/bot-icon.png') }}">
+                                src="{{ url_for('static', filename='assets/img/bot-icon.png') }}" alt="Bot Icon">
                         </div>
                     </div>
                     <div class="ChatItem-chatContent">
@@ -227,18 +226,14 @@
                     </div>
                 </div>
             </div>
-            <div style="display: flex; align-items: center; margin-top: 10px;">
-                <input type="text" id="user-input" placeholder="Type your questions here."
-                    onkeydown="handleKeyPress(event)" style="margin-right: 10px;">
-                <button id="chat-bot-button" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
-                <div style="width: 10px;"></div> <!-- Add some space between buttons -->
-                <button id="speak" onclick="speak()" oncontextmenu="showVolumeSlider(event)"
-                    style="border: none; padding: 0; background: transparent;">
-                    <img src="../static/assets/img/testingSpeaker.png" style="width: 30px; height: 30px;">
+            <div id="chatContainerInput">
+                <input type="text" id="userInput" placeholder="Type your questions here"
+                    onkeydown="handleKeyPress(event)">
+                <button id="chatBotButton" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
+                <button id="speak" onclick="speak()" oncontextmenu="showVolumeSlider(event)">
+                    <img src="../static/assets/img/testingSpeaker.png" alt="Speaker Icon">
                 </button>
-                <div id="volumeSlider">
-                    <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="0.5">
-                </div>
+                <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="0.5" class="chatVolumeSlider">
             </div>
         </div>
     </section>

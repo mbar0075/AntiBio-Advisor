@@ -159,8 +159,8 @@ function calculateAndDisplayRoute(origin, destination) {
 
 //Function to communicate with the Chatbot
 function sendMessage(user_icon, bot_icon) {
-    const userInput = document.getElementById("user-input").value;
-    const chatbox = document.getElementById("chat-box");
+    const userInput = document.getElementById("userInput").value;
+    const chatbox = document.getElementById("chatBox");
 
     //Displaying the user's message in the chatbox
     chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
@@ -201,13 +201,13 @@ function sendMessage(user_icon, bot_icon) {
         });
 
     //Clearing the user input field
-    document.getElementById("user-input").value = '';
+    document.getElementById("userInput").value = '';
 }
 
 
 //Waiting for the entire page to finish loading, then executing the showPosition() function
 window.addEventListener('load', function () {
-    const divToObserve = document.getElementById('chat-box'); // Replace 'myDiv' with the actual ID of your div
+    const divToObserve = document.getElementById('chatBox'); // Replace 'myDiv' with the actual ID of your div
 
     if (divToObserve) {
         const observer = new MutationObserver((mutationsList, observer) => {
@@ -278,15 +278,13 @@ function speak() {
 
         // Set the volume from the slider
         var volumeRange = document.getElementById("volumeRange");
-        
+
         var value = parseFloat(volumeRange.value);
         utterance.volume = value;
 
         synth.speak(utterance);
     }
 }
-
-
 
 function handleKeyPress(event) {
     if (event.key === "Enter") {
