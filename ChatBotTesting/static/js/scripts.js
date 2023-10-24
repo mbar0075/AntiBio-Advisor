@@ -259,32 +259,31 @@ function showVolumeSlider(event) {
     volumeRange.value = parseFloat(utterance.getAttribute("data-volume")) || 0.5;
 }
 
-function updateVolume() {
-    var volumeRange = document.getElementById("volumeRange");
-    var value = parseFloat(volumeRange.value);
-    utterance.setAttribute("data-volume", value);
-}
+// function updateVolume() {
+//     // var volumeRange = document.getElementById("volumeRange");
+//     // var value = parseFloat(volumeRange.value);
+//     // utterance.setAttribute("data-volume", value);
+// }
 
 function speak() {
+
     var textarea = document.getElementsByClassName('ChatItem-chatText');
+    var lengthOfTextArea = textarea.length;
+    var text = "";
+    for (var counter = 0; counter < lengthOfTextArea; counter++) {
+        text = textarea[counter].innerHTML;
 
-    var text = textarea[currentTextIndex].innerHTML;
+        // Create a new SpeechSynthesisUtterance for each text
+        var utterance = new SpeechSynthesisUtterance(text);
 
-    // Create a new SpeechSynthesisUtterance for each text
-    var utterance = new SpeechSynthesisUtterance(text);
-    utterance.voice = voices[1]; // You can change this index
+        // Set the volume from the slider
+        var volumeRange = document.getElementById("volumeRange");
+        
+        var value = parseFloat(volumeRange.value);
+        utterance.volume = value;
 
-    // Set the volume from the slider
-    var volumeRange = document.getElementById("volumeRange");
-    var value = parseFloat(volumeRange.value);
-    utterance.volume = value;
-
-    console.log(value);
-    console.log(utterance.volume);
-
-    synth.speak(utterance);
-
-    // Increment the index to speak the next text on the next button click
+        synth.speak(utterance);
+    }
 }
 
 

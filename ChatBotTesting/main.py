@@ -38,63 +38,63 @@ def serve_website():
 # Handling the chatbot functionality
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    # # Retrieivng the user query
-    # user_query = request.json.get('text')
-
-    # # Defining the conversation
-    # conversation.append({"role": "user", "content": user_query})
-
-    # # Making the API call
-    # response = openai.ChatCompletion.create(
-    #     model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",#"gpt-3.5-turbo",
-    #     messages=conversation
-    # )
-
-    # # Extracting the bot's reply
-    # bot_reply = response['choices'][0]['message']['content']
-
-    # conversation.append({"role": "assistant", "content": bot_reply})
-
-    # return jsonify({'text': bot_reply})
-
-# ------------------- Llama2 -------------------
     # Retrieivng the user query
     user_query = request.json.get('text')
 
     # Defining the conversation
     conversation.append({"role": "user", "content": user_query})
 
-    # Generate LLM response
-    output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', # LLM model
-                        input={"prompt": f"{pre_prompt} {user_query} Assistant: ", # Prompts
-                        "temperature":0.1, "top_p":0.9, "max_length":128, "repetition_penalty":1})  # Model parameters
-    
-    bot_reply = ""
+    # Making the API call
+    response = openai.ChatCompletion.create(
+        model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",#"gpt-3.5-turbo",
+        messages=conversation
+    )
 
-    for item in output:
-        bot_reply += item
-
+    # Extracting the bot's reply
+    bot_reply = response['choices'][0]['message']['content']
 
     conversation.append({"role": "assistant", "content": bot_reply})
 
     return jsonify({'text': bot_reply})
+
+# ------------------- Llama2 -------------------
+    # # Retrieivng the user query
+    # user_query = request.json.get('text')
+
+    # # Defining the conversation
+    # conversation.append({"role": "user", "content": user_query})
+
+    # # Generate LLM response
+    # output = replicate.run('a16z-infra/llama13b-v2-chat:df7690f1994d94e96ad9d568eac121aecf50684a0b0963b25a41cc40061269e5', # LLM model
+    #                     input={"prompt": f"{pre_prompt} {user_query} Assistant: ", # Prompts
+    #                     "temperature":0.1, "top_p":0.9, "max_length":128, "repetition_penalty":1})  # Model parameters
+    
+    # bot_reply = ""
+
+    # for item in output:
+    #     bot_reply += item
+
+
+    # conversation.append({"role": "assistant", "content": bot_reply})
+
+    # return jsonify({'text': bot_reply})
 # ------------------- Llama2 -------------------
 
 # Define a route to handle file upload and processing
-@app.route("/process", methods=["POST"])
-def process_file():
-    uploaded_file = request.files["fileInput"]
+# @app.route("/process", methods=["POST"])
+# def process_file():
+#     uploaded_file = request.files["fileInput"]
     
-    pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
+#     pytesseract.pytesseract.tesseract_cmd = r'AntiBio-Advisor\\Tesseract-OCR\\tesseract.exe'
 
-    # Open an image using Pillow
-    image = Image.open(uploaded_file)  
+#     # Open an image using Pillow
+#     image = Image.open(uploaded_file)  
 
-    # Use pytesseract to extract text from the image
-    text = pytesseract.image_to_string(image, config='--psm 3')
+#     # Use pytesseract to extract text from the image
+#     text = pytesseract.image_to_string(image, config='--psm 3')
 
-    # Print the extracted text
-    return text
+#     # Print the extracted text
+#     return text
 
 if __name__ == '__main__':
     app.run(debug=True)
