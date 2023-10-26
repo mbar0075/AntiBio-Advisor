@@ -49,6 +49,15 @@ window.addEventListener('DOMContentLoaded', event => {
             }
         });
     });
+
+    var slider = document.getElementById("chatVolumeSlider");
+
+    slider.addEventListener("input", function() {
+      var value = slider.value;
+      var percentage = (value - slider.min) / (slider.max - slider.min) * 100;
+      var bg = "linear-gradient(to right, #007FEF 0%, #007FEF " + percentage + "%, gray " + percentage + "%, gray 100%)";
+      slider.style.background = bg;
+    });
 });
 
 //Waiting for the entire page to finish loading, then executing the showPosition() function
@@ -252,9 +261,9 @@ var currentTextIndex = 0; // To keep track of the text being spoken
 
 function showVolumeSlider(event) {
     event.preventDefault();
-    var slider = document.getElementById("volumeSlider");
+    var slider = document.getElementById("chatVolumeSlider");
     slider.style.display = "block";
-    var volumeRange = document.getElementById("volumeRange");
+    var volumeRange = document.getElementById("chatVolumeSlider");
     volumeRange.value = parseFloat(utterance.getAttribute("data-volume")) || 0.5;
 }
 
@@ -275,7 +284,7 @@ function speak() {
         var utterance = new SpeechSynthesisUtterance(text);
 
         // Set the volume from the slider
-        var volumeRange = document.getElementById("volumeRange");
+        var volumeRange = document.getElementById("chatVolumeSlider");
 
         var value = parseFloat(volumeRange.value);
         utterance.volume = value;
