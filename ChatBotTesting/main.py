@@ -95,5 +95,12 @@ def chat():
 #     # Print the extracted text
 #     return text
 
+# Resetting conversation history
+@app.route('/api/reset_conversation', methods=['POST'])
+def reset_conversation():
+    global conversation
+    conversation = []
+    return jsonify({'message': 'Conversation reset.'})
+
 if __name__ == '__main__':
     app.run(debug=True)

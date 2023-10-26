@@ -12,7 +12,7 @@ def save_path(filepath, content):
 api_key = "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"
 openai.api_key = api_key
 
-jsonLFilePath = "fine_tuning.jsonl"
+jsonLFilePath = "FineTuning\\fine_tuning.jsonl"
 
 with open(jsonLFilePath, 'rb') as file:
     response = openai.File.create(
@@ -23,4 +23,5 @@ with open(jsonLFilePath, 'rb') as file:
 file_id = response['id']
 print(f"File uploaded with ID: {file_id}")
 
-#File id (fine_tuning.jsonl) = file-FcZw1iAdldUflAWumtzvbsFv
+#File id (fine_tuning_old.jsonl) = file-FcZw1iAdldUflAWumtzvbsFv
+#File id (fine_tuning.jsonl) = file-2mL56bkvPbFwnf3o6wHalcT2

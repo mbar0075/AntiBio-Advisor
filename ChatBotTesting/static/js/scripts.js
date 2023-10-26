@@ -204,7 +204,6 @@ function sendMessage(user_icon, bot_icon) {
     document.getElementById("userInput").value = '';
 }
 
-
 //Waiting for the entire page to finish loading, then executing the showPosition() function
 window.addEventListener('load', function () {
     const divToObserve = document.getElementById('chatBox'); // Replace 'myDiv' with the actual ID of your div
@@ -266,7 +265,6 @@ function showVolumeSlider(event) {
 // }
 
 function speak() {
-
     var textarea = document.getElementsByClassName('ChatItem-chatText');
     var lengthOfTextArea = textarea.length;
     var text = "";
@@ -284,6 +282,33 @@ function speak() {
 
         synth.speak(utterance);
     }
+}
+
+function clearChatHistory(bot_icon) {
+    const chatbox = document.getElementById("chatBox");
+
+    chatbox.innerHTML = `<div class="ChatItem ChatItem--customer">
+    <div class="ChatItem-meta">
+      <div class="ChatItem-avatar">
+        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
+      </div>
+    </div>
+    <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?</div>
+    </div>
+  </div>`
+
+    // JavaScript code to reset the conversation
+    fetch('/api/reset_conversation', {
+        method: 'POST',
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 function handleKeyPress(event) {

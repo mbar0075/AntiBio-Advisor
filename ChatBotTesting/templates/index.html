@@ -229,11 +229,14 @@
             <div id="chatContainerInput">
                 <input type="text" id="userInput" placeholder="Type your questions here"
                     onkeydown="handleKeyPress(event)">
-                <button id="chatBotButton" onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
+                <button class="chatBotButton" id="chatBotSendButton"
+                    onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
+                <button class="chatBotButton" id="chatBotClearButton"
+                    onclick="clearChatHistory(bot_icon_src)">Clear</button>
                 <button id="speak" onclick="speak()" oncontextmenu="showVolumeSlider(event)">
                     <img src="../static/assets/img/testingSpeaker.png" alt="Speaker Icon">
                 </button>
-                <input type="range" id="volumeRange" min="0" max="1" step="0.1" value="0.5" class="chatVolumeSlider">
+                <input type="range" id="chatVolumeSlider" min="0" max="1" step="0.1" value="0.5">
             </div>
         </div>
     </section>
