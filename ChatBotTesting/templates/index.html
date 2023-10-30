@@ -73,7 +73,7 @@
                     <h2 class="text-white-50 mx-auto mt-2 mb-5 animated-text-info">An intelligent interface project
                         targeted towards
                         educating people of different ages about when and why to use antibiotic medication.</h2>
-                    <a class="btn btn-primary animated-text-button" href="#chatbot">Lets Chat!</a>
+                    <a class="btn btn-primary animated-text-button chat-button" href="#chatBot">Lets Chat!</a>
                 </div>
             </div>
         </div>
@@ -222,6 +222,9 @@
                     <div class="ChatItem-chatContent">
                         <div class="ChatItem-chatText">
                             Hey there 👋, you can call me MediBot. How can I assist you today?
+                            <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                                <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -244,16 +247,38 @@
     <section class="section-notation bg-black text-center py-4" id="notations">
         <h1 class="animated-text">Select an Abbreviation / Notation:</h1>
         <br>
+        <select id="antibio-abbreviations" onchange="showExplanation()">
+            <option value="--">--</option>
+            <option value="Penicillin">Penicillin</option>
+            <option value="Cephalosporins">Cephalosporins</option>
+            <option value="Tetracyclines">Tetracyclines</option>
+            <option value="Macrolides">Macrolides</option>
+            <option value="Fluoroquinolones">Fluoroquinolones</option>
+            <option value="Sulfonamides">Sulfonamides</option>
+            <option value="Aminoglycosides">Aminoglycosides</option>
+            <option value="Metronidazole">Metronidazole</option>
+            <option value="Clindamycin">Clindamycin</option>
+            <option value="Vancomycin">Vancomycin</option>
+            <option value="Linezolid">Linezolid</option>
+            <option value="Doxycycline">Doxycycline</option>
+        </select>
+
+        <select id="word-abbreviations" onchange="showExplanation()">
+            <option value="--">--</option>
+            <option value="HS">HS</option>
+            <option value="PRN">PRN</option>
+            <option value="OD">OD</option>
+            <option value="BD">BD</option>
+        </select>
+
         <select id="abbreviations" onchange="showExplanation()">
+            <option value="--">--</option>
             <option value="0-1-0">0-1-0</option>
             <option value="1-0-1">1-0-1</option>
             <option value="1-1-1">1-1-1</option>
             <option value="2-2-2">2-2-2</option>
             <option value="1/2-1-1/2">1/2-1-1/2</option>
-            <option value="HS">HS</option>
-            <option value="PRN">PRN</option>
-            <option value="OD">OD</option>
-            <option value="BD">BD</option>
+            
         </select>
 
         <div class="bg-black" id="explanation">

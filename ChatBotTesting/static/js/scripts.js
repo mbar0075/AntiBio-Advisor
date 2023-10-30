@@ -86,62 +86,114 @@ function showPosition() {
 
 //Function to initialise the map
 function initMap(userLatitude, userLongitude) {
-    //Creating a new Google Map centered at the user's coordinates
+    // Creating a new Google Map centered at the user's coordinates
     var map = new google.maps.Map(document.getElementById('map'), {
         center: { lat: userLatitude, lng: userLongitude },
         zoom: 15
     });
 
-    //Initialising map-related variables
+    // Initialising map-related variables
     infoWindow = new google.maps.InfoWindow();
     directionsService = new google.maps.DirectionsService();
     directionsRenderer = new google.maps.DirectionsRenderer();
 
-    //Setting the map for directions rendering
+    // Setting the map for directions rendering
     directionsRenderer.setMap(map);
 
-    //Getting the element for the information panel
-
-    //Performing a text search for pharmacies using the Places API
+    // Getting the element for the information panel
     infoPanel = document.getElementById('info-panel');
-    var request = {
+
+    // Perform a text search for pharmacies using the Places API
+    var pharmacyRequest = {
         query: 'pharmacy',
         fields: ['name', 'geometry'],
     };
+
+    // Perform a text search for general practitioners
+    var gpRequest = {
+        query: 'general practitioner',
+        fields: ['name', 'geometry'],
+    };
+
     var service = new google.maps.places.PlacesService(map);
 
-    //Handling the results of the text search
-    service.textSearch(request, function (results, status) {
-        if (status === google.maps.places.PlacesServiceStatus.OK) {
-            //Sorting places by distance from the user's location
-            results.sort(function (a, b) {
-                var distanceA = google.maps.geometry.spherical.computeDistanceBetween({ lat: userLatitude, lng: userLongitude }, a.geometry.location);
-                var distanceB = google.maps.geometry.spherical.computeDistanceBetween({ lat: userLatitude, lng: userLongitude }, b.geometry.location);
+    // Handling the results of the text search for pharmacies
+    service.textSearch(pharmacyRequest, function (pharmacyResults, pharmacyStatus) {
+        if (pharmacyStatus === google.maps.places.PlacesServiceStatus.OK) {
+            // Sorting places by distance from the user's location
+            pharmacyResults.sort(function (a, b) {
+                var distanceA = google.maps.geometry.spherical.computeDistanceBetween(
+                    { lat: userLatitude, lng: userLongitude },
+                    a.geometry.location
+                );
+                var distanceB = google.maps.geometry.spherical.computeDistanceBetween(
+                    { lat: userLatitude, lng: userLongitude },
+                    b.geometry.location
+                );
                 return distanceA - distanceB;
             });
-            //Creating marker for each pharmacy
-            for (var i = 0; i < results.length; i++) {
-                createMarker(results[i]);
+            // Creating marker for each pharmacy
+            for (var i = 0; i < pharmacyResults.length; i++) {
+                createMarker(pharmacyResults[i], true);
             }
         }
     });
 
-    //Function to create a marker for a place (pharmacy)
-    function createMarker(place) {
-        //Creating a marker
+    // Handling the results of the text search for general practitioners
+    service.textSearch(gpRequest, function (gpResults, gpStatus) {
+        if (gpStatus === google.maps.places.PlacesServiceStatus.OK) {
+            // Sorting places by distance from the user's location
+            gpResults.sort(function (a, b) {
+                var distanceA = google.maps.geometry.spherical.computeDistanceBetween(
+                    { lat: userLatitude, lng: userLongitude },
+                    a.geometry.location
+                );
+                var distanceB = google.maps.geometry.spherical.computeDistanceBetween(
+                    { lat: userLatitude, lng: userLongitude },
+                    b.geometry.location
+                );
+                return distanceA - distanceB;
+            });
+            // Creating marker for each general practitioner
+            for (var i = 0; i < gpResults.length; i++) {
+                createMarker(gpResults[i], false);
+            }
+        }
+    });
+
+    // Function to create a marker for a place (pharmacy or general practitioner)
+    function createMarker(place, isPharmacy = false) {
+        // Creating a marker
+        var markerIcon = null; // Default marker icon (no custom icon)
+
+        if (isPharmacy) {
+            // Check if the place is a pharmacy and set a custom pharmacy marker icon
+            markerIcon = {
+                url: '../static/assets/img/red_location.png', // Replace with the actual path to your pharmacy marker icon image
+            };
+        } else {
+            // Check if the place is a general practitioner and set a custom GP marker icon
+            markerIcon = {
+                url: '../static/assets/img/blue_location.png', // Replace with the actual path to your blue GP marker icon image
+            };
+        }
+
+        // Creating a marker with the selected marker icon
         var marker = new google.maps.Marker({
             map: map,
             position: place.geometry.location,
-            title: place.name
+            title: place.name,
+            icon: markerIcon // Set the marker icon
         });
-        //Adding a click listener to the marker
+
+        // Adding a click listener to the marker
         marker.addListener("click", function () {
-            //Calling the calculateAndDisplayRoute() function to display the route from the user to the pharmacy
+            // Calling the calculateAndDisplayRoute() function to display the route from the user to the place
             calculateAndDisplayRoute({ lat: userLatitude, lng: userLongitude }, place.geometry.location);
-            //Creating content for info window
+            // Creating content for info window
             var content = `<strong>${place.name}</strong><br>${place.formatted_address}<br>`;
             content += `<a href="https://www.google.com/maps?q=${place.geometry.location.lat()},${place.geometry.location.lng()}" target="_blank">Open in Google Maps</a>`;
-            //Setting the content and open the info window
+            // Setting the content and opening the info window
             infoWindow.setContent(content);
             infoWindow.open(marker.getMap(), marker);
         });
@@ -179,7 +231,11 @@ function sendMessage(user_icon, bot_icon) {
       </div>
     </div>
     <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText">${userInput}</div>
+      <div class="ChatItem-chatText">${userInput}
+      <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+            <img src="../static/assets/img/testingSpeaker2.png" alt="Speaker Icon">
+        </button>
+      </div>
     </div>
   </div>`;
 
@@ -201,7 +257,11 @@ function sendMessage(user_icon, bot_icon) {
                 </div>
               </div>
               <div class="ChatItem-chatContent">
-                <div class="ChatItem-chatText">${data.text}</div>
+                <div class="ChatItem-chatText">${data.text}
+                <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                    <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+                </button>
+                </div>
               </div>
             </div>`
         })
@@ -293,6 +353,22 @@ function speak() {
     }
 }
 
+function readMessage(button) {
+    // Get the text from the parent <div> element
+    var chatText = button.parentElement.textContent.trim();
+
+    // Create a new SpeechSynthesisUtterance for the text
+    var utterance = new SpeechSynthesisUtterance(chatText);
+
+    // Set the volume from the slider
+    var volumeRange = document.getElementById("chatVolumeSlider");
+    var value = parseFloat(volumeRange.value);
+    utterance.volume = value;
+
+    synth.speak(utterance);
+}
+
+
 function clearChatHistory(bot_icon) {
     const chatbox = document.getElementById("chatBox");
 
@@ -303,7 +379,11 @@ function clearChatHistory(bot_icon) {
       </div>
     </div>
     <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?</div>
+      <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?
+      <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+        </button>
+      </div>
     </div>
   </div>`
 
@@ -328,33 +408,72 @@ function handleKeyPress(event) {
 }
 
 function showExplanation() {
-    var select = document.getElementById("abbreviations");
+    var antibioticsValue = document.getElementById("antibio-abbreviations").value;
+    var wordsValue = document.getElementById("word-abbreviations").value;
+    var numericValue = document.getElementById("abbreviations").value;
+
     var explanationText = document.getElementById("explanationText");
     var explanationDiv = document.getElementById("explanation");
 
-    var selectedValue = select.value;
-
-    var explanations = {
-        "0-1-0": "Take no pills in the morning, one pill at midday, and no pills in the evening.",
-        "1-0-1": "One pill in the morning, skip midday, and one pill in the evening.",
-        "1-1-1": "Take one pill three times a day: morning, midday, and evening.",
-        "2-2-2": "Two pills in the morning, two at midday, and two in the evening.",
-        "1/2-1-1/2": "Half a pill in the morning, one full pill at midday, and half a pill in the evening.",
-        "HS": "Stands for 'hora somni', meaning 'at bedtime'.",
-        "PRN": "Abbreviation for 'pro re nata', or 'as needed'.",
-        "OD": "Represents 'once daily'.",
-        "BD": "Short for 'bis in die', or 'twice a day'."
+    var abbreviation_explanations = {
+        "0-1-0": "0-1-0: Take no pills in the morning, one pill at midday, and no pills in the evening.",
+        "1-0-1": "1-0-1: One pill in the morning, skip midday, and one pill in the evening.",
+        "1-1-1": "1-1-1: Take one pill three times a day: morning, midday, and evening.",
+        "2-2-2": "2-2-2: Two pills in the morning, two at midday, and two in the evening.",
+        "1/2-1-1/2": "1/2-1-1/2: Half a pill in the morning, one full pill at midday, and half a pill in the evening",
     };
 
-    if (explanations[selectedValue]) {
-        explanationDiv.style.display = "block";
+    var word_explanations = {
+        "HS": "HS: Stands for 'hora somni', meaning 'at bedtime'.",
+        "PRN": "PRN: Abbreviation for 'pro re nata', or 'as needed'.",
+        "OD": "OD: Represents 'once daily'.",
+        "BD": "BD: Short for 'bis in die', or 'twice a day'.",
+    };
 
+    var antibiotic_explanations = {
+        "Penicillin": "Explanation for Penicillin",
+        "Cephalosporins": "Explanation for Cephalosporins",
+        "Tetracyclines": "Explanation for Tetracyclines",
+        "Macrolides": "Explanation for Macrolides",
+        "Fluoroquinolones": "Explanation for Fluoroquinolones",
+        "Sulfonamides": "Explanation for Sulfonamides",
+        "Aminoglycosides": "Explanation for Aminoglycosides",
+        "Metronidazole": "Explanation for Metronidazole",
+        "Clindamycin": "Explanation for Clindamycin",
+        "Vancomycin": "Explanation for Vancomycin",
+        "Linezolid": "Explanation for Linezolid",
+        "Doxycycline": "Explanation for Doxycycline",
+    };
+
+    var explanation = "";
+
+    if (antibioticsValue in antibiotic_explanations) {
+        explanation += antibiotic_explanations[antibioticsValue];
+    }
+    
+    if (wordsValue in word_explanations) {
+        if (explanation !== "") {
+            explanation += "<br><br>";
+        }
+        explanation += word_explanations[wordsValue];
+    }
+    
+    if (numericValue in abbreviation_explanations) {
+        if (explanation !== "") {
+            explanation += "<br><br>";
+        }
+        explanation += abbreviation_explanations[numericValue];
+    }
+    
+    if (explanation.trim() !== "") {
+        explanationDiv.style.display = "block";
+    
         // Remove and add the class to trigger the animation
         explanationText.classList.remove("prescription-fade-in");
         void explanationText.offsetWidth; // This line is needed to force a reflow
         explanationText.classList.add("prescription-fade-in");
-
-        explanationText.textContent = explanations[selectedValue];
+    
+        explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
     } else {
         explanationText.textContent = "No explanation available for this selection.";
         explanationDiv.style.display = "block";

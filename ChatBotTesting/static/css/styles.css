@@ -13047,8 +13047,8 @@ body {
 /* Additional CSS */
 #chatContainer {
   padding: 10px;
-  width: 50vw;
-  max-width: 50vw;
+  width: 60vw;
+  max-width: 60vw;
   margin: 0 auto;
 }
 
@@ -13056,7 +13056,7 @@ body {
   position: relative;
   width: 100%;
   /* Set the width to 100% or your desired width */
-  height: 300px;
+  height: 500px;
   /* Set the height to your desired height */
   background-color: var(--bs-white);
   border: 1px solid #ccc;
@@ -13247,6 +13247,28 @@ body {
   /* Adjust background color as needed */
 }
 
+#word-abbreviations {
+  margin-top: 1rem;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: var(--bs-white);
+  /* Adjust background color as needed */
+}
+
+#antibio-abbreviations {
+  margin-top: 1rem;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 10px;
+  background-color: var(--bs-white);
+  /* Adjust background color as needed */
+}
+
 .map-section {
   padding-top: 1rem;
 }
@@ -13276,7 +13298,7 @@ body {
 }
 
 .animated-text-button {
-  animation: fadeIn 7s ease-in-out forwards;
+  animation: fadeAndPulse 7s ease-in-out forwards, pulse 2s ease infinite;
 }
 
 .animated-text-button:hover {
@@ -13391,6 +13413,17 @@ body {
   height: 30px;
 }
 
+#readMessage {
+  border: none;
+  padding-left: 95%;
+  background: transparent;
+}
+
+#readMessage>img {
+  width: 20px;
+  height: 20px;
+}
+
 .header-container {
   display: flex;
   align-items: center;
@@ -13441,5 +13474,33 @@ body {
 
   #chatBox::-webkit-scrollbar {
     display: none;
+  }
+}
+
+/* chat-button in homepage*/
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeAndPulse {
+  0% {
+    opacity: 0;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
   }
 }
