@@ -236,6 +236,9 @@
                     onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
                 <button class="chatBotButton" id="chatBotClearButton"
                     onclick="clearChatHistory(bot_icon_src)">Clear</button>
+                <button id="toggleSpeechRecognition" onmousedown="startSpeechToText()" onmouseup="stopSpeechToText()">
+                    <img src="../static/assets/img/microphone.png" alt="Recognition Icon">
+                </button>
                 <button id="speak" onclick="speak()" oncontextmenu="showVolumeSlider(event)">
                     <img src="../static/assets/img/testingSpeaker.png" alt="Speaker Icon">
                 </button>

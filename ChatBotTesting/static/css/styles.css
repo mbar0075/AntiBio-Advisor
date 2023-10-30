@@ -13424,6 +13424,17 @@ body {
   height: 20px;
 }
 
+#toggleSpeechRecognition {
+  border: none;
+  padding: 0;
+  background: transparent;
+}
+
+#toggleSpeechRecognition>img {
+  width: 30px;
+  height: 30px;
+}
+
 .header-container {
   display: flex;
   align-items: center;

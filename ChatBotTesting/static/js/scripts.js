@@ -223,54 +223,60 @@ function sendMessage(user_icon, bot_icon) {
     const userInput = document.getElementById("userInput").value;
     const chatbox = document.getElementById("chatBox");
 
-    //Displaying the user's message in the chatbox
-    chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
-    <div class="ChatItem-meta">
-      <div class="ChatItem-avatar">
-        <img class="ChatItem-avatarImage" src="` + user_icon + `">
-      </div>
-    </div>
-    <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText">${userInput}
-      <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
-            <img src="../static/assets/img/testingSpeaker2.png" alt="Speaker Icon">
-        </button>
-      </div>
-    </div>
-  </div>`;
-
-    //Making an API call to GPT-3 using JavaScript's fetch() function
-    fetch('/api/chat', {
-        method: 'POST',
-        body: JSON.stringify({ text: userInput }),
-        headers: {
-            'Content-Type': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => {
-            //Displaying the response from GPT-3 in the chatbox
-            chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
-              <div class="ChatItem-meta">
-                <div class="ChatItem-avatar">
-                  <img class="ChatItem-avatarImage" src="` + bot_icon + `">
-                </div>
-              </div>
-              <div class="ChatItem-chatContent">
-                <div class="ChatItem-chatText">${data.text}
-                <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
-                    <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+    if (userInput !== "") {
+            //Displaying the user's message in the chatbox
+            chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
+            <div class="ChatItem-meta">
+            <div class="ChatItem-avatar">
+                <img class="ChatItem-avatarImage" src="` + user_icon + `">
+            </div>
+            </div>
+            <div class="ChatItem-chatContent">
+            <div class="ChatItem-chatText">${userInput}
+            <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                    <img src="../static/assets/img/testingSpeaker2.png" alt="Speaker Icon">
                 </button>
-                </div>
-              </div>
-            </div>`
-        })
-        .catch(error => {
-            console.error(error);
-        });
+            </div>
+            </div>
+        </div>`;
 
-    //Clearing the user input field
-    document.getElementById("userInput").value = '';
+            //Making an API call to GPT-3 using JavaScript's fetch() function
+            fetch('/api/chat', {
+                method: 'POST',
+                body: JSON.stringify({ text: userInput }),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    //Displaying the response from GPT-3 in the chatbox
+                    chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatItem-chatText">${data.text}
+                        <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+                        </button>
+                        </div>
+                    </div>
+                    </div>`
+                })
+                .catch(error => {
+                    console.error(error);
+                });
+
+            //Clearing the user input field
+            document.getElementById("userInput").value = '';
+        userInput.value = "";
+    } else {
+        // The input is empty, handle this case (e.g., display an alert)
+        alert("Please enter a message before sending.");
+    }
 }
 
 //Waiting for the entire page to finish loading, then executing the showPosition() function
@@ -367,6 +373,51 @@ function readMessage(button) {
 
     synth.speak(utterance);
 }
+
+/* ------------------------------------------------------ */
+/* Speech to Text */
+document.addEventListener('DOMContentLoaded', function () {
+    var userInput = document.getElementById('userInput'); // Get the text input element
+});
+
+var recognition;
+function startSpeechToText() {
+    if (recognition && recognition.state === 'running') {
+        // A recognition instance is already running, so don't start another.
+        return;
+    }
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.continuous = true;
+
+        recognition.onresult = function (event) {
+            var text = event.results[0][0].transcript;
+            // console.log('Speech Recognition result: ' + text);
+            // console.log(userInput)
+            userInput.value = text; // Set the recognized text in the input field
+        };
+
+        recognition.onerror = function (event) {
+            console.error('Speech Recognition Error: ' + event.error);
+        };
+
+        recognition.onend = function () {
+            // Optionally add logic when recognition ends
+        };
+
+        recognition.start();
+    } else {
+        alert('Speech recognition is not supported in your browser.');
+    }
+}
+
+function stopSpeechToText() {
+    if (recognition) {
+        recognition.stop();
+    }
+}
+/* ------------------------------------------------------ */
 
 
 function clearChatHistory(bot_icon) {
