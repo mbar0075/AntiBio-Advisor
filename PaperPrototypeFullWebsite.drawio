@@ -1,0 +1,62 @@
+<mxfile host="app.diagrams.net" modified="2023-10-30T14:04:29.120Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="Z4sS_x_dUiJARvjAkyF0" version="22.0.8" type="device">
+  <diagram name="Page-1" id="nMDBfoTaMFMd4-BZHjt-">
+    <mxGraphModel dx="1049" dy="568" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="h_OLHurXglKgS5x80uge-11" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="330" y="413" width="180" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-1" value="ANTIBIO ADVISOR" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-2" value="LET&#39;S CHAT" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="380" y="290" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-3" value="VIDEOS &amp;amp; FACTS SECTION" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="340" width="120" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-5" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="423" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-6" value="Chat Bot Intro Message" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="433" width="120" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-7" value="User Query" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="370" y="473" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-8" value="Chat Bot Response" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="350" y="503" width="120" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-9" value="Chat Bot Buttons" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="340" y="553" width="160" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-12" value="ABBREVIATIONS &amp;amp; NOTATIONS SECTION" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="355" y="610" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-13" value="FIND NEARBY PHARMACIES &amp;amp; GENERAL PRACTITIONERS SECTIONS" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="335" y="680" width="170" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-14" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;dashed=1;" edge="1" parent="1" source="h_OLHurXglKgS5x80uge-2" target="h_OLHurXglKgS5x80uge-11">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="580" y="300" as="sourcePoint" />
+            <mxPoint x="520" y="610" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="560" y="305" />
+              <mxPoint x="560" y="503" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-17" value="" style="shape=singleArrow;direction=south;whiteSpace=wrap;html=1;arrowWidth=0.40416666666666573;arrowSize=0.09712962962962972;" vertex="1" parent="1">
+          <mxGeometry x="221.25" y="240" width="80" height="490" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-18" value="&lt;font style=&quot;font-size: 22px;&quot;&gt;SCROLL DOWN&lt;/font&gt;" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;rotation=-90;" vertex="1" parent="1">
+          <mxGeometry x="40" y="406.25" width="442.5" height="110" as="geometry" />
+        </mxCell>
+        <mxCell id="h_OLHurXglKgS5x80uge-19" value="Paper Prototype - Page Layout" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=180;height=30;" vertex="1" parent="1">
+          <mxGeometry x="160" y="200" width="440" height="560" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

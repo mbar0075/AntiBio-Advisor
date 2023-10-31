@@ -1,0 +1,37 @@
+<mxfile host="app.diagrams.net" modified="2023-10-30T14:04:33.526Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="DdMEWVBjX3G4di5mMa0p" version="22.0.8" type="device">
+  <diagram name="Page-1" id="R98s23C_ZAeqoqFUFeoc">
+    <mxGraphModel dx="199" dy="568" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-1" value="VIDEO &amp;amp; FACTS SECTION TITLE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1200" y="80" width="120" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-2" value="VIDEO" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="140" width="200" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-3" value="DIAGRAM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="280" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-4" value="FACT" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="280" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-5" value="DIAGRAM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="400" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-6" value="FACT" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="400" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-7" value="FACT" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1160" y="500" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-8" value="DIAGRAM" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="1260" y="500" width="100" height="100" as="geometry" />
+        </mxCell>
+        <mxCell id="jYn0CRqL5XbQrBcR9Usf-9" value="Paper Prototype - Abbreviation/Notation Section Layout" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=330;height=30;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="30" width="340" height="590" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

@@ -82,7 +82,22 @@
   --bs-link-hover-color: #50817e;
   --bs-code-color: #d63384;
   --bs-highlight-bg: #faf4e0;
-  --bs-animated-text-color: #99DBF9;
+  --bs-animated-text-color: #d1cdda;
+
+  --palette-purple-dark: #070212;
+  --palette-purple-1: #210B2C;
+  --palette-purple-2: #55286F;
+  --palette-purple-3: #BC96E6;
+  --palette-purple-4: #D8B4E2;
+  --palette-purple-5: #AE759F;
+  --palette-purple-bright: #d1cdda;
+  --palette-purple-dark-rgb: 7, 2, 18;
+  --palette-purple-1-rgb: 33, 11, 44;
+  --palette-purple-2-rgb: 85, 40, 111;
+  --palette-purple-3-rgb: 188, 150, 230;
+  --palette-purple-4-rgb: 216, 180, 226;
+  --palette-purple-5-rgb: 174, 117, 159;
+  --palette-purple-bright-rgb: 209, 205, 218;
 }
 
 *,
@@ -7789,6 +7804,11 @@ fieldset:disabled .btn {
   background-color: RGBA(0, 0, 0, var(--bs-bg-opacity, 1)) !important;
 }
 
+.text-bg-purple {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--palette-purple-dark-rgb), var(--bs-bg-opacity)) !important;
+}
+
 .text-bg-white {
   color: #000 !important;
   background-color: RGBA(255, 255, 255, var(--bs-bg-opacity, 1)) !important;
@@ -9318,6 +9338,11 @@ fieldset:disabled .btn {
 .bg-black {
   --bs-bg-opacity: 1;
   background-color: rgba(var(--bs-black-rgb), var(--bs-bg-opacity)) !important;
+}
+
+.bg-purple {
+  --bs-bg-opacity: 1;
+  background-color: rgba(var(--palette-purple-dark-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-white {
@@ -12884,7 +12909,7 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0.7) 90%, #000 100%), url("../assets/img/masthead.gif");
+  background: linear-gradient(to bottom, rgba(7, 2, 18, 0.3) 0%, rgba(7, 2, 18, 0.4) 40%, rgba(7, 2, 18, 0.7) 70%, rgba(7, 2, 18, 1) 100%), url("../assets/img/masthead.gif");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -13059,7 +13084,7 @@ body {
   height: 500px;
   /* Set the height to your desired height */
   background-color: var(--bs-white);
-  border: 1px solid #ccc;
+  border: 3px solid var(--bs-white);
   padding: 10px;
   overflow-y: auto;
   overflow-x: hidden;
@@ -13146,7 +13171,7 @@ body {
   width: 70%;
   margin-bottom: 0.5rem;
   padding: 1rem;
-  background: #007FEF;
+  background: var(--palette-purple-3);
   color: var(--bs-white);
   border-radius: 3px;
   box-shadow: 0 2px 6px rgba(#000, 0.175);
@@ -13156,8 +13181,8 @@ body {
   .ChatItem--expert & {
     margin-left: auto;
     border: 1px solid #dbdbdb;
-    background: white;
-    color: #666;
+    background: var(--bs-white);
+    color: var(--bs-black);
   }
 }
 
@@ -13356,14 +13381,19 @@ body {
 }
 
 #chatContainerInput {
+  border: 3px solid var(--bs-white);
+  border-radius: 10px;
+  background-color: var(--palette-purple-3);
   display: flex;
   align-items: center;
+  padding-top: 5px;
+  padding-bottom: 5px;
   margin-top: 10px;
 }
 
 /* Applying a margin to each child of chatContainerInput */
 #chatContainerInput>* {
-  margin-right: 10px;
+  margin-right: 20px;
 }
 
 /* Volume Slider */
@@ -13372,7 +13402,7 @@ body {
   width: 100%;
   height: 10px;
   border-radius: 5px;
-  background: linear-gradient(to right, #007FEF 0%, #007FEF 50%, gray 50%, gray 100%);
+  background: linear-gradient(to right, var(--bs-white) 0%, var(--bs-white) 50%, gray 50%, gray 100%);
   outline: none;
   -webkit-transition: .2s;
   transition: opacity .2s;
@@ -13385,22 +13415,17 @@ body {
   width: 20px;
   height: 20px;
   border-radius: 30%;
-  background: #007FEF;
+  background: var(--bs-white);
   cursor: pointer;
 }
 
-#chatVolumeSlider::-moz-range-thumb {
+/* #chatVolumeSlider::-moz-range-thumb {
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background: gray;
+  background: var(--palette-purple-4);
   cursor: pointer;
-}
-
-
-#userInput {
-  margin-right: 10px;
-}
+} */
 
 #speak {
   border: none;
@@ -13415,7 +13440,7 @@ body {
 
 #readMessage {
   border: none;
-  padding-left: 95%;
+  margin-left: 95%;
   background: transparent;
 }
 
@@ -13442,12 +13467,16 @@ body {
 }
 
 #chatIcon {
-  width: 55px;
-  height: 30px;
+  margin-top: 25px;
+  margin-left: 15px;
+  width: 50px;
+  height: 50px;
 }
 
 #chatTitle {
-  margin-bottom: 0px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+  font-size: 55px;
 }
 
 /* Mobile-specific styles using a media query */
@@ -13475,7 +13504,7 @@ body {
     height: 300px;
     /* Set the height to your desired height */
     background-color: var(--bs-white);
-    border: 1px solid #ccc;
+    border: 10px solid var(--bs-white);
     padding: 10px;
     overflow-y: auto;
     overflow-x: hidden;
@@ -13518,4 +13547,31 @@ body {
     opacity: 1;
     transform: scale(1);
   }
+}
+
+@keyframes bounceAndEnlarge {
+  0% {
+    transform: scale(1);
+  }
+
+  25% {
+    transform: translateY(-20px) scale(1.1);
+  }
+
+  50% {
+    transform: translateY(0) scale(1.2);
+  }
+
+  75% {
+    transform: translateY(-10px) scale(1.1);
+  }
+
+  100% {
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Apply the animation to the image element on hover */
+.animated-marker:hover {
+  animation: bounceAndEnlarge 2s ease-in-out forwards;
 }

@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', event => {
     slider.addEventListener("input", function () {
         var value = slider.value;
         var percentage = (value - slider.min) / (slider.max - slider.min) * 100;
-        var bg = "linear-gradient(to right, #007FEF 0%, #007FEF " + percentage + "%, gray " + percentage + "%, gray 100%)";
+        var bg = "linear-gradient(to right, var(--bs-white) 0%, var(--bs-white)" + percentage + "%, gray " + percentage + "%, gray 100%)";
         slider.style.background = bg;
     });
 });
@@ -534,5 +534,20 @@ function showExplanation() {
     }
 }
 
+function mapExplanation(event) {
+    var popup = document.getElementById("myPopup");
+
+    // Toggle the visibility of the popup
+    if (popup.style.visibility === "visible") {
+        popup.style.visibility = "hidden";
+    } else {
+        popup.style.visibility = "visible";
+    }
+
+    // Prevent event propagation to parent elements
+    if (event) {
+        event.stopPropagation();
+    }
+}
 
 window.onload = showExplanation;

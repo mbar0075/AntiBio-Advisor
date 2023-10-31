@@ -34,6 +34,18 @@ def serve_website():
     bot_icon = url_for('static', filename='assets/img/bot-icon.png')
     return render_template("index.html", user_icon=user_icon, bot_icon = bot_icon)
 
+@app.route('/info')
+def information_page():
+    return render_template("information.html")
+
+@app.route('/faq')
+def faq_page():
+    return render_template("faq.html")
+
+@app.route('/prescriptionInfo')
+def presecription_info_page():
+    return render_template("prescriptionInfo.html")
+
 # Handling the chatbot functionality
 @app.route('/api/chat', methods=['POST'])
 def chat():

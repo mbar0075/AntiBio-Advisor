@@ -1,0 +1,31 @@
+<mxfile host="app.diagrams.net" modified="2023-10-30T15:02:31.106Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/118.0.0.0 Safari/537.36" etag="An1ghQ7JxWGnAgwfzGUL" version="22.0.8" type="device">
+  <diagram name="Page-1" id="fCD1NguNFOx3Nj2X-4qR">
+    <mxGraphModel dx="719" dy="390" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1o2BK9EwSedWX01zhVEf-1" value="ABBREVIATIONS / NOTATIONS TITLE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="320" y="130" width="220" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1o2BK9EwSedWX01zhVEf-2" value="Antibiotic &lt;br&gt;Dropdown" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="190" width="80" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1o2BK9EwSedWX01zhVEf-3" value="Notation Dropdown" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="490" y="190" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1o2BK9EwSedWX01zhVEf-4" value="Abbreviation Dropdown" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="390" y="190" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1o2BK9EwSedWX01zhVEf-5" value="EXPLANATION TITLE" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="240" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1o2BK9EwSedWX01zhVEf-6" value="Antibiotics, Abbreviation &amp;amp; Notation explanation" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="300" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="1o2BK9EwSedWX01zhVEf-7" value="Paper Prototype - Abbreviation/Notation Section Layout" style="shape=umlFrame;whiteSpace=wrap;html=1;pointerEvents=0;width=310;height=30;" vertex="1" parent="1">
+          <mxGeometry x="270" y="80" width="320" height="280" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
