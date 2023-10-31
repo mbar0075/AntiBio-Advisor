@@ -52,11 +52,11 @@ window.addEventListener('DOMContentLoaded', event => {
 
     var slider = document.getElementById("chatVolumeSlider");
 
-    slider.addEventListener("input", function() {
-      var value = slider.value;
-      var percentage = (value - slider.min) / (slider.max - slider.min) * 100;
-      var bg = "linear-gradient(to right, #007FEF 0%, #007FEF " + percentage + "%, gray " + percentage + "%, gray 100%)";
-      slider.style.background = bg;
+    slider.addEventListener("input", function () {
+        var value = slider.value;
+        var percentage = (value - slider.min) / (slider.max - slider.min) * 100;
+        var bg = "linear-gradient(to right, #007FEF 0%, #007FEF " + percentage + "%, gray " + percentage + "%, gray 100%)";
+        slider.style.background = bg;
     });
 });
 
@@ -224,8 +224,8 @@ function sendMessage(user_icon, bot_icon) {
     const chatbox = document.getElementById("chatBox");
 
     if (userInput !== "") {
-            //Displaying the user's message in the chatbox
-            chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
+        //Displaying the user's message in the chatbox
+        chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
             <div class="ChatItem-meta">
             <div class="ChatItem-avatar">
                 <img class="ChatItem-avatarImage" src="` + user_icon + `">
@@ -240,18 +240,18 @@ function sendMessage(user_icon, bot_icon) {
             </div>
         </div>`;
 
-            //Making an API call to GPT-3 using JavaScript's fetch() function
-            fetch('/api/chat', {
-                method: 'POST',
-                body: JSON.stringify({ text: userInput }),
-                headers: {
-                    'Content-Type': 'application/json'
-                }
-            })
-                .then(response => response.json())
-                .then(data => {
-                    //Displaying the response from GPT-3 in the chatbox
-                    chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
+        //Making an API call to GPT-3 using JavaScript's fetch() function
+        fetch('/api/chat', {
+            method: 'POST',
+            body: JSON.stringify({ text: userInput }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                //Displaying the response from GPT-3 in the chatbox
+                chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
                     <div class="ChatItem-meta">
                         <div class="ChatItem-avatar">
                         <img class="ChatItem-avatarImage" src="` + bot_icon + `">
@@ -265,13 +265,13 @@ function sendMessage(user_icon, bot_icon) {
                         </div>
                     </div>
                     </div>`
-                })
-                .catch(error => {
-                    console.error(error);
-                });
+            })
+            .catch(error => {
+                console.error(error);
+            });
 
-            //Clearing the user input field
-            document.getElementById("userInput").value = '';
+        //Clearing the user input field
+        document.getElementById("userInput").value = '';
         userInput.value = "";
     } else {
         // The input is empty, handle this case (e.g., display an alert)
@@ -382,6 +382,8 @@ document.addEventListener('DOMContentLoaded', function () {
 
 var recognition;
 function startSpeechToText() {
+    document.getElementById("recognitionIcon").src = "../static/assets/img/speaker.png";
+
     if (recognition && recognition.state === 'running') {
         // A recognition instance is already running, so don't start another.
         return;
@@ -395,7 +397,7 @@ function startSpeechToText() {
             var text = event.results[0][0].transcript;
             // console.log('Speech Recognition result: ' + text);
             // console.log(userInput)
-            userInput.value = text; // Set the recognized text in the input field
+            userInput.value += text + " "; // Set the recognized text in the input field
         };
 
         recognition.onerror = function (event) {
@@ -413,6 +415,7 @@ function startSpeechToText() {
 }
 
 function stopSpeechToText() {
+    document.getElementById("recognitionIcon").src = "../static/assets/img/microphone.png";
     if (recognition) {
         recognition.stop();
     }
@@ -501,29 +504,29 @@ function showExplanation() {
     if (antibioticsValue in antibiotic_explanations) {
         explanation += antibiotic_explanations[antibioticsValue];
     }
-    
+
     if (wordsValue in word_explanations) {
         if (explanation !== "") {
             explanation += "<br><br>";
         }
         explanation += word_explanations[wordsValue];
     }
-    
+
     if (numericValue in abbreviation_explanations) {
         if (explanation !== "") {
             explanation += "<br><br>";
         }
         explanation += abbreviation_explanations[numericValue];
     }
-    
+
     if (explanation.trim() !== "") {
         explanationDiv.style.display = "block";
-    
+
         // Remove and add the class to trigger the animation
         explanationText.classList.remove("prescription-fade-in");
         void explanationText.offsetWidth; // This line is needed to force a reflow
         explanationText.classList.add("prescription-fade-in");
-    
+
         explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
     } else {
         explanationText.textContent = "No explanation available for this selection.";
