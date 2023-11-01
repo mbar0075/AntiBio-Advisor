@@ -245,8 +245,8 @@ function sendMessage(user_icon, bot_icon) {
     for (var i = 0; i < choices.length; i++) {
         choices[i].style.display = 'none';
     }
-    
-        
+
+
 
     if (userInput !== "") {
         //Displaying the user's message in the chatbox
@@ -332,7 +332,7 @@ function processImage() {
 
     var formData = new FormData();
     formData.append('fileInput', file);
-    
+
     if (formData) {
         console.log("YEAH");
     }
@@ -355,10 +355,10 @@ function processImage() {
 
     //     var formData = new FormData(this);
 
-        fetch('/api/scan_barcode', {
-            method: 'POST',
-            body: formData
-        })
+    fetch('/api/scan_barcode', {
+        method: 'POST',
+        body: formData
+    })
         .then(response => response.json())
         .then(data => {
             document.getElementById('result').textContent = data.text;
@@ -524,7 +524,7 @@ function clearChatHistory(bot_icon) {
       </div>
   </div>
 </div>`
-  
+
 
     // JavaScript code to reset the conversation
     fetch('/api/reset_conversation', {
@@ -661,64 +661,82 @@ function handleFormSubmission() {
             method: 'POST',
             body: formData
         })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('result').textContent = data.text;
-        });
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('result').textContent = data.text;
+            });
     });
 }
 
 /*FAQs */
 
 // Function to toggle the display of the chatbot response when the question is clicked
-function toggleResponse(response) {
+function toggleResponse(response, faqIcon) {
     response.style.display = response.style.display === 'block' ? 'none' : 'block';
+    if (faqIcon.alt == "add") {
+        faqIcon.src = "../static/assets/img/minus.png";
+        faqIcon.alt = "minus"
+    }
+    else {
+        faqIcon.src = "../static/assets/img/add.png";
+        faqIcon.alt = "add"
+    }
 }
 
 // Function to load the FAQ from CSV
 function loadFAQFromCSV() {
     fetch('../static/FAQs.csv')
-    .then(response => response.text())
-    .then(data => {
-        const faqData = data.split('\n');
-        const faqContainer = document.getElementById('faq-container');
+        .then(response => response.text())
+        .then(data => {
+            const faqData = data.split('\n');
+            const faqContainer = document.getElementById('faq-container');
 
-        faqData.forEach((line, index) => {
-            if (index === 0) return; // Skip the header row
+            faqData.forEach((line, index) => {
+                if (index === 0) return;
+                lineContent = line.split(',');
 
-            const [, userQuery, chatbotResponse] = line.split(',');
+                query = lineContent[1];
+                query = "Q: " + query;
+                response = lineContent.slice(2, lineContent.length).join(", ");
+                response = "A: " + response;
 
-            // Create FAQ item HTML
-            const faqItem = document.createElement('div');
-            faqItem.classList.add('faq-item');
+                // Create FAQ item HTML
+                const faqItem = document.createElement('div');
+                faqItem.classList.add('faq-item');
 
-            // Create the user query
-            const userQueryElement = document.createElement('div');
-            userQueryElement.classList.add('user-query');
-            userQueryElement.textContent = userQuery;
+                const faqIcon = document.createElement('img');
+                faqIcon.classList.add('faq-icon');
+                faqIcon.src = "../static/assets/img/add.png";
+                faqIcon.alt = "add";
 
-            // Create the chatbot response initially hidden
-            const chatbotResponseElement = document.createElement('div');
-            chatbotResponseElement.classList.add('chatbot-response');
-            chatbotResponseElement.textContent = chatbotResponse;
-            chatbotResponseElement.style.display = 'none';
+                // Create the user query
+                const queryElement = document.createElement('div');
+                queryElement.classList.add('query');
+                queryElement.textContent = query;
 
-            // Append user query and response to the FAQ item
-            faqItem.appendChild(userQueryElement);
-            faqItem.appendChild(chatbotResponseElement);
+                // Create the chatbot response initially hidden
+                const responseElement = document.createElement('div');
+                responseElement.classList.add('response');
+                responseElement.textContent = response;
+                responseElement.style.display = 'none';
 
-            // Append the FAQ item to the container
-            faqContainer.appendChild(faqItem);
+                // Append user query and response to the FAQ item
+                faqItem.appendChild(queryElement);
+                queryElement.appendChild(faqIcon);
+                faqItem.appendChild(responseElement);
 
-            // Attach a click event to toggle the response when the user query is clicked
-            userQueryElement.addEventListener('click', () => {
-                toggleResponse(chatbotResponseElement);
+                // Append the FAQ item to the container
+                faqContainer.appendChild(faqItem);
+
+                // Attach a click event to toggle the response when the user query is clicked
+                queryElement.addEventListener('click', () => {
+                    toggleResponse(responseElement, faqIcon);
+                });
             });
+        })
+        .catch(error => {
+            console.error('Error loading CSV file:', error);
         });
-    })
-    .catch(error => {
-        console.error('Error loading CSV file:', error);
-    });
 }
 
 /*Quiz */

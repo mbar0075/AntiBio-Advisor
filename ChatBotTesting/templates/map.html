@@ -51,7 +51,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/">Main</a></li>
                     <li class="nav-item"><a class="nav-link" href="info">Learn More</a></li>
-                    <li class="nav-item"><a class="nav-link" href="faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq">FAQs</a></li>
                     <li class="nav-item"><a class="nav-link" href="prescriptionInfo">Prescription Info</a></li>
                     <li class="nav-item"><a class="nav-link" href="#page-top">Map</a></li>
                     <li class="nav-item"><a class="nav-link" href="quiz">Quiz</a></li>
@@ -65,25 +65,23 @@
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
             <div class="d-flex justify-content-center">
                 <div class="text-center">
-                    <h1 class="mx-auto my-0 animated-text-masthead">FAQs</h1>
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5 animated-text-info">Welcome to our FAQs page, your go-to
-                        resource
-                        for answers on anything Antibiotics. Explore commonly asked questions, get clarity from
-                        clear responses, and arm yourself with the information you need to make wise decisions for a
-                        healthy future.</h2>
+                    <h1 class="mx-auto my-0 animated-text-masthead">Map</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5 animated-text-info">Explore our Map Page, your guide to
+                        accessible healthcare.
+                        Discover nearby pharmacies and general practitioners with ease through interactive markers which
+                        display the shortest
+                        routes. Navigating your health journey has never been more straightforward.</h2>
                 </div>
             </div>
         </div>
     </header>
 
     <!-- Map Box Section -->
-    <section class="py-4 bg-black text-center" id="pharmacies">
-        <h1 class="text-bottom-margin animated-text">
-            <img class="animated-marker myPopup" src="../static/assets/img/blue_location.png" alt="Map Location"
-                style="width: 50px; height: 50px; padding-bottom: 2px" />
+    <section class="py-4 bg-purple text-center" id="pharmacies">
+        <h1 class="text-bottom-margin animated-text sub-title">
+            <img class="animated-marker myPopup" src="../static/assets/img/blue_location.png" alt="Map Location" />
             Find Nearby Pharmacies
-            <img class="animated-marker myPopup" src="../static/assets/img/red_location.png" alt="Map Location"
-                style="width: 50px; height: 50px; padding-bottom: 2px" />
+            <img class="animated-marker myPopup" src="../static/assets/img/red_location.png" alt="Map Location" />
         </h1>
         <br><br>
         <!-- Explaining what the different icons mean in the form of a very good looking list popup, where the blue icon means general practioner and red for pharmacy-->
@@ -97,60 +95,26 @@
         </div>
         <br><br>
         <div id="result"></div>
-        <div id="map" style="height: 400px; width: 100%;"></div>
+        <div id="map"></div>
         <script>showPosition();</script>
     </section>
 
     <!-- Contact-->
-    <section class="contact-section bg-black">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5">
-                <!-- <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Address</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">4923 Market Street, Orlando FL</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-envelope text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Email</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Phone</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">+1 (555) 902-8832</div>
-                        </div>
-                    </div>
-                </div> -->
+    <section class="contact-section">
+        <!-- Footer-->
+        <footer class="footer small text-center text-white-50">
+            <div class="">
+                <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>
+                <div class="container px-4 px-lg-5">Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat </div>
+                <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa
+                Camilleri
+                and
+                Mr Gavin Schranz at the University of Malta.
             </div>
-            <div class="social d-flex justify-content-center">
-                <!-- <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a> -->
-                <a class="mx-2" href="https://github.com/mbar0075/AntiBio-Advisor"><i class="fab fa-github"></i></a>
             </div>
-        </div>
+        </footer>
     </section>
-    <!-- Footer-->
-    <footer class="footer bg-black small text-center text-white-50">
-        <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>
-        <div class="container px-4 px-lg-5">Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat </div>
-        <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa Camilleri
-        and
-        Mr Gavin Schranz at the University of Malta.</div>
-    </footer>
+
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

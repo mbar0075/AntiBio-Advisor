@@ -13303,7 +13303,6 @@ body {
 
 /* Basic styles for your text */
 .animated-text {
-  display: flex;
   align-items: center;
   text-align: center;
   opacity: 0;
@@ -13311,8 +13310,6 @@ body {
   animation: fadeIn 1.5s ease-in-out forwards;
   /* Animation */
   color: var(--bs-white);
-  display: inline-block;
-  /* Make it an inline block */
   width: auto;
   /* Set width to auto to fit content */
 }
@@ -13478,12 +13475,6 @@ body {
   height: 50px;
 }
 
-#chatTitle {
-  margin-top: 50px;
-  margin-bottom: 20px;
-  font-size: 55px;
-}
-
 .ChatSelection {
   position: relative;
   width: 70%;
@@ -13497,6 +13488,7 @@ body {
   z-index: 2;
   opacity: 0.7;
   transition: opacity 0.3s ease;
+
   .ChatItem--expert & {
     margin-left: auto;
     /* border: 1px solid #dbdbdb; */
@@ -13509,7 +13501,8 @@ body {
   /* background-color: var(--palette-purple-5); */
   opacity: 1;
   /* Your regular styles here */
-  transition: background-color 0.3s ease; /* Smooth transition effect */
+  transition: background-color 0.3s ease;
+  /* Smooth transition effect */
 
   /* Styles for hover state */
   cursor: pointer;
@@ -13553,27 +13546,42 @@ body {
 }
 
 .description-text-disclaimer {
-  color: var(--palette-purple-1); /* Red color */
-  font-weight: bold; /* Bold text */
+  color: var(--palette-purple-1);
+  /* Red color */
+  font-weight: bold;
+  /* Bold text */
 }
 
 /*FAQS*/
-.faq-item {
-  border: 1px solid #ccc;
-  margin: 10px;
-  padding: 10px;
-  background-color: #f7f7f7;
+#faq-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }
 
-.question {
+.faq-item {
+  border-radius: 10px;
+  margin: 15px;
+  padding: 10px;
+  background-color: var(--palette-purple-3);
+  width: 700px;
+}
+
+.faq-icon {
+  width: 15px;
+  height: 15px;
+  float: right;
+}
+
+.response {
+  padding-top: 20px;
+  color: var(--bs-white);
+}
+
+.query {
+  font-style: italic;
   font-weight: bold;
 }
-
-.user-query {
-  font-style: italic;
-}
-
-
 
 /*Quiz*/
 .quiz-item {
@@ -13598,12 +13606,6 @@ body {
 
 /* Mobile-specific styles using a media query */
 @media (max-width: 767px) {
-
-  #chatTitle {
-    font-size: 10px;
-    margin-bottom: 0px;
-  }
-
   #chatIcon {
     width: 20px;
     height: 10px;
@@ -13688,7 +13690,28 @@ body {
   }
 }
 
+.animated-marker {
+  width: 50px;
+  height: 50px;
+  padding-bottom: 2px
+}
+
 /* Apply the animation to the image element on hover */
 .animated-marker:hover {
   animation: bounceAndEnlarge 2s ease-in-out forwards;
+}
+
+.sub-title {
+  color: var(--bs-white);
+  font-size: 55px;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+#map {
+  border: 7px solid var(--bs-white);
+  border-radius: 10px;
+  display: inline-flex;
+  height: 600px;
+  width: 80%;
 }

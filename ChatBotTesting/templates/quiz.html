@@ -51,7 +51,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="/">Main</a></li>
                     <li class="nav-item"><a class="nav-link" href="info">Learn More</a></li>
-                    <li class="nav-item"><a class="nav-link" href="faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq">FAQs</a></li>
                     <li class="nav-item"><a class="nav-link" href="prescriptionInfo">Prescription Info</a></li>
                     <li class="nav-item"><a class="nav-link" href="map">Map</a></li>
                     <li class="nav-item"><a class="nav-link" href="#page-top">Quiz</a></li>
@@ -65,12 +65,11 @@
         <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
             <div class="d-flex justify-content-center">
                 <div class="text-center">
-                    <h1 class="mx-auto my-0 animated-text-masthead">FAQs</h1>
-                    <h2 class="text-white-50 mx-auto mt-2 mb-5 animated-text-info">Welcome to our FAQs page, your go-to
-                        resource
-                        for answers on anything Antibiotics. Explore commonly asked questions, get clarity from
-                        clear responses, and arm yourself with the information you need to make wise decisions for a
-                        healthy future.</h2>
+                    <h1 class="mx-auto my-0 animated-text-masthead">QUIZ</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5 animated-text-info">
+                        Welcome to our Quiz Page, designed to test and enrich your understanding of antibiotics and
+                        antimicrobial resistance. Challenge yourself, gauge your expertise, and become an informed
+                        advocate for responsible healthcare practices.</h2>
                 </div>
             </div>
         </div>
@@ -81,19 +80,13 @@
         <!-- Barcode Scanning API -->
         <h1>Upload an Image for Barcode Scanning</h1>
         <!-- <form method="POST" action="/api/scan_barcode" enctype="multipart/form-data"> -->
-            <input type="file" id="fileInput" name="image" accept="image/jpeg, image/png, image/gif, image/webp, image/bmp" />
-            <button type="submit" onclick="processImage()" value="Scan Barcode">Scan Barcode</button>
+        <input type="file" id="fileInput" name="image"
+            accept="image/jpeg, image/png, image/gif, image/webp, image/bmp" />
+        <button type="submit" onclick="processImage()" value="Scan Barcode">Scan Barcode</button>
         <!-- </form> -->
 
         <!-- Display the result from the barcode scanning API -->
         <div id="result"></div>
-    </section>
-
-    <section>
-        <h1>Frequently Asked Questions</h1>
-        <div id="faq-container">
-            <!-- FAQ items will be dynamically added here -->
-        </div>
     </section>
 
     <section>

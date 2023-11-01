@@ -51,7 +51,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="#page-top">Main</a></li>
                     <li class="nav-item"><a class="nav-link" href="info">Learn More</a></li>
-                    <li class="nav-item"><a class="nav-link" href="faq">FAQ</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq">FAQs</a></li>
                     <li class="nav-item"><a class="nav-link" href="prescriptionInfo">Prescription Info</a></li>
                     <li class="nav-item"><a class="nav-link" href="map">Map</a></li>
                     <li class="nav-item"><a class="nav-link" href="quiz">Quiz</a></li>
@@ -79,29 +79,40 @@
         <div class="description-text-container">
             <div class="description-text-container-inner selected" id="text1" onmouseover="selectText('text1')">
                 <h2 class="description-text-heading">In English</h2>
-                <p>This website depicts an academic research project aimed towards reducing misinformation with regards to antibiotics and their use. 
-                    In light of this this webpage only serves as a proof of concept thus, the implementation has been carried out in 
-                    english given that english is Malta's second language and the main target audience is people aged 18 or over.</p>
-                    
-                    <p class="description-text-disclaimer">Disclaimer: The information provided to the user throughout the website although factual and correct, does not substite the medical opinion of a professional doctor. 
-                    Please seek medical advice from trained individuals before attempting anything suggested in the website. </p>
+                <p>This website depicts an academic research project aimed towards reducing misinformation with regards
+                    to antibiotics and their use.
+                    In light of this this webpage only serves as a proof of concept thus, the implementation has been
+                    carried out in
+                    english given that english is Malta's second language and the main target audience is people aged 18
+                    or over.</p>
+
+                <p class="description-text-disclaimer">Disclaimer: The information provided to the user throughout the
+                    website although factual and correct, does not substite the medical opinion of a professional
+                    doctor.
+                    Please seek medical advice from trained individuals before attempting anything suggested in the
+                    website. </p>
             </div>
-        
+
             <div class="description-text-container-inner" id="text2" onmouseover="selectText('text2')">
                 <h2 class="description-text-heading">Bil-Malti</h2>
-                <p>Din il-websajt inħadmet għal xogħol akkademiku bl-iskop li titnaqqas il-firxa ta misinformazzjoni rigward l-antibijotiċi.
-                    Minħabba dan l-aspett il-websajt ġiet maħduma b'lingwa Ingliża kemm għal fatt li l-lingwa sekondarja ta' Malta hija l-Ingliz u 
+                <p>Din il-websajt inħadmet għal xogħol akkademiku bl-iskop li titnaqqas il-firxa ta misinformazzjoni
+                    rigward l-antibijotiċi.
+                    Minħabba dan l-aspett il-websajt ġiet maħduma b'lingwa Ingliża kemm għal fatt li l-lingwa sekondarja
+                    ta' Malta hija l-Ingliz u
                     kemm ħabba li l-grupp prinċipali ta' dan l-istudju huma nies ta' tmintax-il sena jew ikbar.</p>
-                    
-                    <p class="description-text-disclaimer">Ċaħda ta' responsabbiltà: L-informazzjoni pprovduta lill-utent matul il-websajt għalkemm fattwali u korretta, ma tissostitwixxix l-opinjoni medika ta 'tabib professjonali.
-                    Jekk jogħġbok fittex parir mediku minn individwi mħarrġa qabel ma tipprova xi ħaġa ssuġġerita fil-websajt.</p>
+
+                <p class="description-text-disclaimer">Ċaħda ta' responsabbiltà: L-informazzjoni pprovduta lill-utent
+                    matul il-websajt għalkemm fattwali u korretta, ma tissostitwixxix l-opinjoni medika ta 'tabib
+                    professjonali.
+                    Jekk jogħġbok fittex parir mediku minn individwi mħarrġa qabel ma tipprova xi ħaġa ssuġġerita
+                    fil-websajt.</p>
             </div>
         </div>
     </section>
     <!-- Chat-Bot Text Box Section -->
     <section class="chat-section bg-purple py-4" id="chatBot">
         <div class="text-center header-container">
-            <h1 id="chatTitle" class="animated-text">Let's have a Chat!</h1>
+            <h1 class="animated-text sub-title">Let's have a Chat!</h1>
             <img id="chatIcon" src="{{ url_for('static', filename='assets/img/chat-icon-rotation.gif') }}"
                 alt="Chat Icon">
         </div>
@@ -126,42 +137,44 @@
                     </div>
                 </div>
 
-            <div class="ChatItem ChatItem--expert temporaryChoices">
-                <div class="ChatItem-meta">
-                <div class="ChatItem-avatar">
-                    <img class="ChatItem-avatarImage" src="{{ user_icon }}">
-                </div>
-                </div>
-                <div class="ChatItem-chatContent">
-                    <div class="ChatSelection" onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
-                        Hello, I would like to learn about AntiBiotics.
+                <div class="ChatItem ChatItem--expert temporaryChoices">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                            <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatSelection"
+                            onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
+                            Hello, I would like to learn about AntiBiotics.
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ChatItem ChatItem--expert temporaryChoices">
-                <div class="ChatItem-meta">
-                <div class="ChatItem-avatar">
-                    <img class="ChatItem-avatarImage" src="{{ user_icon }}">
-                </div>
-                </div>
-                <div class="ChatItem-chatContent">
-                    <div class="ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
-                        When are antibiotics needed?
+                <div class="ChatItem ChatItem--expert temporaryChoices">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                            <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
+                            When are antibiotics needed?
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="ChatItem ChatItem--expert temporaryChoices">
-                <div class="ChatItem-meta">
-                <div class="ChatItem-avatar">
-                    <img class="ChatItem-avatarImage" src="{{ user_icon }}">
-                </div>
-                </div>
-                <div class="ChatItem-chatContent">
-                    <div class="ChatSelection" onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
-                        Can you better explain to me what Anti-Microbial Resistance means?
+                <div class="ChatItem ChatItem--expert temporaryChoices">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                            <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatSelection"
+                            onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
+                            Can you better explain to me what Anti-Microbial Resistance means?
+                        </div>
                     </div>
                 </div>
-            </div>            
 
             </div>
             <div id="chatContainerInput">
@@ -202,9 +215,11 @@
             <div class="">
                 <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>
                 <div class="container px-4 px-lg-5">Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat </div>
-                <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa Camilleri
+                <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa
+                Camilleri
                 and
-                Mr Gavin Schranz at the University of Malta.</div>
+                Mr Gavin Schranz at the University of Malta.
+            </div>
             </div>
         </footer>
     </section>
