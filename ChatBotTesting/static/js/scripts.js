@@ -332,17 +332,36 @@ function processImage() {
 
     var formData = new FormData();
     formData.append('fileInput', file);
+    
+    if (formData) {
+        console.log("YEAH");
+    }
 
-    fetch('/process', {
-        method: 'POST',
-        body: formData,
-    })
-        .then(response => response.text())
-        .then(data => {
-            console.log(data);
+    // fetch('/process', {
+    //     method: 'POST',
+    //     body: formData,
+    // })
+    //     .then(response => response.text())
+    //     .then(data => {
+    //         console.log(data);
+    //     })
+    //     .catch(error => {
+    //         console.error(error);
+    //     });
+
+    // // JavaScript to handle the form submission and display the result
+    // document.querySelector('form').addEventListener('submit', function (e) {
+    //     e.preventDefault();
+
+    //     var formData = new FormData(this);
+
+        fetch('/api/scan_barcode', {
+            method: 'POST',
+            body: formData
         })
-        .catch(error => {
-            console.error(error);
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('result').textContent = data.text;
         });
 }
 
@@ -405,6 +424,8 @@ function readMessage(button) {
 /* Speech to Text */
 document.addEventListener('DOMContentLoaded', function () {
     var userInput = document.getElementById('userInput'); // Get the text input element
+
+    handleFormSubmission();
 });
 
 var recognition;
@@ -627,3 +648,141 @@ function selectText(id) {
 
 
 window.onload = showExplanation;
+
+/* Barcode Scanning */
+function handleFormSubmission() {
+    // JavaScript to handle the form submission and display the result
+    document.querySelector('form').addEventListener('submit', function (e) {
+        e.preventDefault();
+
+        var formData = new FormData(this);
+
+        fetch('/api/scan_barcode', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('result').textContent = data.text;
+        });
+    });
+}
+
+/*FAQs */
+
+// Function to toggle the display of the chatbot response when the question is clicked
+function toggleResponse(response) {
+    response.style.display = response.style.display === 'block' ? 'none' : 'block';
+}
+
+// Function to load the FAQ from CSV
+function loadFAQFromCSV() {
+    fetch('../static/FAQs.csv')
+    .then(response => response.text())
+    .then(data => {
+        const faqData = data.split('\n');
+        const faqContainer = document.getElementById('faq-container');
+
+        faqData.forEach((line, index) => {
+            if (index === 0) return; // Skip the header row
+
+            const [, userQuery, chatbotResponse] = line.split(',');
+
+            // Create FAQ item HTML
+            const faqItem = document.createElement('div');
+            faqItem.classList.add('faq-item');
+
+            // Create the user query
+            const userQueryElement = document.createElement('div');
+            userQueryElement.classList.add('user-query');
+            userQueryElement.textContent = userQuery;
+
+            // Create the chatbot response initially hidden
+            const chatbotResponseElement = document.createElement('div');
+            chatbotResponseElement.classList.add('chatbot-response');
+            chatbotResponseElement.textContent = chatbotResponse;
+            chatbotResponseElement.style.display = 'none';
+
+            // Append user query and response to the FAQ item
+            faqItem.appendChild(userQueryElement);
+            faqItem.appendChild(chatbotResponseElement);
+
+            // Append the FAQ item to the container
+            faqContainer.appendChild(faqItem);
+
+            // Attach a click event to toggle the response when the user query is clicked
+            userQueryElement.addEventListener('click', () => {
+                toggleResponse(chatbotResponseElement);
+            });
+        });
+    })
+    .catch(error => {
+        console.error('Error loading CSV file:', error);
+    });
+}
+
+/*Quiz */
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+}
+
+function loadQuizFromCSV() {
+    fetch('../static/Quiz.csv')
+        .then(response => response.text())
+        .then(data => {
+            const quizData = data.split('\n');
+            const quizContainer = document.getElementById('quiz-container');
+
+            quizData.forEach((line, index) => {
+                if (index === 0) return; // Skip the header row
+
+                const [question, answersCSV] = line.split(',');
+                const answers = answersCSV.split('|').map(answer => answer.trim());
+
+                // Shuffle the options randomly
+                const shuffledOptions = [...answers];
+                shuffleArray(shuffledOptions);
+
+                // Create Quiz item HTML
+                const quizItem = document.createElement('div');
+                quizItem.classList.add('quiz-item');
+                quizItem.innerHTML = `
+                    <div class="question">${question}</div>
+                    <div class="options">
+                        ${shuffledOptions.map((option, optionIndex) => `
+                            <button class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" onclick="handleUserSelection(this, ${optionIndex})">${option}</button>
+                        `).join('')}
+                    </div>
+                    <div class="user-answer" style="display: none;"></div>
+                `;
+
+                quizContainer.appendChild(quizItem);
+            });
+        })
+        .catch(error => {
+            console.error('Error loading CSV file:', error);
+        });
+}
+
+function handleUserSelection(button, optionIndex) {
+    const selectedAnswer = button.getAttribute('data-value');
+    const correctAnswer = button.getAttribute('data-correct-answer');
+    const userAnswerElement = button.parentElement.parentElement.querySelector('.user-answer');
+
+    if (selectedAnswer === correctAnswer) {
+        userAnswerElement.textContent = 'Correct!';
+        userAnswerElement.style.color = 'green';
+    } else {
+        userAnswerElement.textContent = 'Incorrect. Correct answer: ' + correctAnswer;
+        userAnswerElement.style.color = 'red';
+    }
+
+    userAnswerElement.style.display = 'block';
+}
+
+
+window.onload = loadFAQFromCSV();
+window.onload = loadQuizFromCSV();

@@ -1,6 +1,10 @@
 
 # Importing the required library
 from flask import Flask, request, jsonify, send_from_directory, render_template, url_for
+
+from werkzeug.utils import secure_filename
+import pyzbar.pyzbar as pyzbar
+
 import openai
 # import sys
 # import os
@@ -20,6 +24,9 @@ pre_prompt = "You are a helpful assistant. You do not respond as 'User' or prete
 
 # ------------------- Llama2 -------------------
 app = Flask(__name__)
+
+# Create uploads folder to hold the uploaded files
+app.config['UPLOAD_FOLDER'] = os.path.abspath('uploads')
 
 # Setting the OpenAI API key
 openai.api_key = "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"
@@ -123,6 +130,32 @@ def reset_conversation():
     global conversation
     conversation = []
     return jsonify({'message': 'Conversation reset.'})
+
+@app.route('/api/scan_barcode', methods=['POST'])
+def scan_barcode():
+    print("christmas time jerome")
+    try:
+        uploaded_file = request.files["fileInput"]
+
+        # Perform barcode scanning on the uploaded image using pyzbar
+        img = Image.open(uploaded_file)
+        decoded_objects = pyzbar.decode(img)
+
+        if decoded_objects:
+            barcode_data = decoded_objects[0].data.decode('utf-8')
+        else:
+            barcode_data = 'No barcode found'
+
+        print('Barcode data:', barcode_data)
+
+        # Return the barcode scanning result as part of the chat response
+        chat_response = {
+            'text': 'Image uploaded, and barcode scanned: ' + barcode_data
+        }
+        return jsonify(chat_response)
+    except Exception as e:
+        print(e)
+        return jsonify({'error': str(e)})
 
 if __name__ == '__main__':
     app.run(debug=True)
