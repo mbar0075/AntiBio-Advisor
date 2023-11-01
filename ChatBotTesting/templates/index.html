@@ -53,6 +53,8 @@
                     <li class="nav-item"><a class="nav-link" href="info">Learn More</a></li>
                     <li class="nav-item"><a class="nav-link" href="faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="prescriptionInfo">Prescription Info</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map">Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quiz">Quiz</a></li>
                 </ul>
             </div>
         </div>
@@ -74,7 +76,7 @@
     </header>
 
     <!-- Chat-Bot Text Box Section -->
-    <section class="contact-section bg-purple py-4" id="chatBot">
+    <section class="chat-section bg-purple py-4" id="chatBot">
         <div class="text-center header-container">
             <h1 id="chatTitle" class="animated-text">Let's have a Chat!</h1>
             <img id="chatIcon" src="{{ url_for('static', filename='assets/img/chat-icon-rotation.gif') }}"
@@ -100,6 +102,44 @@
                         </div>
                     </div>
                 </div>
+
+            <div class="ChatItem ChatItem--expert temporaryChoices">
+                <div class="ChatItem-meta">
+                <div class="ChatItem-avatar">
+                    <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                </div>
+                </div>
+                <div class="ChatItem-chatContent">
+                    <div class="ChatSelection" onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
+                        Hello, I would like to learn about AntiBiotics.
+                    </div>
+                </div>
+            </div>
+            <div class="ChatItem ChatItem--expert temporaryChoices">
+                <div class="ChatItem-meta">
+                <div class="ChatItem-avatar">
+                    <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                </div>
+                </div>
+                <div class="ChatItem-chatContent">
+                    <div class="ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
+                        When are antibiotics needed?
+                    </div>
+                </div>
+            </div>
+            <div class="ChatItem ChatItem--expert temporaryChoices">
+                <div class="ChatItem-meta">
+                <div class="ChatItem-avatar">
+                    <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                </div>
+                </div>
+                <div class="ChatItem-chatContent">
+                    <div class="ChatSelection" onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
+                        Can you better explain to me what Anti-Microbial Resistance means?
+                    </div>
+                </div>
+            </div>            
+
             </div>
             <div id="chatContainerInput">
                 <input type="text" id="userInput" placeholder="Type your questions here"
@@ -119,133 +159,32 @@
         </div>
     </section>
 
-    <section class="section-notation bg-black text-center py-4" id="notations">
-        <h1 class="animated-text">Select an Abbreviation / Notation:</h1>
-        <br>
-        <select id="antibio-abbreviations" onchange="showExplanation()">
-            <option value="--">--</option>
-            <option value="Penicillin">Penicillin</option>
-            <option value="Cephalosporins">Cephalosporins</option>
-            <option value="Tetracyclines">Tetracyclines</option>
-            <option value="Macrolides">Macrolides</option>
-            <option value="Fluoroquinolones">Fluoroquinolones</option>
-            <option value="Sulfonamides">Sulfonamides</option>
-            <option value="Aminoglycosides">Aminoglycosides</option>
-            <option value="Metronidazole">Metronidazole</option>
-            <option value="Clindamycin">Clindamycin</option>
-            <option value="Vancomycin">Vancomycin</option>
-            <option value="Linezolid">Linezolid</option>
-            <option value="Doxycycline">Doxycycline</option>
-        </select>
-
-        <select id="word-abbreviations" onchange="showExplanation()">
-            <option value="--">--</option>
-            <option value="HS">HS</option>
-            <option value="PRN">PRN</option>
-            <option value="OD">OD</option>
-            <option value="BD">BD</option>
-        </select>
-
-        <select id="abbreviations" onchange="showExplanation()">
-            <option value="--">--</option>
-            <option value="0-1-0">0-1-0</option>
-            <option value="1-0-1">1-0-1</option>
-            <option value="1-1-1">1-1-1</option>
-            <option value="2-2-2">2-2-2</option>
-            <option value="1/2-1-1/2">1/2-1-1/2</option>
-
-        </select>
-
-        <div class="bg-black" id="explanation">
-            <br>
-            <h1 class="py-3 animated-text">Explanation:</h1>
-            <br>
-            <p id="explanationText" class="text-white explanation-box"></p>
-        </div>
-
-    </section>
-
 
     <!-- <h1>Upload a File</h1>
     <input type="file" id="fileInput" accept="image/*">
     <button onclick="processImage()">Run OCR</button>
     <div id="result"></div> -->
 
-    <!-- Map Box Section -->
-    <section class="py-4 bg-black text-center" id="pharmacies">
-        <h1 class="text-bottom-margin animated-text">
-            <img class="animated-marker myPopup" src="../static/assets/img/blue_location.png" alt="Map Location"
-                style="width: 50px; height: 50px; padding-bottom: 2px" />
-            Find Nearby Pharmacies
-            <img class="animated-marker myPopup" src="../static/assets/img/red_location.png" alt="Map Location"
-                style="width: 50px; height: 50px; padding-bottom: 2px" />
-        </h1>
-        <br><br>
-        <!-- Explaining what the different icons mean in the form of a very good looking list popup, where the blue icon means general practioner and red for pharmacy-->
-        <div class="popup" onclick="mapExplanation()">
-            <p class="text-white">
-                <img class="animated-marker myPopup" src="../static/assets/img/blue_location.png"
-                    alt="Map Location" />General Practitioner<br>
-                <img class="animated-marker myPopup" src="../static/assets/img/red_location.png"
-                    alt="Map Location" />Pharmacy<br>
-            </p>
-        </div>
-        <br><br>
-        <div id="result"></div>
-        <div id="map" style="height: 400px; width: 100%;"></div>
-        <script>showPosition();</script>
-    </section>
-
     <!-- Contact-->
-    <section class="contact-section bg-black">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5">
-                <!-- <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Address</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">4923 Market Street, Orlando FL</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-envelope text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Email</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Phone</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">+1 (555) 902-8832</div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
+    <section class="contact-section">
+        <!-- <div class="container px-4 px-lg-5">
             <div class="social d-flex justify-content-center">
-                <!-- <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a> -->
+                <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
+                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a>
                 <a class="mx-2" href="https://github.com/mbar0075/AntiBio-Advisor"><i class="fab fa-github"></i></a>
             </div>
-        </div>
+        </div> -->
+        <!-- Footer-->
+        <footer class="footer small text-center text-white-50">
+            <div class="">
+                <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>
+                <div class="container px-4 px-lg-5">Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat </div>
+                <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa Camilleri
+                and
+                Mr Gavin Schranz at the University of Malta.</div>
+            </div>
+        </footer>
     </section>
-    <!-- Footer-->
-    <footer class="footer bg-black small text-center text-white-50">
-        <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>
-        <div class="container px-4 px-lg-5">Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat </div>
-        <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa Camilleri
-        and
-        Mr Gavin Schranz at the University of Malta.</div>
-    </footer>
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
     <!-- Core theme JS-->

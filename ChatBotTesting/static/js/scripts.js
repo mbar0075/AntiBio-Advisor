@@ -218,10 +218,35 @@ function calculateAndDisplayRoute(origin, destination) {
     });
 }
 
+// Function to handle choice selection
+function selectChoice(choice) {
+    // Do something with the selected choice, e.g., send it to the chatbot
+    // if (choice == "option1") {
+    //     choice = "Hello, I would like to learn about AntiBiotics."
+    // } else if (choice == "option2") {
+    //     choice = "When are antibiotics needed?"
+    // } else if (choice == "option3") {
+    //     choice = "Can you better explain to me what Anti-Microbial Resistance means?"
+    // }
+
+    document.getElementById("userInput").value = choice
+
+    sendMessage(user_icon_src, bot_icon_src)
+}
+
+
 //Function to communicate with the Chatbot
 function sendMessage(user_icon, bot_icon) {
     const userInput = document.getElementById("userInput").value;
     const chatbox = document.getElementById("chatBox");
+
+    var choices = document.getElementsByClassName('temporaryChoices');
+
+    for (var i = 0; i < choices.length; i++) {
+        choices[i].style.display = 'none';
+    }
+    
+        
 
     if (userInput !== "") {
         //Displaying the user's message in the chatbox
@@ -344,8 +369,9 @@ function speak() {
     var lengthOfTextArea = textarea.length;
     var text = "";
     for (var counter = 0; counter < lengthOfTextArea; counter++) {
-        text = textarea[counter].innerHTML;
+        text = textarea[counter].innerText;
 
+        console.log(text)
         // Create a new SpeechSynthesisUtterance for each text
         var utterance = new SpeechSynthesisUtterance(text);
 
@@ -361,8 +387,9 @@ function speak() {
 
 function readMessage(button) {
     // Get the text from the parent <div> element
+    console.log("Dhalna")
     var chatText = button.parentElement.textContent.trim();
-
+    console.log(chatText)
     // Create a new SpeechSynthesisUtterance for the text
     var utterance = new SpeechSynthesisUtterance(chatText);
 
@@ -439,7 +466,44 @@ function clearChatHistory(bot_icon) {
         </button>
       </div>
     </div>
-  </div>`
+  </div>
+  <div class="ChatItem ChatItem--expert temporaryChoices">
+  <div class="ChatItem-meta">
+  <div class="ChatItem-avatar">
+      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+  </div>
+  </div>
+  <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
+          Hello, I would like to learn about AntiBiotics.
+      </div>
+  </div>
+</div>
+<div class="ChatItem ChatItem--expert temporaryChoices">
+  <div class="ChatItem-meta">
+  <div class="ChatItem-avatar">
+      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+  </div>
+  </div>
+  <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
+          When are antibiotics needed?
+      </div>
+  </div>
+</div>
+<div class="ChatItem ChatItem--expert temporaryChoices">
+  <div class="ChatItem-meta">
+  <div class="ChatItem-avatar">
+      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+  </div>
+  </div>
+  <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
+          Can you better explain to me what Anti-Microbial Resistance means?
+      </div>
+  </div>
+</div>`
+  
 
     // JavaScript code to reset the conversation
     fetch('/api/reset_conversation', {

@@ -53,6 +53,8 @@
                     <li class="nav-item"><a class="nav-link" href="info">Learn More</a></li>
                     <li class="nav-item"><a class="nav-link" href="faq">FAQ</a></li>
                     <li class="nav-item"><a class="nav-link" href="#page-top">Prescription Info</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map">Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quiz">Quiz</a></li>
                 </ul>
             </div>
         </div>
@@ -76,78 +78,50 @@
         </div>
     </header>
 
-    <!-- About-->
-    <section class="about-section text-center" id="about">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5 justify-content-center">
-                <div class="col-lg-8">
-                    <h2 class="mb-4 animated-text">What is Anti-Microbial Resistance?</h2>
-                    <p class="text-white-50 mb-4 slide-in-element">
-                        "Antimicrobial resistance (AMR) threatens the effective prevention and treatment of an
-                        ever-increasing range of infections caused by bacteria, parasites, viruses and fungi." - WHO
-                    </p><br>
-                    <iframe class="mb-5" width="100%" height="100%"
-                        src="https://www.youtube.com/embed/MENdrA8B0N4?si=YKUgWjrfS_VcDzr0" title="YouTube video player"
-                        frameborder="0"
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowfullscreen></iframe>
-                </div>
-            </div>
-            <!-- <img class="img-fluid" src="{{ url_for('static', filename='assets/img/ipad.png') }}" alt="..." /> -->
-        </div>
-    </section>
+    <section class="section-notation bg-black text-center py-4" id="notations">
+        <h1 class="animated-text">Select an Abbreviation / Notation:</h1>
+        <br>
+        <select id="antibio-abbreviations" onchange="showExplanation()">
+            <option value="--">--</option>
+            <option value="Penicillin">Penicillin</option>
+            <option value="Cephalosporins">Cephalosporins</option>
+            <option value="Tetracyclines">Tetracyclines</option>
+            <option value="Macrolides">Macrolides</option>
+            <option value="Fluoroquinolones">Fluoroquinolones</option>
+            <option value="Sulfonamides">Sulfonamides</option>
+            <option value="Aminoglycosides">Aminoglycosides</option>
+            <option value="Metronidazole">Metronidazole</option>
+            <option value="Clindamycin">Clindamycin</option>
+            <option value="Vancomycin">Vancomycin</option>
+            <option value="Linezolid">Linezolid</option>
+            <option value="Doxycycline">Doxycycline</option>
+        </select>
 
+        <select id="word-abbreviations" onchange="showExplanation()">
+            <option value="--">--</option>
+            <option value="HS">HS</option>
+            <option value="PRN">PRN</option>
+            <option value="OD">OD</option>
+            <option value="BD">BD</option>
+        </select>
 
-    <!-- Projects-->
-    <section class="projects-section bg-light" id="projects">
-        <div class="container px-4 px-lg-5">
-            <!-- Featured Project Row-->
-            <div class="row gx-0 mb-4 mb-lg-5 align-items-center">
-                <div class="col-xl-8 col-lg-7"><img class="img-fluid mb-3 mb-lg-0"
-                        src="{{ url_for('static', filename='assets/img/bg-masthead.jpg') }}" alt="..." /></div>
-                <div class="col-xl-4 col-lg-5">
-                    <div class="featured-text text-center text-lg-left">
-                        <h4>Shoreline</h4>
-                        <p class="text-black-50 mb-0">Grayscale is open source and MIT licensed. This means you can use
-                            it for any project - even commercial projects! Download it, customize it, and publish your
-                            website!</p>
-                    </div>
-                </div>
-            </div>
-            <!-- Project One Row-->
-            <div class="row gx-0 mb-5 mb-lg-0 justify-content-center">
-                <div class="col-lg-6"><img class="img-fluid"
-                        src="{{ url_for('static', filename='assets/img/antibiotic-resistance.jpg') }}" alt="..." />
-                </div>
-                <div class="col-lg-6">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-left">
-                                <h4 class="text-white">Misty</h4>
-                                <p class="mb-0 text-white-50">An example of where you can put an image of a project, or
-                                    anything else, along with a description.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- Project Two Row-->
-            <div class="row gx-0 justify-content-center">
-                <div class="col-lg-6"><img class="img-fluid"
-                        src="{{ url_for('static', filename='assets/img/antibiotics-stats1.png') }}" alt="..." /></div>
-                <div class="col-lg-6 order-lg-first">
-                    <div class="bg-black text-center h-100 project">
-                        <div class="d-flex h-100">
-                            <div class="project-text w-100 my-auto text-center text-lg-right">
-                                <h4 class="text-white">Mountains</h4>
-                                <p class="mb-0 text-white-50">Another example of a project with its respective
-                                    description. These sections work well responsively as well!</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+        <select id="abbreviations" onchange="showExplanation()">
+            <option value="--">--</option>
+            <option value="0-1-0">0-1-0</option>
+            <option value="1-0-1">1-0-1</option>
+            <option value="1-1-1">1-1-1</option>
+            <option value="2-2-2">2-2-2</option>
+            <option value="1/2-1-1/2">1/2-1-1/2</option>
+
+        </select>
+
+        <div class="bg-black" id="explanation">
+            <br>
+            <h1 class="py-3 animated-text">Explanation:</h1>
+            <br>
+            <p id="explanationText" class="text-white explanation-box"></p>
         </div>
+
     </section>
 
     <!-- Contact-->

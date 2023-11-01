@@ -43,8 +43,16 @@ def faq_page():
     return render_template("faq.html")
 
 @app.route('/prescriptionInfo')
-def presecription_info_page():
+def prescription_info_page():
     return render_template("prescriptionInfo.html")
+
+@app.route('/map')
+def map_page():
+    return render_template("map.html")
+
+@app.route('/quiz')
+def quiz_page():
+    return render_template("quiz.html")
 
 # Handling the chatbot functionality
 @app.route('/api/chat', methods=['POST'])
