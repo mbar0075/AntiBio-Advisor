@@ -13494,6 +13494,7 @@ body {
   line-height: 1.3;
   z-index: 2;
   opacity: 0.7;
+  transition: opacity 0.3s ease;
   .ChatItem--expert & {
     margin-left: auto;
     /* border: 1px solid #dbdbdb; */
@@ -13519,6 +13520,39 @@ body {
   background: var(--palette-purple-2);
   color: white;
   padding: 20px;
+}
+
+.description-text-container {
+  display: flex;
+  justify-content: center;
+}
+
+.description-text-container-inner {
+  width: 40%;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--palette-purple-3);
+  border: 2px solid #333;
+  border-radius: 8px;
+  margin: 10px;
+  text-align: justify;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
+.description-text-container-inner.selected {
+  opacity: 1;
+}
+
+.description-text-heading {
+  color: #fff;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+.description-text-disclaimer {
+  color: var(--palette-purple-1); /* Red color */
+  font-weight: bold; /* Bold text */
 }
 
 /* Mobile-specific styles using a media query */

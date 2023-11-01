@@ -614,4 +614,16 @@ function mapExplanation(event) {
     }
 }
 
+function selectText(id) {
+    // Remove the 'selected' class from all elements
+    var elements = document.getElementsByClassName('description-text-container-inner');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('selected');
+    }
+
+    // Add the 'selected' class to the hovered element
+    document.getElementById(id).classList.add('selected');
+}
+
+
 window.onload = showExplanation;
