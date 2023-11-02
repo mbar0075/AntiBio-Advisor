@@ -671,7 +671,8 @@ function handleFormSubmission() {
 /*FAQs */
 
 // Function to toggle the display of the chatbot response when the question is clicked
-function toggleResponse(response, faqIcon) {
+function toggleResponse(response, faqIcon, faqItem) {
+    faqItem.classList.toggle('expanded');
     response.style.display = response.style.display === 'block' ? 'none' : 'block';
     if (faqIcon.alt == "add") {
         faqIcon.src = "../static/assets/img/minus.png";
@@ -680,6 +681,12 @@ function toggleResponse(response, faqIcon) {
     else {
         faqIcon.src = "../static/assets/img/add.png";
         faqIcon.alt = "add"
+    }
+
+    // Check if the current height is larger than 100px, and set maxHeight accordingly
+    const currentHeight = faqItem.scrollHeight;
+    if (currentHeight < 100) {
+        faqItem.style.maxHeight = "90px";
     }
 }
 
@@ -730,7 +737,7 @@ function loadFAQFromCSV() {
 
                 // Attach a click event to toggle the response when the user query is clicked
                 queryElement.addEventListener('click', () => {
-                    toggleResponse(responseElement, faqIcon);
+                    toggleResponse(responseElement, faqIcon, faqItem);
                 });
             });
         })

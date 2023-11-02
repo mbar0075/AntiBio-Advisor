@@ -13565,6 +13565,14 @@ body {
   padding: 10px;
   background-color: var(--palette-purple-2);
   width: 700px;
+  cursor: pointer;
+  overflow: hidden;
+  height: 45px;
+  transition: height 0.5s ease;
+}
+
+.expanded {
+  height: 110px;
 }
 
 .faq-icon {
