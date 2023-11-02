@@ -687,6 +687,8 @@ function toggleResponse(response, faqIcon, faqItem) {
     const currentHeight = faqItem.scrollHeight;
     if (currentHeight < 100) {
         faqItem.style.maxHeight = "90px";
+    } else {
+        faqItem.style.maxHeight = "1000px"
     }
 
     faqIcon.classList.toggle('rotate');
@@ -759,6 +761,8 @@ function shuffleArray(array) {
 let selectedAnswers = [];
 
 function loadQuizFromCSV() {
+    alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    alphabetIndex = 0;
     fetch('../static/Quiz.csv')
         .then(response => response.text())
         .then(data => {
@@ -772,14 +776,13 @@ function loadQuizFromCSV() {
                 // Shuffle the options randomly
                 const shuffledOptions = [...answers];
                 shuffleArray(shuffledOptions);
-
                 return `
                     <div class="quiz-item">
                         <div class="question">${question}</div>
                         <div class="options">
-                            ${shuffledOptions.map(option => `
+                            ${shuffledOptions.map((option, alphabetIndex) => `
                                 <div class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" data-question="${index}">
-                                    ${option}
+                                    ${alphabet[alphabetIndex] + ": " + option}
                                 </div>
                             `).join('')}
                         </div>
@@ -788,6 +791,7 @@ function loadQuizFromCSV() {
                         </div>
                     </div>`;
             });
+            alphabetIndex = 0;
 
             quizContainer.innerHTML = quizItemsHTML.join('');
 
@@ -833,6 +837,27 @@ function handleUserSelection(button) {
     button.classList.add('active');
 }
 
+function toggleDropdown(id) {
+    const idItem = document.getElementById(id);
+    const dropdown = idItem.querySelector('.custom-select .options');
+    // console.log(dropdown)
+    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+}
+
+// function updateSelectedText(option) {
+//     const selectBox = document.querySelector('.custom-select .select-box');
+//     selectBox.textContent = option.textContent;
+// }
+
+function updateSelectedText(option, id) {
+    const selectBox = document.querySelector('.custom-select .select-box');
+    console.log(id)
+    document.getElementById(id).querySelector('.select-box') = option.textContent;
+    // textContent = option.textContent;
+    // const idItem = document.getElementById(id);
+    // const dropdown = idItem.querySelector('.custom-select .select-box');
+    // dropdown.textContent = option.textContent;
+}
 
 window.onload = loadFAQFromCSV();
 window.onload = loadQuizFromCSV();

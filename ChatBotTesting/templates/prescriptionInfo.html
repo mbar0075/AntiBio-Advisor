@@ -78,55 +78,79 @@
         </div>
     </header>
 
-    <section>
+    <section class="section-notation bg-purple text-center py-4" id="notations">
+        <h1 class="animated-text sub-title">Scan And Decode</h1>
         <!-- Barcode Scanning API -->
-        <h1>Upload an Image for Barcode Scanning</h1>
+
         <!-- <form method="POST" action="/api/scan_barcode" enctype="multipart/form-data"> -->
         <input type="file" id="fileInput" name="image"
             accept="image/jpeg, image/png, image/gif, image/webp, image/bmp" />
         <button type="submit" onclick="processImage()" value="Scan Barcode">Scan Barcode</button>
-        <!-- </form> -->
 
         <!-- Display the result from the barcode scanning API -->
         <div id="result"></div>
-    </section>
 
-    <section class="section-notation bg-black text-center py-4" id="notations">
         <h1 class="animated-text">Select an Abbreviation / Notation:</h1>
         <br>
-        <select id="antibio-abbreviations" onchange="showExplanation()">
-            <option value="--">--</option>
-            <option value="Penicillin">Penicillin</option>
-            <option value="Cephalosporins">Cephalosporins</option>
-            <option value="Tetracyclines">Tetracyclines</option>
-            <option value="Macrolides">Macrolides</option>
-            <option value="Fluoroquinolones">Fluoroquinolones</option>
-            <option value="Sulfonamides">Sulfonamides</option>
-            <option value="Aminoglycosides">Aminoglycosides</option>
-            <option value="Metronidazole">Metronidazole</option>
-            <option value="Clindamycin">Clindamycin</option>
-            <option value="Vancomycin">Vancomycin</option>
-            <option value="Linezolid">Linezolid</option>
-            <option value="Doxycycline">Doxycycline</option>
-        </select>
 
-        <select id="word-abbreviations" onchange="showExplanation()">
-            <option value="--">--</option>
-            <option value="HS">HS</option>
-            <option value="PRN">PRN</option>
-            <option value="OD">OD</option>
-            <option value="BD">BD</option>
-        </select>
+        <div class="dropdown-container">
+            <div id="antibiotics-dropdown" class="custom-select" onclick="toggleDropdown(this.id)">
+                <div class="select-box">
+                    Antibiotics
+                </div>
+                <div class="options">
+                    <div class="option" value="--" onclick="updateSelectedText(this, this.id)">--</div>
+                    <div class="option" value="Penicillin" onclick="updateSelectedText(this, this.id)">Penicillin</div>
+                    <div class="option" value="Cephalosporins" onclick="updateSelectedText(this, this.id)">
+                        Cephalosporins</div>
+                    <div class="option" value="Tetracyclines" onclick="updateSelectedText(this, this.id)">Tetracyclines
+                    </div>
+                    <div class="option" value="Macrolides" onclick="updateSelectedText(this, this.id)">Macrolides</div>
+                    <div class="option" value="Fluoroquinolones" onclick="updateSelectedText(this, this.id)">
+                        Fluoroquinolones
+                    </div>
+                    <div class="option" value="Sulfonamides" onclick="updateSelectedText(this, this.id)">Sulfonamides
+                    </div>
+                    <div class="option" value="Aminoglycosides" onclick="updateSelectedText(this, this.id)">
+                        Aminoglycosides</div>
+                    <div class="option" value="Metronidazole" onclick="updateSelectedText(this, this.id)">Metronidazole
+                    </div>
+                    <div class="option" value="Clindamycin" onclick="updateSelectedText(this, this.id)">Clindamycin
+                    </div>
+                    <div class="option" value="Vancomycin" onclick="updateSelectedText(this, this.id)">Vancomycin</div>
+                    <div class="option" value="Linezolid" onclick="updateSelectedText(this, this.id)">Linezolid</div>
+                    <div class="option" value="Doxycycline" onclick="updateSelectedText(this, this.id)">Doxycycline
+                    </div>
+                </div>
+            </div>
 
-        <select id="abbreviations" onchange="showExplanation()">
-            <option value="--">--</option>
-            <option value="0-1-0">0-1-0</option>
-            <option value="1-0-1">1-0-1</option>
-            <option value="1-1-1">1-1-1</option>
-            <option value="2-2-2">2-2-2</option>
-            <option value="1/2-1-1/2">1/2-1-1/2</option>
+            <div id="abbreviations-dropdown" class="custom-select" onclick="toggleDropdown(this.id)">
+                <div class="select-box">
+                    Abbreviations
+                </div>
+                <div class="options">
+                    <div class="option" value="--" onclick="updateSelectedText(this, this.id)">--</div>
+                    <div class="option" value="HS" onclick="updateSelectedText(this, this.id)">HS</div>
+                    <div class="option" value="PRN" onclick="updateSelectedText(this, this.id)">PRN</div>
+                    <div class="option" value="OD" onclick="updateSelectedText(this, this.id)">OD</div>
+                    <div class="option" value="BD" onclick="updateSelectedText(this, this.id)">BD</div>
+                </div>
+            </div>
 
-        </select>
+            <div id="notations-dropdown" class="custom-select" onclick="toggleDropdown(this.id)">
+                <div class="select-box">
+                    Notations
+                </div>
+                <div class="options">
+                    <div class="option" value="--" onclick="updateSelectedText(this, this.id)">--</div>
+                    <div class="option" value="0-1-0" onclick="updateSelectedText(this, this.id)">0-1-0</div>
+                    <div class="option" value="1-0-1" onclick="updateSelectedText(this, this.id)">1-0-1</div>
+                    <div class="option" value="1-1-1" onclick="updateSelectedText(this, this.id)">1-1-1</div>
+                    <div class="option" value="2-2-2" onclick="updateSelectedText(this, this.id)">2-2-2</div>
+                    <div class="option" value="1/2-1-1/2" onclick="updateSelectedText(this, this.id)">1/2-1-1/2</div>
+                </div>
+            </div>
+        </div>
 
         <div class="bg-black" id="explanation">
             <br>
@@ -137,48 +161,6 @@
 
     </section>
 
-    <!-- Contact-->
-    <section class="contact-section bg-black">
-        <div class="container px-4 px-lg-5">
-            <div class="row gx-4 gx-lg-5">
-                <!-- <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-map-marked-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Address</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">4923 Market Street, Orlando FL</div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-envelope text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Email</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50"><a href="#!">hello@yourdomain.com</a></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-4 mb-3 mb-md-0">
-                    <div class="card py-4 h-100">
-                        <div class="card-body text-center">
-                            <i class="fas fa-mobile-alt text-primary mb-2"></i>
-                            <h4 class="text-uppercase m-0">Phone</h4>
-                            <hr class="my-4 mx-auto" />
-                            <div class="small text-black-50">+1 (555) 902-8832</div>
-                        </div>
-                    </div>
-                </div> -->
-            </div>
-            <div class="social d-flex justify-content-center">
-                <!-- <a class="mx-2" href="#!"><i class="fab fa-twitter"></i></a>
-                <a class="mx-2" href="#!"><i class="fab fa-facebook-f"></i></a> -->
-                <a class="mx-2" href="https://github.com/mbar0075/AntiBio-Advisor"><i class="fab fa-github"></i></a>
-            </div>
-        </div>
-    </section>
     <!-- Footer-->
     <footer class="footer bg-black small text-center text-white-50">
         <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>

@@ -9342,7 +9342,8 @@ fieldset:disabled .btn {
 
 .bg-purple {
   --bs-bg-opacity: 1;
-  background-color: rgba(var(--palette-purple-dark-rgb), var(--bs-bg-opacity)) !important;
+  /* background-color: rgba(var(--palette-purple-dark-rgb), var(--bs-bg-opacity)) !important; */
+  background-color: rgba(var(--palette-purple-1-rgb), var(--bs-bg-opacity)) !important;
 }
 
 .bg-white {
@@ -12909,7 +12910,7 @@ body {
   height: auto;
   min-height: 35rem;
   padding: 15rem 0;
-  background: linear-gradient(to bottom, rgba(7, 2, 18, 0.3) 0%, rgba(7, 2, 18, 0.4) 40%, rgba(7, 2, 18, 0.7) 70%, rgba(7, 2, 18, 1) 100%), url("../assets/img/masthead.gif");
+  background: linear-gradient(to bottom, rgba(7, 2, 18, 0.3) 0%, rgba(33, 11, 44, 0.4) 70%, rgba(33, 11, 44, 0.9) 95%, rgba(33, 11, 44, 1) 100%), url("../assets/img/masthead.gif");
   background-position: center;
   background-repeat: no-repeat;
   background-attachment: scroll;
@@ -12966,7 +12967,6 @@ body {
 .about-section {
   padding-top: 7rem;
   padding-bottom: 15rem;
-  background: linear-gradient(to bottom, #000 0%, rgba(0, 0, 0, 0.9) 100%);
 }
 
 .about-section p {
@@ -13020,7 +13020,7 @@ body {
 }
 
 .contact-section {
-  padding-top: 0.25rem;
+  /* padding-top: 0.25rem; */
   background: var(--palette-purple-dark);
 }
 
@@ -13067,9 +13067,11 @@ body {
 }
 
 .footer {
-  padding: 5rem 0;
+  padding-top: 5rem;
+  padding-bottom: 3rem;
   position: relative;
   text-align: center;
+  background: linear-gradient(to bottom, rgba(33, 11, 44, 1) 0%, rgba(33, 11, 44, 1) 20%, rgba(7, 2, 18, 1) 40%, rgba(7, 2, 18, 1) 95%, rgba(7, 2, 18, 1) 100%);
 }
 
 /* Additional CSS */
@@ -13264,40 +13266,7 @@ body {
   /* padding-bottom: 15rem; */
 }
 
-#abbreviations {
-  margin-top: 1rem;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  background-color: var(--bs-white);
-  /* Adjust background color as needed */
-}
-
-#word-abbreviations {
-  margin-top: 1rem;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  background-color: var(--bs-white);
-  /* Adjust background color as needed */
-}
-
-#antibio-abbreviations {
-  margin-top: 1rem;
-  padding: 8px;
-  font-size: 16px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  background-color: var(--bs-white);
-  /* Adjust background color as needed */
-}
-
-.map-section {
+*/ .map-section {
   padding-top: 1rem;
 }
 
@@ -13563,17 +13532,17 @@ body {
   border-radius: 10px;
   margin: 15px;
   padding: 10px;
-  background-color: var(--palette-purple-2);
+  background-color: var(--palette-purple-3);
   width: 700px;
   cursor: pointer;
   overflow: hidden;
   height: 45px;
   transition: height 0.5s ease;
-  opacity:0.7;
+  opacity: 0.95;
 }
 
 .faq-item:hover {
-  opacity:1;
+  opacity: 1;
 }
 
 .expanded {
@@ -13593,7 +13562,7 @@ body {
 
 .response {
   padding-top: 20px;
-  color: var(--palette-purple-3);
+  color: var(--bs-black);
 }
 
 .query {
@@ -13627,7 +13596,8 @@ body {
   margin-bottom: 10px;
 }
 
-.answer-button:hover, .answer-button.active {
+.answer-button:hover,
+.answer-button.active {
   opacity: 1;
 }
 
@@ -13756,4 +13726,72 @@ body {
   display: inline-flex;
   height: 600px;
   width: 80%;
+}
+
+/* .dropdown {
+  margin-top: 1rem;
+  padding: 8px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  background-color: var(--palette-purple-3);
+} */
+
+/* .dropdown * {
+  border-radius: 15px;
+  background-color: var(--palette-purple-2);
+} */
+
+/* Custom dropdown container */
+.custom-select {
+  /* position: relative; */
+  width: 150px;
+  padding: 5px;
+}
+
+/* Custom select box style */
+.custom-select .select-box {
+  background-color: var(--palette-purple-3);
+  color: var(--bs-white);
+  padding: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+/* Custom select box on hover */
+.custom-select .select-box:hover {
+  background-color: var(--palette-purple-4);
+}
+
+/* Custom options container */
+.custom-select .options {
+  position: absolute;
+  display: none;
+  background-color: var(--palette-purple-3);
+  max-height: 100px;
+  overflow-y: auto;
+  z-index: 1;
+}
+
+/* Removing the scroll bar */
+.custom-select .options::-webkit-scrollbar {
+  display: none;
+}
+
+/* Custom option style */
+.custom-select .options .option {
+  padding: 5px;
+  cursor: pointer;
+}
+
+/* Custom option on hover */
+.custom-select .options .option:hover {
+  background-color: var(--palette-purple-4);
+  color: var(--bs-white);
+}
+
+.dropdown-container {
+  display: flex;
+  justify-content: center;
 }
