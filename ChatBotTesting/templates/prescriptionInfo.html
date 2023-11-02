@@ -78,6 +78,19 @@
         </div>
     </header>
 
+    <section>
+        <!-- Barcode Scanning API -->
+        <h1>Upload an Image for Barcode Scanning</h1>
+        <!-- <form method="POST" action="/api/scan_barcode" enctype="multipart/form-data"> -->
+        <input type="file" id="fileInput" name="image"
+            accept="image/jpeg, image/png, image/gif, image/webp, image/bmp" />
+        <button type="submit" onclick="processImage()" value="Scan Barcode">Scan Barcode</button>
+        <!-- </form> -->
+
+        <!-- Display the result from the barcode scanning API -->
+        <div id="result"></div>
+    </section>
+
     <section class="section-notation bg-black text-center py-4" id="notations">
         <h1 class="animated-text">Select an Abbreviation / Notation:</h1>
         <br>
