@@ -13569,6 +13569,11 @@ body {
   overflow: hidden;
   height: 45px;
   transition: height 0.5s ease;
+  opacity:0.7;
+}
+
+.faq-item:hover {
+  opacity:1;
 }
 
 .expanded {
@@ -13579,6 +13584,11 @@ body {
   width: 15px;
   height: 15px;
   float: right;
+  transition: transform 0.5s ease-in-out;
+}
+
+.rotate {
+  transform: rotate(180deg);
 }
 
 .response {
@@ -13611,11 +13621,20 @@ body {
   border-radius: 10px;
   color: var(--bs-white);
   background-color: var(--palette-purple-2);
-  margin: 10px;
+  padding: 10px;
+  cursor: pointer;
+  opacity: 0.6;
+  margin-bottom: 10px;
+}
+
+.answer-button:hover, .answer-button.active {
+  opacity: 1;
 }
 
 .question {
   font-weight: bold;
+  font-size: 1.2em;
+  margin-bottom: 15px;
 }
 
 .options label {

@@ -688,6 +688,8 @@ function toggleResponse(response, faqIcon, faqItem) {
     if (currentHeight < 100) {
         faqItem.style.maxHeight = "90px";
     }
+
+    faqIcon.classList.toggle('rotate');
 }
 
 // Function to load the FAQ from CSV
@@ -754,6 +756,8 @@ function shuffleArray(array) {
     }
 }
 
+let selectedAnswers = [];
+
 function loadQuizFromCSV() {
     fetch('../static/Quiz.csv')
         .then(response => response.text())
@@ -761,9 +765,7 @@ function loadQuizFromCSV() {
             const quizData = data.split('\n');
             const quizContainer = document.getElementById('quiz-container');
 
-            quizData.forEach((line, index) => {
-                if (index === 0) return; // Skip the header row
-
+            const quizItemsHTML = quizData.slice(1).map((line, index) => {
                 const [question, answersCSV] = line.split(',');
                 const answers = answersCSV.split('|').map(answer => answer.trim());
 
@@ -771,20 +773,30 @@ function loadQuizFromCSV() {
                 const shuffledOptions = [...answers];
                 shuffleArray(shuffledOptions);
 
-                // Create Quiz item HTML
-                const quizItem = document.createElement('div');
-                quizItem.classList.add('quiz-item');
-                quizItem.innerHTML = `
-                    <div class="question">${question}</div>
-                    <div class="options">
-                        ${shuffledOptions.map((option, optionIndex) => `
-                            <button class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" onclick="handleUserSelection(this, ${optionIndex})">${option}</button>
-                        `).join('')}
-                    </div>
-                    <div class="user-answer" style="display: none;"></div>
-                `;
+                return `
+                    <div class="quiz-item">
+                        <div class="question">${question}</div>
+                        <div class="options">
+                            ${shuffledOptions.map(option => `
+                                <div class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" data-question="${index}">
+                                    ${option}
+                                </div>
+                            `).join('')}
+                        </div>
+                        <div class="user-answer" style="display: none;">
+                            <p>Correct Answer: ${answers[0]}</p>
+                        </div>
+                    </div>`;
+            });
 
-                quizContainer.appendChild(quizItem);
+            quizContainer.innerHTML = quizItemsHTML.join('');
+
+            // Use event delegation for click handling
+            quizContainer.addEventListener('click', (event) => {
+                const button = event.target.closest('.answer-button');
+                if (button) {
+                    handleUserSelection(button);
+                }
             });
         })
         .catch(error => {
@@ -792,7 +804,7 @@ function loadQuizFromCSV() {
         });
 }
 
-function handleUserSelection(button, optionIndex) {
+function handleUserSelection(button) {
     const selectedAnswer = button.getAttribute('data-value');
     const correctAnswer = button.getAttribute('data-correct-answer');
     const userAnswerElement = button.parentElement.parentElement.querySelector('.user-answer');
@@ -806,6 +818,19 @@ function handleUserSelection(button, optionIndex) {
     }
 
     userAnswerElement.style.display = 'block';
+
+    // Update the selected answer array
+    const questionIndex = button.getAttribute('data-question');
+    selectedAnswers[questionIndex] = selectedAnswer;
+
+    // Remove 'active' class from all options within the same question
+    const optionsWithinQuestion = document.querySelectorAll(`.answer-button[data-question="${questionIndex}"]`);
+    optionsWithinQuestion.forEach(item => {
+        item.classList.remove('active');
+    });
+
+    // Toggle the 'active' class for the clicked option
+    button.classList.add('active');
 }
 
 
