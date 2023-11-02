@@ -736,7 +736,7 @@ function loadFAQFromCSV() {
                 faqContainer.appendChild(faqItem);
 
                 // Attach a click event to toggle the response when the user query is clicked
-                queryElement.addEventListener('click', () => {
+                faqItem.addEventListener('click', () => {
                     toggleResponse(responseElement, faqIcon, faqItem);
                 });
             });
