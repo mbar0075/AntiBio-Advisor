@@ -547,9 +547,12 @@ function handleKeyPress(event) {
 }
 
 function showExplanation() {
-    var antibioticsValue = document.getElementById("antibio-abbreviations").value;
-    var wordsValue = document.getElementById("word-abbreviations").value;
-    var numericValue = document.getElementById("abbreviations").value;
+    var antibioticsValue = document.getElementById("antibiotic-box").innerText;
+    console.log(antibioticsValue);
+    var wordsValue = document.getElementById("abbreviations-box").innerText;
+    console.log(wordsValue);
+    var numericValue = document.getElementById("notations-box").innerText;
+    console.log(numericValue);
 
     var explanationText = document.getElementById("explanationText");
     var explanationDiv = document.getElementById("explanation");
@@ -585,7 +588,7 @@ function showExplanation() {
     };
 
     var explanation = "";
-
+    console.log(word_explanations);
     if (antibioticsValue in antibiotic_explanations) {
         explanation += antibiotic_explanations[antibioticsValue];
     }
@@ -700,6 +703,7 @@ let currentSortOption = "Age"; // or "Symptoms"
 // Function to toggle the sorting option
 function toggleSortOption() {
     currentSortOption = currentSortOption === "Age" ? "Symptoms" : "Age";
+    document.getElementById('toggle-btn').textContent = "Sort by " + currentSortOption;
     loadFAQFromCSV();
 }
 
@@ -731,58 +735,58 @@ function loadFAQFromCSV() {
 
             sortedFaqData.forEach((line, index) => {
                 lineContent = line.split(',');
-            
+
                 const title = currentSortOption === "Age" ? lineContent[1] : lineContent[2];
-            
+
                 if (title != lastTitle) {
                     // Create a new h1 element
                     const titleElement = document.createElement('h1');
-            
-                    titleElement.classList.add("sub-title");
+
+                    titleElement.classList.add("sub-heading");
                     titleElement.classList.add("animated-text");
                     // Set the text content of the h1 element to the title
                     titleElement.textContent = title;
-            
+
                     // Append the h1 element to the container
                     faqContainer.appendChild(titleElement);
-            
+
                     // Update lastTitle to the current title for future comparisons
                     lastTitle = title;
                 }
-            
+
                 query = lineContent[3];
                 query = "Q: " + query;
                 response = lineContent.slice(4, lineContent.length).join(", ");
                 response = "A: " + response;
-            
+
                 // Create FAQ item HTML
                 const faqItem = document.createElement('div');
                 faqItem.classList.add('faq-item');
-            
+
                 const faqIcon = document.createElement('img');
                 faqIcon.classList.add('faq-icon');
                 faqIcon.src = "../static/assets/img/add.png";
                 faqIcon.alt = "add";
-            
+
                 // Create the user query
                 const queryElement = document.createElement('div');
                 queryElement.classList.add('query');
                 queryElement.textContent = query;
-            
+
                 // Create the chatbot response initially hidden
                 const responseElement = document.createElement('div');
                 responseElement.classList.add('response');
                 responseElement.textContent = response;
                 responseElement.style.display = 'none';
-            
+
                 // Append user query and response to the FAQ item
                 faqItem.appendChild(queryElement);
                 queryElement.appendChild(faqIcon);
                 faqItem.appendChild(responseElement);
-            
+
                 // Append the FAQ item to the container
                 faqContainer.appendChild(faqItem);
-            
+
                 // Attach a click event to toggle the response when the user query is clicked
                 faqItem.addEventListener('click', () => {
                     toggleResponse(responseElement, faqIcon, faqItem);
@@ -793,7 +797,6 @@ function loadFAQFromCSV() {
             console.error('Error loading CSV file:', error);
         });
 }
-
 
 /*Quiz */
 function shuffleArray(array) {
@@ -817,7 +820,7 @@ function loadQuizFromCSV() {
             const quizItemsHTML = shuffledQuizData.slice(0, 4).map((line, index) => {
                 const [question, answersCSV] = line.split(',');
                 const answers = answersCSV.split('|').map(answer => answer.trim());
-            
+
                 // Shuffle the options randomly
                 const shuffledOptions = [...answers];
                 shuffleArray(shuffledOptions);
@@ -836,7 +839,7 @@ function loadQuizFromCSV() {
                         </div>
                     </div>`;
             });
-            
+
             alphabetIndex = 0;
 
             quizContainer.innerHTML = quizItemsHTML.join('');
@@ -890,19 +893,11 @@ function toggleDropdown(id) {
     dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
 }
 
-// function updateSelectedText(option) {
-//     const selectBox = document.querySelector('.custom-select .select-box');
-//     selectBox.textContent = option.textContent;
-// }
-
-function updateSelectedText(option, id) {
-    const selectBox = document.querySelector('.custom-select .select-box');
-    console.log(id)
-    document.getElementById(id).querySelector('.select-box') = option.textContent;
-    // textContent = option.textContent;
-    // const idItem = document.getElementById(id);
-    // const dropdown = idItem.querySelector('.custom-select .select-box');
-    // dropdown.textContent = option.textContent;
+function updateSelectedText(option) {
+    const dropDown = document.getElementById(option.parentNode.parentNode.parentNode.id);
+    const selectBox = dropDown.querySelector('.custom-select .select-box');
+    selectBox.innerText = option.textContent;
+    showExplanation();
 }
 
 window.onload = loadFAQFromCSV();

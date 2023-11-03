@@ -13757,11 +13757,12 @@ body {
   padding: 10px;
   border-radius: 10px;
   cursor: pointer;
+  opacity: 0.95;
 }
 
 /* Custom select box on hover */
 .custom-select .select-box:hover {
-  background-color: var(--palette-purple-4);
+  opacity: 1;
 }
 
 /* Custom options container */
@@ -13801,7 +13802,8 @@ body {
 /* Carousel Styles */
 .carousel-section {
   padding: 60px 0;
-  background-color: var(--palette-purple-1); /* Set the background color based on --palette-purple-1 */
+  background-color: var(--palette-purple-1);
+  /* Set the background color based on --palette-purple-1 */
 }
 
 .carousel-inner {
@@ -13815,8 +13817,10 @@ body {
 
 .carousel-item img {
   width: 100%;
-  max-height: 300px; /* Set your desired maximum height */
-  object-fit: contain; /* Shrink to fit while maintaining aspect ratio */
+  max-height: 300px;
+  /* Set your desired maximum height */
+  object-fit: contain;
+  /* Shrink to fit while maintaining aspect ratio */
   border-radius: 10px;
 }
 
@@ -13828,20 +13832,52 @@ body {
 
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
-  background-color: #343a40; /* Set your desired color */
+  background-color: #343a40;
+  /* Set your desired color */
 }
 
 /* Optional: Add additional styling for carousel captions */
 .carousel-caption {
-  background-color: rgba(0, 0, 0, 0.7); /* Set your desired background color and opacity */
+  background-color: rgba(0, 0, 0, 0.7);
+  /* Set your desired background color and opacity */
   border-radius: 10px;
   padding: 20px;
 }
 
 .carousel-caption h3 {
-  color: #ffffff; /* Set your desired text color */
+  color: #ffffff;
+  /* Set your desired text color */
 }
 
 .carousel-caption p {
-  color: #ffffff; /* Set your desired text color */
+  color: #ffffff;
+  /* Set your desired text color */
+}
+
+.sub-heading {
+  color: var(--bs-white);
+  font-size: 40px;
+  margin-top: 50px;
+  margin-bottom: 10px;
+}
+
+.toggle-button {
+  background-color: var(--palette-purple-3);
+  color: var(--bs-white);
+  border-radius: 10px;
+  text-align: center;
+  width: auto;
+  padding: 10px 20px 10px 20px;
+  cursor: pointer;
+  opacity: 0.95;
+}
+
+.toggle-button:hover {
+  opacity: 1;
+}
+
+.center-content {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
 }

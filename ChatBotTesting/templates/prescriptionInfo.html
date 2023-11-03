@@ -80,75 +80,72 @@
     </header>
 
     <section class="section-notation bg-purple text-center py-4" id="notations">
-        <h1 class="animated-text sub-title">Scan And Decode</h1>
-        <!-- Barcode Scanning API -->
-
-        <!-- <form method="POST" action="/api/scan_barcode" enctype="multipart/form-data"> -->
-        <input type="file" id="fileInput" name="image"
-            accept="image/jpeg, image/png, image/gif, image/webp, image/bmp" />
-        <button type="submit" onclick="processImage()" value="Scan Barcode">Scan Barcode</button>
-
-        <!-- Display the result from the barcode scanning API -->
-        <div id="result"></div>
-
-        <h1 class="animated-text">Select an Abbreviation / Notation:</h1>
+        <h1 class="animated-text sub-title">Select an Antibiotic</h1>
         <br>
 
-        <div class="dropdown-container">
+        <div id="antibiotics-dropdown-container" class="dropdown-container">
             <div id="antibiotics-dropdown" class="custom-select" onclick="toggleDropdown(this.id)">
-                <div class="select-box">
-                    Antibiotics
+                <div id="antibiotic-box" class="select-box">
+                    --
                 </div>
                 <div class="options">
-                    <div class="option" value="--" onclick="updateSelectedText(this, this.id)">--</div>
-                    <div class="option" value="Penicillin" onclick="updateSelectedText(this, this.id)">Penicillin</div>
-                    <div class="option" value="Cephalosporins" onclick="updateSelectedText(this, this.id)">
-                        Cephalosporins</div>
-                    <div class="option" value="Tetracyclines" onclick="updateSelectedText(this, this.id)">Tetracyclines
+                    <div class="option" value="--" onclick="updateSelectedText(this)">--
                     </div>
-                    <div class="option" value="Macrolides" onclick="updateSelectedText(this, this.id)">Macrolides</div>
-                    <div class="option" value="Fluoroquinolones" onclick="updateSelectedText(this, this.id)">
-                        Fluoroquinolones
+                    <div class="option" value="Penicillin" onclick="updateSelectedText(this)">Penicillin
                     </div>
-                    <div class="option" value="Sulfonamides" onclick="updateSelectedText(this, this.id)">Sulfonamides
+                    <div class="option" value="Cephalosporins" onclick="updateSelectedText(this)">Cephalosporins
                     </div>
-                    <div class="option" value="Aminoglycosides" onclick="updateSelectedText(this, this.id)">
-                        Aminoglycosides</div>
-                    <div class="option" value="Metronidazole" onclick="updateSelectedText(this, this.id)">Metronidazole
+                    <div class="option" value="Tetracyclines" onclick="updateSelectedText(this)">Tetracyclines
                     </div>
-                    <div class="option" value="Clindamycin" onclick="updateSelectedText(this, this.id)">Clindamycin
+                    <div class="option" value="Macrolides" onclick="updateSelectedText(this)">Macrolides
                     </div>
-                    <div class="option" value="Vancomycin" onclick="updateSelectedText(this, this.id)">Vancomycin</div>
-                    <div class="option" value="Linezolid" onclick="updateSelectedText(this, this.id)">Linezolid</div>
-                    <div class="option" value="Doxycycline" onclick="updateSelectedText(this, this.id)">Doxycycline
+                    <div class="option" value="Fluoroquinolones" onclick="updateSelectedText(this)">Fluoroquinolones
+                    </div>
+                    <div class="option" value="Sulfonamides" onclick="updateSelectedText(this)">Sulfonamides
+                    </div>
+                    <div class="option" value="Aminoglycosides" onclick="updateSelectedText(this)">Aminoglycosides
+                    </div>
+                    <div class="option" value="Metronidazole" onclick="updateSelectedText(this)">Metronidazole
+                    </div>
+                    <div class="option" value="Clindamycin" onclick="updateSelectedText(this)">Clindamycin
+                    </div>
+                    <div class="option" value="Vancomycin" onclick="updateSelectedText(this)">Vancomycin
+                    </div>
+                    <div class="option" value="Linezolid" onclick="updateSelectedText(this)">Linezolid
+                    </div>
+                    <div class="option" value="Doxycycline" onclick="updateSelectedText(this)">Doxycycline
                     </div>
                 </div>
             </div>
+        </div>
 
+        <div id="abbreviations-dropdown-container" class="dropdown-container">
             <div id="abbreviations-dropdown" class="custom-select" onclick="toggleDropdown(this.id)">
-                <div class="select-box">
-                    Abbreviations
+                <div id="abbreviations-box" class="select-box">
+                    --
                 </div>
                 <div class="options">
-                    <div class="option" value="--" onclick="updateSelectedText(this, this.id)">--</div>
-                    <div class="option" value="HS" onclick="updateSelectedText(this, this.id)">HS</div>
-                    <div class="option" value="PRN" onclick="updateSelectedText(this, this.id)">PRN</div>
-                    <div class="option" value="OD" onclick="updateSelectedText(this, this.id)">OD</div>
-                    <div class="option" value="BD" onclick="updateSelectedText(this, this.id)">BD</div>
+                    <div class="option" value="--" onclick="updateSelectedText(this)">--</div>
+                    <div class="option" value="HS" onclick="updateSelectedText(this)">HS</div>
+                    <div class="option" value="PRN" onclick="updateSelectedText(this)">PRN</div>
+                    <div class="option" value="OD" onclick="updateSelectedText(this)">OD</div>
+                    <div class="option" value="BD" onclick="updateSelectedText(this)">BD</div>
                 </div>
             </div>
+        </div>
 
+        <div id="notations-dropdown-container" class="dropdown-container">
             <div id="notations-dropdown" class="custom-select" onclick="toggleDropdown(this.id)">
-                <div class="select-box">
-                    Notations
+                <div id="notations-box" class="select-box">
+                    --
                 </div>
                 <div class="options">
-                    <div class="option" value="--" onclick="updateSelectedText(this, this.id)">--</div>
-                    <div class="option" value="0-1-0" onclick="updateSelectedText(this, this.id)">0-1-0</div>
-                    <div class="option" value="1-0-1" onclick="updateSelectedText(this, this.id)">1-0-1</div>
-                    <div class="option" value="1-1-1" onclick="updateSelectedText(this, this.id)">1-1-1</div>
-                    <div class="option" value="2-2-2" onclick="updateSelectedText(this, this.id)">2-2-2</div>
-                    <div class="option" value="1/2-1-1/2" onclick="updateSelectedText(this, this.id)">1/2-1-1/2</div>
+                    <div class="option" value="--" onclick="updateSelectedText(this)">--</div>
+                    <div class="option" value="0-1-0" onclick="updateSelectedText(this)">0-1-0</div>
+                    <div class="option" value="1-0-1" onclick="updateSelectedText(this)">1-0-1</div>
+                    <div class="option" value="1-1-1" onclick="updateSelectedText(this)">1-1-1</div>
+                    <div class="option" value="2-2-2" onclick="updateSelectedText(this)">2-2-2</div>
+                    <div class="option" value="1/2-1-1/2" onclick="updateSelectedText(this)">1/2-1-1/2</div>
                 </div>
             </div>
         </div>
