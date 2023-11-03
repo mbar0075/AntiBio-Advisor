@@ -617,8 +617,12 @@ function showExplanation() {
 
         explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
     } else {
+        explanationText.classList.remove("prescription-fade-in");
         explanationText.textContent = "No explanation available for this selection.";
+        explanationDiv.classList.add("bg-purple");
         explanationDiv.style.display = "block";
+        explanationText.classList.add("prescription-fade-in");
+        explanationText.classList.add("description-text-container-inner")
     }
 }
 
@@ -826,7 +830,7 @@ function loadQuizFromCSV() {
                 shuffleArray(shuffledOptions);
                 return `
                     <div class="quiz-item">
-                        <div class="question">Question ${index + 1}</div>
+                        <div class="question">Question ${index + 1} - ${question}</div>
                         <div class="options">
                             ${shuffledOptions.map((option, alphabetIndex) => `
                                 <div class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" data-question="${index + 1}">
@@ -890,7 +894,7 @@ function toggleDropdown(id) {
     const idItem = document.getElementById(id);
     const dropdown = idItem.querySelector('.custom-select .options');
     // console.log(dropdown)
-    dropdown.style.display = dropdown.style.display === 'none' ? 'block' : 'none';
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 
 function updateSelectedText(option) {

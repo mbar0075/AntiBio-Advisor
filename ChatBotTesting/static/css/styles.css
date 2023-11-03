@@ -13085,9 +13085,7 @@ body {
 #chatBox {
   position: relative;
   width: 100%;
-  /* Set the width to 100% or your desired width */
   height: 500px;
-  /* Set the height to your desired height */
   background-color: var(--bs-white);
   border: 3px solid var(--bs-white);
   padding: 10px;
@@ -13103,8 +13101,6 @@ body {
 
 #userInput {
   width: 88%;
-  /* padding: 5px;
-  margin-top: 10px; */
   border-radius: 10px;
   background-color: #f9f9f9;
 }
@@ -13113,7 +13109,6 @@ body {
   background-color: var(--bs-gray-dark);
   border: none;
   color: white;
-  /* padding: 5px; */
   text-align: center;
   text-decoration: none;
   display: inline-block;
@@ -13185,7 +13180,6 @@ body {
 
   .ChatItem--expert & {
     margin-left: auto;
-    /* border: 1px solid #dbdbdb; */
     background: var(--bs-white);
     color: var(--bs-black);
   }
@@ -13242,23 +13236,14 @@ body {
 .explanation-box {
   margin: 0px;
   background-color: #333;
-  /* Background color */
   color: var(--bs-white);
-  /* Text color */
   padding: 10px;
-  /* Padding around the content */
 
   border: 2px solid #555;
-  /* Border */
   border-radius: 5px;
-  /* Rounded corners */
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
-  /* Box shadow for depth */
-
   display: inline-block;
-  /* Make it an inline block */
   width: auto;
-  /* Set width to auto to fit content */
 }
 
 .section-notation {
@@ -13275,12 +13260,9 @@ body {
   align-items: center;
   text-align: center;
   opacity: 0;
-  /* Hide the text initially */
   animation: fadeIn 1.5s ease-in-out forwards;
-  /* Animation */
   color: var(--bs-white);
   width: auto;
-  /* Set width to auto to fit content */
 }
 
 .animated-text-masthead {
@@ -13390,14 +13372,6 @@ body {
   cursor: pointer;
 }
 
-/* #chatVolumeSlider::-moz-range-thumb {
-  width: 25px;
-  height: 25px;
-  border-radius: 50%;
-  background: var(--palette-purple-4);
-  cursor: pointer;
-} */
-
 #speak {
   border: none;
   padding: 0;
@@ -13460,23 +13434,13 @@ body {
 
   .ChatItem--expert & {
     margin-left: auto;
-    /* border: 1px solid #dbdbdb; */
-    /* background: var(--bs-white);
-    color: var(--bs-black); */
   }
 }
 
 .ChatSelection:hover {
-  /* background-color: var(--palette-purple-5); */
   opacity: 1;
-  /* Your regular styles here */
   transition: background-color 0.3s ease;
-  /* Smooth transition effect */
-
-  /* Styles for hover state */
   cursor: pointer;
-
-  /* color: white; */
 }
 
 .Footer-Box {
@@ -13763,18 +13727,6 @@ body {
   left: calc(50% - 50px);
 }
 
-#antibiotics-dropdown-container .options {
-  left: calc(50% - 50px);
-}
-
-#abbreviations-dropdown-container .options {
-  left: calc(45.5% - 50px);
-}
-
-#notations-dropdown-container .options {
-  left: calc(54.5% - 50px);
-}
-
 /* Removing the scroll bar */
 .custom-select .options::-webkit-scrollbar {
   display: none;
@@ -13888,4 +13840,32 @@ body {
   align-items: center;
   flex-direction: row;
   justify-content: center
+}
+
+/* Width of the scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  background: var(--palette-purple-2);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--palette-purple-3);
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+  background: var(--palette-purple-4);
+}
+
+.dropdown-custom-position {
+  position: relative;
+}
+
+.dropdown-options-position {
+  position: absolute;
 }
