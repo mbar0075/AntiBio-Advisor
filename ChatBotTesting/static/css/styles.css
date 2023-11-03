@@ -13760,6 +13760,19 @@ body {
   z-index: 1;
   opacity: 0.95;
   width: 100px;
+  left: calc(50% - 50px);
+}
+
+#antibiotics-dropdown-container .options {
+  left: calc(50% - 50px);
+}
+
+#abbreviations-dropdown-container .options {
+  left: calc(45.5% - 50px);
+}
+
+#notations-dropdown-container .options {
+  left: calc(54.5% - 50px);
 }
 
 /* Removing the scroll bar */
