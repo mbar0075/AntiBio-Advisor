@@ -606,11 +606,14 @@ function showExplanation() {
 
     if (explanation.trim() !== "") {
         explanationDiv.style.display = "block";
+        explanationDiv.classList.add("bg-purple");
 
         // Remove and add the class to trigger the animation
         explanationText.classList.remove("prescription-fade-in");
         void explanationText.offsetWidth; // This line is needed to force a reflow
         explanationText.classList.add("prescription-fade-in");
+        explanationText.classList.add("description-text-container-inner")
+
 
         explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
     } else {
