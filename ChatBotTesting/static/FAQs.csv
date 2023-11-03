@@ -1,21 +1,21 @@
-Question,User Query,Chatbot Response
-1,Do I need antibiotics for a cold?,"No, colds are caused by viruses, and antibiotics cannot kill viruses. They are used for bacterial infections."
-2,Can I drink alcohol while taking antibiotics?,It's best to avoid alcohol as it can interfere with the effectiveness of antibiotics and might cause side effects.
-3,Should I take antibiotics for the flu?,"No, the flu is viral. Antibiotics won't help; they treat bacterial infections."
-4,I feel better; can I stop taking my antibiotics?,"No, you should complete the full prescribed course to fully eradicate the bacteria, even if you feel better."
-5,Do antibiotics work against fungal infections?,"No, antibiotics specifically target bacteria, not fungi."
-6,Can I use someone else's antibiotics?,"No, antibiotics should be prescribed to treat specific conditions and dosages are tailored to individual needs. Misuse can lead to antibiotic resistance."
-7,Are antibiotics effective for treating acne?,"Some antibiotics can help with acne, but they should be prescribed by a healthcare professional as part of an overall treatment plan."
-8,Can antibiotics cause an allergic reaction?,"Yes, like any medication, antibiotics can cause allergic reactions in some people. If you experience symptoms of an allergy, seek medical attention immediately."
-9,Do antibiotics interact with my other medications?,They can. Always inform your healthcare provider about all medications you're taking to avoid harmful interactions.
-10,How do antibiotics affect birth control pills?,Some antibiotics might reduce the effectiveness of birth control pills. Discuss with a healthcare professional for advice on additional contraceptive measures.
-11,Are all antibiotics the same?,"No, there are various types of antibiotics that work in different ways and act on different types of bacteria."
-12,Can I get antibiotics without a prescription?,"It is not advisable. Taking antibiotics without a proper medical prescription can lead to misuse, contributing to antibiotic resistance."
-13,Should I take probiotics with my antibiotics?,"Some studies suggest probiotics may help prevent side effects like diarrhea. However, you should consult with a healthcare professional first."
-14,Why can't I use antibiotics for a sore throat?,"Many sore throats are caused by viruses, where antibiotics are ineffective. They're only necessary for bacterial infections like strep throat."
-15,Can antibiotics make me feel tired?,"Yes, some people may feel tired as a side effect. If fatigue is significant, consult your healthcare provider."
-16,Do antibiotics affect my appetite?,They might. Some people may experience appetite changes as a side effect. Consult your healthcare provider if it becomes a concern.
-17,Can I take antibiotics for a toothache?,Antibiotics are not a solution for a toothache but might be prescribed if there's a bacterial infection. See a dentist for a proper diagnosis.
-18,Are antibiotics bad for your liver?,Long-term or inappropriate use can harm your liver. It's essential to use them correctly as prescribed.
-19,Can I get a yeast infection from taking antibiotics?,"Yes, antibiotics can kill the beneficial bacteria that prevent yeast overgrowth, leading to an infection."
-20,Why is it dangerous to take antibiotics unnecessarily?,"Unnecessary use can lead to antibiotic resistance, making bacterial strains stronger and harder to treat in the future."
+Question,Age,Symptoms,User Query,Chatbot Response
+1,General,General,Do I need antibiotics for a cold?,"No, colds are caused by viruses, and antibiotics cannot kill viruses. They are used for bacterial infections."
+2,General,General,Can I drink alcohol while taking antibiotics?,It's best to avoid alcohol as it can interfere with the effectiveness of antibiotics and might cause side effects.
+3,General,General,Should I take antibiotics for the flu?,"No, the flu is viral. Antibiotics won't help; they treat bacterial infections."
+4,General,Skin Condition,I feel better; can I stop taking my antibiotics?,"No, you should complete the full prescribed course to fully eradicate the bacteria, even if you feel better."
+5,General,Skin Condition,Do antibiotics work against fungal infections?,"No, antibiotics specifically target bacteria, not fungi."
+6,Child,Skin Condition,Can I use someone else's antibiotics?,"No, antibiotics should be prescribed to treat specific conditions and dosages are tailored to individual needs. Misuse can lead to antibiotic resistance."
+7,Child,Skin Condition,Are antibiotics effective for treating acne?,"Some antibiotics can help with acne, but they should be prescribed by a healthcare professional as part of an overall treatment plan."
+8,Child,Skin Condition,Can antibiotics cause an allergic reaction?,"Yes, like any medication, antibiotics can cause allergic reactions in some people. If you experience symptoms of an allergy, seek medical attention immediately."
+9,Child,Skin Condition,Do antibiotics interact with my other medications?,They can. Always inform your healthcare provider about all medications you're taking to avoid harmful interactions.
+10,Child,Skin Condition,How do antibiotics affect birth control pills?,Some antibiotics might reduce the effectiveness of birth control pills. Discuss with a healthcare professional for advice on additional contraceptive measures.
+11,Adult,Rash,Are all antibiotics the same?,"No, there are various types of antibiotics that work in different ways and act on different types of bacteria."
+12,Adult,Rash,Can I get antibiotics without a prescription?,"It is not advisable. Taking antibiotics without a proper medical prescription can lead to misuse, contributing to antibiotic resistance."
+13,Adult,Rash,Should I take probiotics with my antibiotics?,"Some studies suggest probiotics may help prevent side effects like diarrhea. However, you should consult with a healthcare professional first."
+14,Adult,Rash,Why can't I use antibiotics for a sore throat?,"Many sore throats are caused by viruses, where antibiotics are ineffective. They're only necessary for bacterial infections like strep throat."
+15,Adult,Rash,Can antibiotics make me feel tired?,"Yes, some people may feel tired as a side effect. If fatigue is significant, consult your healthcare provider."
+16,Elderly,Cough,Do antibiotics affect my appetite?,They might. Some people may experience appetite changes as a side effect. Consult your healthcare provider if it becomes a concern.
+17,Elderly,Cough,Can I take antibiotics for a toothache?,Antibiotics are not a solution for a toothache but might be prescribed if there's a bacterial infection. See a dentist for a proper diagnosis.
+18,Elderly,Cough,Are antibiotics bad for your liver?,Long-term or inappropriate use can harm your liver. It's essential to use them correctly as prescribed.
+19,Elderly,Cough,Can I get a yeast infection from taking antibiotics?,"Yes, antibiotics can kill the beneficial bacteria that prevent yeast overgrowth, leading to an infection."
+20,Elderly,Cough,Why is it dangerous to take antibiotics unnecessarily?,"Unnecessary use can lead to antibiotic resistance, making bacterial strains stronger and harder to treat in the future."

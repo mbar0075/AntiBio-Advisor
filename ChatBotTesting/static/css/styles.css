@@ -13795,3 +13795,53 @@ body {
   display: flex;
   justify-content: center;
 }
+
+/**/
+
+/* Carousel Styles */
+.carousel-section {
+  padding: 60px 0;
+  background-color: var(--palette-purple-1); /* Set the background color based on --palette-purple-1 */
+}
+
+.carousel-inner {
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.carousel-item {
+  text-align: center;
+}
+
+.carousel-item img {
+  width: 100%;
+  max-height: 300px; /* Set your desired maximum height */
+  object-fit: contain; /* Shrink to fit while maintaining aspect ratio */
+  border-radius: 10px;
+}
+
+/* Adjust carousel control button styles if needed */
+.carousel-control-prev,
+.carousel-control-next {
+  width: 5%;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  background-color: #343a40; /* Set your desired color */
+}
+
+/* Optional: Add additional styling for carousel captions */
+.carousel-caption {
+  background-color: rgba(0, 0, 0, 0.7); /* Set your desired background color and opacity */
+  border-radius: 10px;
+  padding: 20px;
+}
+
+.carousel-caption h3 {
+  color: #ffffff; /* Set your desired text color */
+}
+
+.carousel-caption p {
+  color: #ffffff; /* Set your desired text color */
+}

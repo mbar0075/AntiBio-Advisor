@@ -694,51 +694,95 @@ function toggleResponse(response, faqIcon, faqItem) {
     faqIcon.classList.toggle('rotate');
 }
 
+// Global variable to store the current sort option
+let currentSortOption = "Age"; // or "Symptoms"
+
+// Function to toggle the sorting option
+function toggleSortOption() {
+    currentSortOption = currentSortOption === "Age" ? "Symptoms" : "Age";
+    loadFAQFromCSV();
+}
+
 // Function to load the FAQ from CSV
 function loadFAQFromCSV() {
     fetch('../static/FAQs.csv')
         .then(response => response.text())
         .then(data => {
             const faqData = data.split('\n');
+
+            // Sort faqData based on the currentSortOption
+            const sortedFaqData = faqData.slice(1).sort((a, b) => {
+                const valueA = a.split(',')[currentSortOption === "Age" ? 1 : 2];
+                const valueB = b.split(',')[currentSortOption === "Age" ? 1 : 2];
+
+                // Prioritize "General" to appear first
+                if (valueA === "General") return -1;
+                if (valueB === "General") return 1;
+
+                return valueA.localeCompare(valueB);
+            });
+
             const faqContainer = document.getElementById('faq-container');
 
-            faqData.forEach((line, index) => {
-                if (index === 0) return;
+            // Clear previous items from the container
+            faqContainer.innerHTML = '';
+
+            var lastTitle = "";
+
+            sortedFaqData.forEach((line, index) => {
                 lineContent = line.split(',');
-
-                query = lineContent[1];
+            
+                const title = currentSortOption === "Age" ? lineContent[1] : lineContent[2];
+            
+                if (title != lastTitle) {
+                    // Create a new h1 element
+                    const titleElement = document.createElement('h1');
+            
+                    titleElement.classList.add("sub-title");
+                    titleElement.classList.add("animated-text");
+                    // Set the text content of the h1 element to the title
+                    titleElement.textContent = title;
+            
+                    // Append the h1 element to the container
+                    faqContainer.appendChild(titleElement);
+            
+                    // Update lastTitle to the current title for future comparisons
+                    lastTitle = title;
+                }
+            
+                query = lineContent[3];
                 query = "Q: " + query;
-                response = lineContent.slice(2, lineContent.length).join(", ");
+                response = lineContent.slice(4, lineContent.length).join(", ");
                 response = "A: " + response;
-
+            
                 // Create FAQ item HTML
                 const faqItem = document.createElement('div');
                 faqItem.classList.add('faq-item');
-
+            
                 const faqIcon = document.createElement('img');
                 faqIcon.classList.add('faq-icon');
                 faqIcon.src = "../static/assets/img/add.png";
                 faqIcon.alt = "add";
-
+            
                 // Create the user query
                 const queryElement = document.createElement('div');
                 queryElement.classList.add('query');
                 queryElement.textContent = query;
-
+            
                 // Create the chatbot response initially hidden
                 const responseElement = document.createElement('div');
                 responseElement.classList.add('response');
                 responseElement.textContent = response;
                 responseElement.style.display = 'none';
-
+            
                 // Append user query and response to the FAQ item
                 faqItem.appendChild(queryElement);
                 queryElement.appendChild(faqIcon);
                 faqItem.appendChild(responseElement);
-
+            
                 // Append the FAQ item to the container
                 faqContainer.appendChild(faqItem);
-
+            
                 // Attach a click event to toggle the response when the user query is clicked
                 faqItem.addEventListener('click', () => {
                     toggleResponse(responseElement, faqIcon, faqItem);
@@ -749,6 +793,7 @@ function loadFAQFromCSV() {
             console.error('Error loading CSV file:', error);
         });
 }
+
 
 /*Quiz */
 function shuffleArray(array) {
@@ -768,20 +813,20 @@ function loadQuizFromCSV() {
         .then(data => {
             const quizData = data.split('\n');
             const quizContainer = document.getElementById('quiz-container');
-
-            const quizItemsHTML = quizData.slice(1).map((line, index) => {
+            const shuffledQuizData = [...quizData.slice(1)].sort(() => Math.random() - 0.5);
+            const quizItemsHTML = shuffledQuizData.slice(0, 4).map((line, index) => {
                 const [question, answersCSV] = line.split(',');
                 const answers = answersCSV.split('|').map(answer => answer.trim());
-
+            
                 // Shuffle the options randomly
                 const shuffledOptions = [...answers];
                 shuffleArray(shuffledOptions);
                 return `
                     <div class="quiz-item">
-                        <div class="question">${question}</div>
+                        <div class="question">Question ${index + 1}</div>
                         <div class="options">
                             ${shuffledOptions.map((option, alphabetIndex) => `
-                                <div class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" data-question="${index}">
+                                <div class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" data-question="${index + 1}">
                                     ${alphabet[alphabetIndex] + ": " + option}
                                 </div>
                             `).join('')}
@@ -791,6 +836,7 @@ function loadQuizFromCSV() {
                         </div>
                     </div>`;
             });
+            
             alphabetIndex = 0;
 
             quizContainer.innerHTML = quizItemsHTML.join('');
