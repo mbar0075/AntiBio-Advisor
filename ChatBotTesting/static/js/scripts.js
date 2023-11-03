@@ -547,12 +547,9 @@ function handleKeyPress(event) {
 }
 
 function showExplanation() {
-    var antibioticsValue = document.getElementById("antibiotic-box").innerText;
-    console.log(antibioticsValue);
+    var antibioticsValue = document.getElementById("antibiotic-box").innerText.trim();
     var wordsValue = document.getElementById("abbreviations-box").innerText;
-    console.log(wordsValue);
     var numericValue = document.getElementById("notations-box").innerText;
-    console.log(numericValue);
 
     var explanationText = document.getElementById("explanationText");
     var explanationDiv = document.getElementById("explanation");
@@ -588,7 +585,7 @@ function showExplanation() {
     };
 
     var explanation = "";
-    console.log(word_explanations);
+
     if (antibioticsValue in antibiotic_explanations) {
         explanation += antibiotic_explanations[antibioticsValue];
     }
