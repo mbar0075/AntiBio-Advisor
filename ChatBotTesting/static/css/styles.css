@@ -13761,6 +13761,7 @@ body {
 
 .carousel-item {
   text-align: center;
+  height: 300px
 }
 
 .carousel-item img {
@@ -13855,3 +13856,23 @@ body {
 .dropdown-options-position {
   position: absolute;
 }
+
+.custom-paragraph-container {
+  display: flex;
+}
+
+.outer-paragraph-container {
+  max-width: 70%;
+  display: flex;
+  width: fit-content;
+  align-items: center;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background-color: var(--palette-purple-3);
+  border: 2px solid #333;
+  border-radius: 8px;
+  opacity: 0.7;
+  transition: opacity 0.3s ease;
+}
+
