@@ -60,11 +60,6 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 });
 
-//Waiting for the entire page to finish loading, then executing the showPosition() function
-window.addEventListener('load', function () {
-    showPosition();
-});
-
 //Declaring the map variables to be used
 var infoWindow;
 var directionsService;
@@ -306,7 +301,7 @@ function sendMessage(user_icon, bot_icon) {
 
 //Waiting for the entire page to finish loading, then executing the showPosition() function
 window.addEventListener('load', function () {
-    const divToObserve = document.getElementById('chatBox'); // Replace 'myDiv' with the actual ID of your div
+    const divToObserve = document.getElementById('chatBox');
 
     if (divToObserve) {
         const observer = new MutationObserver((mutationsList, observer) => {
@@ -903,6 +898,58 @@ function updateSelectedText(option) {
     selectBox.innerText = option.textContent;
     showExplanation();
 }
+
+function startDemo() {
+    const userResponse = confirm("Do you want to go through the tutorial?");
+    if (userResponse) {
+        const location = document.getElementById("userInput").getBoundingClientRect();
+        const popup = document.getElementById("popup1");
+        const offsetY = location.height * 2;
+        const offsetX = location.width / 2;
+
+        const scrollX = window.scrollX || window.pageXOffset;
+        const scrollY = window.scrollY || window.pageYOffset;
+
+        popup.style.display = "block";
+        popup.style.position = "absolute"
+        popup.style.top = `${location.top + scrollY - offsetY}px`;
+        popup.style.left = `${location.left + scrollX + offsetX}px`;
+        popup.style.width = `auto`;
+        popup.style.height = `auto`;
+        popup.style.overflow = "hidden";
+        popup.classList.add("popup-fade-in");
+        popup.classList.remove("popup-fade-in");
+        popup.classList.add("popup-fade-in");
+    }
+}
+
+function positionPopup() {
+    const location = document.getElementById("userInput").getBoundingClientRect();
+    const popup = document.getElementById("popup1");
+    const offsetY = location.height * 2;
+    const offsetX = location.width / 2;
+
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    popup.style.display = "block";
+    popup.style.position = "absolute";
+    popup.style.top = `${location.top + scrollY - offsetY}px`;
+    popup.style.left = `${location.left + scrollX + offsetX}px`;
+    popup.style.width = `auto`;
+    popup.style.height = `auto`;
+    popup.style.overflow = "hidden";
+}
+
+//Waiting for the entire page to finish loading, then executing the showPosition() function
+window.addEventListener('load', function () {
+    showPosition();
+    startDemo();
+});
+
+// Call the positioning function on page load and on window resize
+window.addEventListener("resize", positionPopup);
+
 
 window.onload = loadFAQFromCSV();
 window.onload = loadQuizFromCSV();
