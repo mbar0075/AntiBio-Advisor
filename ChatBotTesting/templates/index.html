@@ -74,7 +74,6 @@
             </div>
         </div>
     </header>
-
     <section class="bg-purple py-4">
         <div class="description-text-container">
             <div class="description-text-container-inner selected" id="text1" onmouseover="selectText('text1')">
@@ -169,7 +168,7 @@
                         </div>
                     </div>
                     <div class="ChatItem-chatContent">
-                        <div class="ChatSelection"
+                        <div id="example-message" class="ChatSelection"
                             onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
                             Can you better explain to me what Anti-Microbial Resistance means?
                         </div>
@@ -191,18 +190,12 @@
 
             </div>
             <div id="chatContainerInput">
-                <!-- <div id="popup1" class="popup-container">
-                    You can write questions for the chatbot to answer in the text box below.
-                </div> -->
-                <div id="popup1" class="popup-container">
-                    <span class="popuptext" id="myPopup">A Simple Popup!</span>
-                </div>
                 <input type="text" id="userInput" placeholder="Type your questions here"
                     onkeydown="handleKeyPress(event)">
                 <button class="chatBotButton" id="chatBotSendButton"
                     onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
                 <button class="chatBotButton" id="chatBotClearButton"
-                    onclick="clearChatHistory(bot_icon_src)">Clear</button>
+                    onclick="confirmClear()">Clear</button>
                 <button id="toggleSpeechRecognition" onmousedown="startSpeechToText()" onmouseup="stopSpeechToText()">
                     <img id="recognitionIcon" src="../static/assets/img/microphone.png" alt="Recognition Icon">
                 </button>
@@ -212,9 +205,19 @@
                 <input type="range" id="chatVolumeSlider" min="0" max="1" step="0.1" value="0.5">
             </div>
         </div>
+          <!-- Confirmation dialog -->
+        <div class="confirmation-dialog quiz-item">
+            <p>Are you sure you want to clear the conversation?</p>
+            <button class="answer-button padding-button" onclick="clearChatHistory(bot_icon_src)">Yes</button>
+            <button class="answer-button padding-button" onclick="cancelClear()">No</button>
+        </div>
+          <!-- Overlay for the confirmation dialog -->
+         <div class="overlay"></div>
     </section>
-
-
+    <div id="popup1" class="popup-container">
+        <button class="next-button" onclick="nextPopup()">Next</button>
+        <span class="popuptext" id="myPopup">A Simple Popup!</span>
+    </div>
     <!-- <h1>Upload a File</h1>
     <input type="file" id="fileInput" accept="image/*">
     <button onclick="processImage()">Run OCR</button>

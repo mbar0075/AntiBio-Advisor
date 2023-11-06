@@ -7,6 +7,23 @@
 // Scripts
 // 
 
+//Place Line 11 and 12 in Dictionary based on page URL to have a tutorial per page
+let popupTextList = [
+    "To start a conversation with the chatbot, you can type your questions or messages in the \"userInput\" field.",
+    "Click the \"Send\" button to send your typed message to the chatbot.",
+    "If you want to clear the chat and start over, use the \"Clear\" button.",
+    "The microphone button allows you to communicate with the chatbot through voice input instead of typing.",
+    "The speaking icon can be used to have the chatbot's responses read aloud.",
+    "You can control the speaking volume by using the volume slider.",
+    "To have the chatbot read a single message aloud, click the speaker button.",
+    "These messages serve as optional initial prompts."
+  ];
+  
+let popupReferenceList = ["userInput", "chatBotSendButton", "chatBotClearButton", "toggleSpeechRecognition", "speak", "chatVolumeSlider", "readMessage", "example-message"];
+let currentReferencePopup = popupReferenceList[0];
+let popupText = popupTextList[0];
+let demoCompletedList = [false, false, false, false, false, false];
+
 window.addEventListener('DOMContentLoaded', event => {
 
     // Navbar shrink function
@@ -532,7 +549,19 @@ function clearChatHistory(bot_icon) {
         .catch(error => {
             console.error('Error:', error);
         });
+    cancelClear();
 }
+
+function confirmClear() {
+    document.querySelector('.confirmation-dialog').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+}
+// Function to cancel the clear operation
+function cancelClear() {
+    document.querySelector('.confirmation-dialog').style.display = 'none';
+    document.querySelector('.overlay').style.display = 'none';
+}
+
 
 function handleKeyPress(event) {
     if (event.key === "Enter") {
@@ -703,6 +732,12 @@ let currentSortOption = "Age"; // or "Symptoms"
 function toggleSortOption() {
     currentSortOption = currentSortOption === "Age" ? "Symptoms" : "Age";
     document.getElementById('toggle-btn').textContent = "Sort by " + currentSortOption;
+    if (currentSortOption == "Age") {
+        document.getElementById('toggle-btn').textContent = "Sort by Symptoms";
+    } else {
+        document.getElementById('toggle-btn').textContent = "Sort by Age";
+    }
+    
     loadFAQFromCSV();
 }
 
@@ -902,43 +937,31 @@ function updateSelectedText(option) {
 function startDemo() {
     const userResponse = confirm("Do you want to go through the tutorial?");
     if (userResponse) {
-        const location = document.getElementById("userInput").getBoundingClientRect();
-        const popup = document.getElementById("popup1");
-        const offsetY = location.height * 2;
-        const offsetX = location.width / 2;
+        positionPopup(currentReferencePopup);
 
-        const scrollX = window.scrollX || window.pageXOffset;
-        const scrollY = window.scrollY || window.pageYOffset;
-
-        popup.style.display = "block";
-        popup.style.position = "absolute"
-        popup.style.top = `${location.top + scrollY - offsetY}px`;
-        popup.style.left = `${location.left + scrollX + offsetX}px`;
-        popup.style.width = `auto`;
-        popup.style.height = `auto`;
-        popup.style.overflow = "hidden";
-        popup.classList.add("popup-fade-in");
-        popup.classList.remove("popup-fade-in");
-        popup.classList.add("popup-fade-in");
+        // console.log(window.location.href.replace());
     }
 }
 
-function positionPopup() {
-    const location = document.getElementById("userInput").getBoundingClientRect();
-    const popup = document.getElementById("popup1");
+function positionPopup(referenceID) {
+    const location = document.getElementById(referenceID).getBoundingClientRect();
+    const visiblePopup = document.getElementById("popup1");
+    
     const offsetY = location.height * 2;
     const offsetX = location.width / 2;
 
     const scrollX = window.scrollX || window.pageXOffset;
     const scrollY = window.scrollY || window.pageYOffset;
 
-    popup.style.display = "block";
-    popup.style.position = "absolute";
-    popup.style.top = `${location.top + scrollY - offsetY}px`;
-    popup.style.left = `${location.left + scrollX + offsetX}px`;
-    popup.style.width = `auto`;
-    popup.style.height = `auto`;
-    popup.style.overflow = "hidden";
+    visiblePopup.style.display = "block";
+    visiblePopup.style.position = "absolute";
+    visiblePopup.style.top = `${location.top + scrollY - offsetY}px`;
+    visiblePopup.style.left = `${location.left + scrollX + offsetX}px`;
+    visiblePopup.style.width = `20%`;
+    visiblePopup.style.height = `auto`;
+    visiblePopup.style.overflow = "hidden";
+
+    visiblePopup.children[1].innerText = popupText;
 }
 
 //Waiting for the entire page to finish loading, then executing the showPosition() function
@@ -947,9 +970,26 @@ window.addEventListener('load', function () {
     startDemo();
 });
 
-// Call the positioning function on page load and on window resize
-window.addEventListener("resize", positionPopup);
+// Call the positioning function on page load and on window rup)esize
+window.addEventListener('resize', function () {
+    positionPopup(currentReferencePopup);
+});
 
+// Function to close the popup
+function nextPopup() {
+    if (popupTextList.indexOf(popupText) == popupTextList.length - 1) {
+        console.log("DHalna");
+        const visiblePopup = document.getElementById("popup1");
+        visiblePopup.style.display = "none";
+    } else {
+        currentReferencePopup = popupReferenceList[popupReferenceList.indexOf(currentReferencePopup) + 1];
+        popupText = popupTextList[popupTextList.indexOf(popupText) + 1];
+
+        positionPopup(currentReferencePopup);
+    }
+
+
+}
 
 window.onload = loadFAQFromCSV();
 window.onload = loadQuizFromCSV();
