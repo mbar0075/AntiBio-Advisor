@@ -8,7 +8,7 @@
 // 
 
 //Place Line 11 and 12 in Dictionary based on page URL to have a tutorial per page
-let popupTextList = [
+homeDemoText = [
     "To start a conversation with the chatbot, you can type your questions or messages in the \"userInput\" field.",
     "Click the \"Send\" button to send your typed message to the chatbot.",
     "If you want to clear the chat and start over, use the \"Clear\" button.",
@@ -17,12 +17,33 @@ let popupTextList = [
     "You can control the speaking volume by using the volume slider.",
     "To have the chatbot read a single message aloud, click the speaker button.",
     "These messages serve as optional initial prompts."
-  ];
-  
-let popupReferenceList = ["userInput", "chatBotSendButton", "chatBotClearButton", "toggleSpeechRecognition", "speak", "chatVolumeSlider", "readMessage", "example-message"];
-let currentReferencePopup = popupReferenceList[0];
-let popupText = popupTextList[0];
-let demoCompletedList = [false, false, false, false, false, false];
+];
+
+homePopupReferenceList = ["userInput", "chatBotSendButton", "chatBotClearButton", "toggleSpeechRecognition", "speak", "chatVolumeSlider", "readMessage", "example-message"];
+
+prescriptionInfoDemoText = [
+    "This dropdown here contains the antibiotic types.",
+    "This dropdown here contains the different notations that may be prescribed.",
+    "This dropdown here contains the different abbreviations used in prescriptions.",
+    "This is the explanation of the above selected options."
+];
+
+prescriptionInfoReferenceList = ["antibiotics-dropdown", "notations-dropdown-container", "abbreviations-dropdown-container", "explanationText"]
+
+mapDemoText = [
+    "This here is the map.",
+    "Click on a marker on the map. The red markers represent pharmacies whilst the blue markers represent General Practitioners.",
+    "A route is now displayed."
+];
+
+mapPopupReferenceList = ["map", "map", "map"]
+
+let popupTextList = { "/": homeDemoText, "/info": null, "/faq": null, "/prescriptionInfo": prescriptionInfoDemoText, "/map": mapDemoText, "/quiz": null }
+
+let popupReferenceList = { "/": homePopupReferenceList, "/info": null, "/faq": null, "/prescriptionInfo": prescriptionInfoReferenceList, "/map": mapPopupReferenceList, "/quiz": null }
+
+let currentReferencePopup = popupReferenceList[window.location.pathname][0];
+let popupText = popupTextList[window.location.pathname][0];
 
 window.addEventListener('DOMContentLoaded', event => {
 
@@ -232,15 +253,6 @@ function calculateAndDisplayRoute(origin, destination) {
 
 // Function to handle choice selection
 function selectChoice(choice) {
-    // Do something with the selected choice, e.g., send it to the chatbot
-    // if (choice == "option1") {
-    //     choice = "Hello, I would like to learn about AntiBiotics."
-    // } else if (choice == "option2") {
-    //     choice = "When are antibiotics needed?"
-    // } else if (choice == "option3") {
-    //     choice = "Can you better explain to me what Anti-Microbial Resistance means?"
-    // }
-
     document.getElementById("userInput").value = choice
 
     sendMessage(user_icon_src, bot_icon_src)
@@ -349,24 +361,6 @@ function processImage() {
         console.log("YEAH");
     }
 
-    // fetch('/process', {
-    //     method: 'POST',
-    //     body: formData,
-    // })
-    //     .then(response => response.text())
-    //     .then(data => {
-    //         console.log(data);
-    //     })
-    //     .catch(error => {
-    //         console.error(error);
-    //     });
-
-    // // JavaScript to handle the form submission and display the result
-    // document.querySelector('form').addEventListener('submit', function (e) {
-    //     e.preventDefault();
-
-    //     var formData = new FormData(this);
-
     fetch('/api/scan_barcode', {
         method: 'POST',
         body: formData
@@ -388,12 +382,6 @@ function showVolumeSlider(event) {
     var volumeRange = document.getElementById("chatVolumeSlider");
     volumeRange.value = parseFloat(utterance.getAttribute("data-volume")) || 0.5;
 }
-
-// function updateVolume() {
-//     // var volumeRange = document.getElementById("volumeRange");
-//     // var value = parseFloat(volumeRange.value);
-//     // utterance.setAttribute("data-volume", value);
-// }
 
 function speak() {
     var textarea = document.getElementsByClassName('ChatItem-chatText');
@@ -737,7 +725,7 @@ function toggleSortOption() {
     } else {
         document.getElementById('toggle-btn').textContent = "Sort by Age";
     }
-    
+
     loadFAQFromCSV();
 }
 
@@ -923,7 +911,6 @@ function handleUserSelection(button) {
 function toggleDropdown(id) {
     const idItem = document.getElementById(id);
     const dropdown = idItem.querySelector('.custom-select .options');
-    // console.log(dropdown)
     dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
 }
 
@@ -934,19 +921,64 @@ function updateSelectedText(option) {
     showExplanation();
 }
 
-function startDemo() {
+// Function to get the value of a cookie by its name
+function getCookie(name) {
+    var cookies = document.cookie.split(';');
+    for (var i = 0; i < cookies.length; i++) {
+        var cookie = cookies[i].trim();
+        if (cookie.startsWith(name + "=")) {
+            return cookie.substring(name.length + 1);
+        }
+    }
+    return "";
+}
+
+// Function to parse a JSON string from a cookie and return a dictionary
+function getDictionaryFromCookie(cookieName) {
+    var cookieValue = getCookie(cookieName);
+    if (cookieValue) {
+        return JSON.parse(decodeURIComponent(cookieValue));
+    }
+    return {};
+}
+
+function startDemo(dictionary) {
+
+    let dict = JSON.parse(dictionary)
+
+    if (dict[window.location.pathname] == 1) {
+        return;
+    }
+
     const userResponse = confirm("Do you want to go through the tutorial?");
     if (userResponse) {
         positionPopup(currentReferencePopup);
-
-        // console.log(window.location.href.replace());
     }
+
+    // Setting the demo completed inidicator to true to avoid reasking the user every time
+    dict[window.location.pathname] = 1;
+
+    fetch('/updateCompletedList', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dict),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
 }
 
 function positionPopup(referenceID) {
     const location = document.getElementById(referenceID).getBoundingClientRect();
     const visiblePopup = document.getElementById("popup1");
-    
+
     const offsetY = location.height * 2;
     const offsetX = location.width / 2;
 
@@ -967,28 +999,27 @@ function positionPopup(referenceID) {
 //Waiting for the entire page to finish loading, then executing the showPosition() function
 window.addEventListener('load', function () {
     showPosition();
-    startDemo();
 });
 
 // Call the positioning function on page load and on window rup)esize
 window.addEventListener('resize', function () {
-    positionPopup(currentReferencePopup);
+    if (popupTextList[window.location.pathname].indexOf(popupText) != popupTextList[window.location.pathname].length - 1) {
+        positionPopup(currentReferencePopup);
+    }
 });
 
 // Function to close the popup
 function nextPopup() {
-    if (popupTextList.indexOf(popupText) == popupTextList.length - 1) {
-        console.log("DHalna");
+    console.log(popupReferenceList[window.location.pathname])
+    if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
         const visiblePopup = document.getElementById("popup1");
         visiblePopup.style.display = "none";
     } else {
-        currentReferencePopup = popupReferenceList[popupReferenceList.indexOf(currentReferencePopup) + 1];
-        popupText = popupTextList[popupTextList.indexOf(popupText) + 1];
+        currentReferencePopup = popupReferenceList[window.location.pathname][popupReferenceList[window.location.pathname].indexOf(currentReferencePopup) + 1];
+        popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText) + 1];
 
         positionPopup(currentReferencePopup);
     }
-
-
 }
 
 window.onload = loadFAQFromCSV();

@@ -31,11 +31,18 @@
 </head>
 
 <body id="page-top">
-    <!-- Required to retrieve the user/bot icons -->
     <script>
-        var user_icon_src = "{{ user_icon }}";
-        var bot_icon_src = "{{ bot_icon }}";
+        var demoCompletedList = "{{demoCompletedList}}"
+
+        window.addEventListener('load', function () {
+            startDemo(demoCompletedList.replace(/&#34;/g, '"'));
+        });
     </script>
+
+    <div id="popup1" class="popup-container">
+        <button class="next-button" onclick="nextPopup()">Next</button>
+        <span class="popuptext" id="myPopup">A Simple Popup!</span>
+    </div>
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
