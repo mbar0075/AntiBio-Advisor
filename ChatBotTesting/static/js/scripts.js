@@ -466,13 +466,27 @@ function toggleResponse(response, faqIcon, faqItem) {
 
     // Check if the current height is larger than 100px, and set maxHeight accordingly
     const currentHeight = faqItem.scrollHeight;
-    if (currentHeight < 100) {
-        faqItem.style.maxHeight = "90px";
-    } else {
-        faqItem.style.maxHeight = "1000px"
-    }
+    
+    if (!window.matchMedia('(max-width: 767px)').matches) {
+        if (currentHeight < 100) {
+            faqItem.style.maxHeight = "90px";
+        } else {
+            faqItem.style.maxHeight = "1000px"
+        }
 
-    faqIcon.classList.toggle('rotate');
+        faqIcon.classList.toggle('rotate');
+    } else {
+        console.log("Dhalna");
+        if (currentHeight < 120) {
+            faqItem.style.maxHeight = "110px";
+        } else if (currentHeight < 150) {
+            faqItem.style.maxHeight = "130px";
+        } else {
+            faqItem.style.maxHeight = "1000px";
+        }
+
+        faqIcon.classList.toggle('rotate');
+    }
 }
 
 // Function to toggle the sorting option

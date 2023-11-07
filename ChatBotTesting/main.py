@@ -1,7 +1,6 @@
 
 # Importing the required library
 from flask import Flask, request, jsonify, send_from_directory, render_template, url_for, session
-from flask_session import Session
 import json
 
 from werkzeug.utils import secure_filename

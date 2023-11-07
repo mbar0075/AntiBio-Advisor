@@ -6779,8 +6779,13 @@ fieldset:disabled .btn {
 }
 
 .carousel-inner {
+  display: flex;
+  align-items: center;
+  overflow: hidden; 
   position: relative;
+  border-radius: 10px;
   width: 100%;
+  height: 30em;
   overflow: hidden;
 }
 
@@ -13715,14 +13720,9 @@ body {
   /* Set the background color based on --palette-purple-1 */
 }
 
-.carousel-inner {
-  border-radius: 10px;
-  overflow: hidden;
-}
-
 .carousel-item {
   text-align: center;
-  height: 300px
+  /* height: 300px */
 }
 
 .carousel-item img {
@@ -13823,13 +13823,13 @@ body {
 }
 
 .outer-paragraph-container {
-  max-width: 70%;
+  display: flex;
+  align-items: center;
+  height: 100%;
+  overflow: hidden;  
   display: flex;
   width: fit-content;
-  align-items: center;
-  margin: auto;
   padding: 20px;
-  box-sizing: border-box;
   background-color: var(--palette-purple-3);
   border: 2px solid #333;
   border-radius: 8px;
@@ -14094,5 +14094,13 @@ body {
   .answer-button,
   .user-answer {
     font-size: 0.8rem;
+  }
+
+  .faq-item {
+    height: 60px;
+  }
+
+  .expanded {
+    height: 160px;
   }
 }
