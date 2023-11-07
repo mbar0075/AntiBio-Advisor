@@ -7,7 +7,7 @@
 // Scripts
 // 
 
-//Place Line 11 and 12 in Dictionary based on page URL to have a tutorial per page
+// Demo showcase variables
 homeDemoText = [
     "To start a conversation with the chatbot, you can type your questions or messages in the \"userInput\" field.",
     "Click the \"Send\" button to send your typed message to the chatbot.",
@@ -38,13 +38,30 @@ mapDemoText = [
 
 mapPopupReferenceList = ["map", "map", "map"]
 
-let popupTextList = { "/": homeDemoText, "/info": null, "/faq": null, "/prescriptionInfo": prescriptionInfoDemoText, "/map": mapDemoText, "/quiz": null }
-
-let popupReferenceList = { "/": homePopupReferenceList, "/info": null, "/faq": null, "/prescriptionInfo": prescriptionInfoReferenceList, "/map": mapPopupReferenceList, "/quiz": null }
-
+let popupTextList = { "/": homeDemoText, "/info": [], "/faq": [], "/prescriptionInfo": prescriptionInfoDemoText, "/map": mapDemoText, "/quiz": [] }
+let popupReferenceList = { "/": homePopupReferenceList, "/info": [], "/faq": [], "/prescriptionInfo": prescriptionInfoReferenceList, "/map": mapPopupReferenceList, "/quiz": [] }
 let currentReferencePopup = popupReferenceList[window.location.pathname][0];
 let popupText = popupTextList[window.location.pathname][0];
 
+//Home/Chatbot variables
+var synth = window.speechSynthesis;
+var voices = synth.getVoices();
+var currentTextIndex = 0; //To keep track of the text being spoken
+var recognition; //Speech recognition
+
+//FAQ variables
+let currentSortOption = "Age"; //variable to store the current sort option
+
+//Map variables
+var infoWindow;
+var directionsService;
+var directionsRenderer;
+var infoPanel;
+
+//Quiz variables
+let selectedAnswers = []; //variable to store the selected answers
+
+/* General Javascript - Used by all webpages */
 window.addEventListener('DOMContentLoaded', event => {
 
     // Navbar shrink function
@@ -98,12 +115,571 @@ window.addEventListener('DOMContentLoaded', event => {
     });
 });
 
-//Declaring the map variables to be used
-var infoWindow;
-var directionsService;
-var directionsRenderer;
-var infoPanel;
+// Function to start the demo denoting how to use the website to the user 
+function startDemo(dictionary) {
 
+    let dict = JSON.parse(dictionary)
+
+    if (dict[window.location.pathname] == 1) {
+        return;
+    }
+
+    const userResponse = confirm("Do you want to go through the tutorial?");
+    if (userResponse) {
+        positionPopup(currentReferencePopup);
+    }
+
+    // Setting the demo completed inidicator to true to avoid reasking the user every time
+    dict[window.location.pathname] = 1;
+
+    fetch('/updateCompletedList', {
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dict),
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+}
+
+// Function to position the popup based on window size 
+function positionPopup(referenceID) {
+    const location = document.getElementById(referenceID).getBoundingClientRect();
+    const visiblePopup = document.getElementById("popup1");
+
+    const offsetY = 0;//location.height;
+    const offsetX = location.width / 2;
+
+    const scrollX = window.scrollX || window.pageXOffset;
+    const scrollY = window.scrollY || window.pageYOffset;
+
+    visiblePopup.style.display = "block";
+    visiblePopup.style.position = "absolute";
+    visiblePopup.style.top = `${location.top + scrollY - offsetY}px`;
+    visiblePopup.style.left = `${location.left + scrollX + offsetX}px`;
+    visiblePopup.style.width = `20%`;
+    visiblePopup.style.height = `auto`;
+    visiblePopup.style.overflow = "hidden";
+
+    visiblePopup.children[1].innerText = popupText;
+}
+
+// Function to close current popup and display the next one
+function nextPopup() {
+    console.log(popupReferenceList[window.location.pathname])
+    if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
+        const visiblePopup = document.getElementById("popup1");
+        visiblePopup.style.display = "none";
+    } else {
+        currentReferencePopup = popupReferenceList[window.location.pathname][popupReferenceList[window.location.pathname].indexOf(currentReferencePopup) + 1];
+        popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText) + 1];
+
+        positionPopup(currentReferencePopup);
+    }
+}
+
+// Code to resise/reposition the popup when the window is resized
+window.addEventListener('resize', function () {
+    if (popupTextList[window.location.pathname].indexOf(popupText) != popupTextList[window.location.pathname].length - 1) {
+        positionPopup(currentReferencePopup);
+    }
+});
+
+/* Home Javascript - Used by home webpage */
+// Function to highlight at least one choice selection from the home page explenations
+function highlightText(id) {
+    // Remove the 'selected' class from all elements
+    var elements = document.getElementsByClassName('description-text-container-inner');
+    for (var i = 0; i < elements.length; i++) {
+        elements[i].classList.remove('selected');
+    }
+
+    // Add the 'selected' class to the hovered element
+    document.getElementById(id).classList.add('selected');
+}
+
+//Function to handle choice selection
+function selectChoice(choice) {
+    document.getElementById("userInput").value = choice
+
+    sendMessage(user_icon_src, bot_icon_src)
+}
+
+//Function to communicate with the Chatbot
+function sendMessage(user_icon, bot_icon) {
+    const userInput = document.getElementById("userInput").value;
+    const chatbox = document.getElementById("chatBox");
+
+    var choices = document.getElementsByClassName('temporaryChoices');
+
+    for (var i = 0; i < choices.length; i++) {
+        choices[i].style.display = 'none';
+    }
+
+
+
+    if (userInput !== "") {
+        //Displaying the user's message in the chatbox
+        chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
+            <div class="ChatItem-meta">
+            <div class="ChatItem-avatar">
+                <img class="ChatItem-avatarImage" src="` + user_icon + `">
+            </div>
+            </div>
+            <div class="ChatItem-chatContent">
+            <div class="ChatItem-chatText">${userInput}
+            <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                    <img src="../static/assets/img/testingSpeaker2.png" alt="Speaker Icon">
+                </button>
+            </div>
+            </div>
+        </div>`;
+
+        //Making an API call to GPT-3 using JavaScript's fetch() function
+        fetch('/api/chat', {
+            method: 'POST',
+            body: JSON.stringify({ text: userInput }),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                //Displaying the response from GPT-3 in the chatbox
+                chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatItem-chatText">${data.text}
+                        <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+                        </button>
+                        </div>
+                    </div>
+                    </div>`
+            })
+            .catch(error => {
+                console.error(error);
+            });
+
+        //Clearing the user input field
+        document.getElementById("userInput").value = '';
+        userInput.value = "";
+    } else {
+        // The input is empty, handle this case (e.g., display an alert)
+        alert("Please enter a message before sending.");
+    }
+}
+
+//Function to display the volume slider in the chtabot area
+function showVolumeSlider(event) {
+    event.preventDefault();
+    var slider = document.getElementById("chatVolumeSlider");
+    slider.style.display = "block";
+    var volumeRange = document.getElementById("chatVolumeSlider");
+    volumeRange.value = parseFloat(utterance.getAttribute("data-volume")) || 0.5;
+}
+
+//Function to read out the chat message history
+function speak() {
+    var textarea = document.getElementsByClassName('ChatItem-chatText');
+    var lengthOfTextArea = textarea.length;
+    var text = "";
+    for (var counter = 0; counter < lengthOfTextArea; counter++) {
+        text = textarea[counter].innerText;
+
+        console.log(text)
+        // Create a new SpeechSynthesisUtterance for each text
+        var utterance = new SpeechSynthesisUtterance(text);
+
+        // Set the volume from the slider
+        var volumeRange = document.getElementById("chatVolumeSlider");
+
+        var value = parseFloat(volumeRange.value);
+        utterance.volume = value;
+
+        synth.speak(utterance);
+    }
+}
+
+//Function to read a singular message in the chat message history
+function readMessage(button) {
+    // Get the text from the parent <div> element
+    var chatText = button.parentElement.textContent.trim();
+    // Create a new SpeechSynthesisUtterance for the text
+    var utterance = new SpeechSynthesisUtterance(chatText);
+
+    // Set the volume from the slider
+    var volumeRange = document.getElementById("chatVolumeSlider");
+    var value = parseFloat(volumeRange.value);
+    utterance.volume = value;
+
+    synth.speak(utterance);
+}
+
+//Function to start converting speech to text
+function startSpeechToText() {
+    document.getElementById("recognitionIcon").src = "../static/assets/img/speaker.png";
+
+    if (recognition && recognition.state === 'running') {
+        // A recognition instance is already running, so don't start another.
+        return;
+    }
+
+    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        recognition = new webkitSpeechRecognition() || new SpeechRecognition();
+        recognition.continuous = true;
+
+        recognition.onresult = function (event) {
+            var text = event.results[0][0].transcript;
+            userInput.value += text + " "; // Set the recognized text in the input field
+        };
+
+        recognition.onerror = function (event) {
+            console.error('Speech Recognition Error: ' + event.error);
+        };
+
+        recognition.start();
+    } else {
+        alert('Speech recognition is not supported in your browser.');
+    }
+}
+
+//Function to stop converting speech to text
+function stopSpeechToText() {
+    document.getElementById("recognitionIcon").src = "../static/assets/img/microphone.png";
+    if (recognition) {
+        recognition.stop();
+    }
+}
+
+//Function to clear the chat history and reset its contents
+function clearChatHistory(bot_icon) {
+    const chatbox = document.getElementById("chatBox");
+
+    chatbox.innerHTML = `<div class="ChatItem ChatItem--customer">
+    <div class="ChatItem-meta">
+      <div class="ChatItem-avatar">
+        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
+      </div>
+    </div>
+    <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?
+      <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="ChatItem ChatItem--expert temporaryChoices">
+  <div class="ChatItem-meta">
+  <div class="ChatItem-avatar">
+      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+  </div>
+  </div>
+  <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
+          Hello, I would like to learn about AntiBiotics.
+      </div>
+  </div>
+</div>
+<div class="ChatItem ChatItem--expert temporaryChoices">
+  <div class="ChatItem-meta">
+  <div class="ChatItem-avatar">
+      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+  </div>
+  </div>
+  <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
+          When are antibiotics needed?
+      </div>
+  </div>
+</div>
+<div class="ChatItem ChatItem--expert temporaryChoices">
+  <div class="ChatItem-meta">
+  <div class="ChatItem-avatar">
+      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+  </div>
+  </div>
+  <div class="ChatItem-chatContent">
+      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
+          Can you better explain to me what Anti-Microbial Resistance means?
+      </div>
+  </div>
+</div>`
+
+
+    // JavaScript code to reset the conversation
+    fetch('/api/reset_conversation', {
+        method: 'POST',
+    })
+        .then(response => response.json())
+        .then(data => {
+            console.log(data.message);
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    cancelClear();
+}
+
+//Function to confirm the clear operation
+function confirmClear() {
+    document.querySelector('.confirmation-dialog').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+}
+
+//Function to cancel the clear operation
+function cancelClear() {
+    document.querySelector('.confirmation-dialog').style.display = 'none';
+    document.querySelector('.overlay').style.display = 'none';
+}
+
+//Function to send the message in the chatbot iput field on enter key press
+function handleKeyPress(event) {
+    if (event.key === "Enter") {
+        // Trigger the same action as the "Send" button
+        sendMessage(user_icon_src, bot_icon_src);
+    }
+}
+
+/* FAQ Javascript - Used by faq webpage */
+//Function to toggle the display of the response when the question is clicked
+function toggleResponse(response, faqIcon, faqItem) {
+    faqItem.classList.toggle('expanded');
+    response.style.display = response.style.display === 'block' ? 'none' : 'block';
+    if (faqIcon.alt == "add") {
+        faqIcon.src = "../static/assets/img/minus.png";
+        faqIcon.alt = "minus"
+    }
+    else {
+        faqIcon.src = "../static/assets/img/add.png";
+        faqIcon.alt = "add"
+    }
+
+    // Check if the current height is larger than 100px, and set maxHeight accordingly
+    const currentHeight = faqItem.scrollHeight;
+    if (currentHeight < 100) {
+        faqItem.style.maxHeight = "90px";
+    } else {
+        faqItem.style.maxHeight = "1000px"
+    }
+
+    faqIcon.classList.toggle('rotate');
+}
+
+// Function to toggle the sorting option
+function toggleSortOption() {
+    currentSortOption = currentSortOption === "Age" ? "Symptoms" : "Age";
+    document.getElementById('toggle-btn').textContent = "Sort by " + currentSortOption;
+    if (currentSortOption == "Age") {
+        document.getElementById('toggle-btn').textContent = "Sort by Symptoms";
+    } else {
+        document.getElementById('toggle-btn').textContent = "Sort by Age";
+    }
+
+    loadFAQFromCSV();
+}
+
+// Function to load the FAQ from CSV
+function loadFAQFromCSV() {
+    fetch('../static/FAQs.csv')
+        .then(response => response.text())
+        .then(data => {
+            const faqData = data.split('\n');
+
+            // Sort faqData based on the currentSortOption
+            const sortedFaqData = faqData.slice(1).sort((a, b) => {
+                const valueA = a.split(',')[currentSortOption === "Age" ? 1 : 2];
+                const valueB = b.split(',')[currentSortOption === "Age" ? 1 : 2];
+
+                // Prioritize "General" to appear first
+                if (valueA === "General") return -1;
+                if (valueB === "General") return 1;
+
+                return valueA.localeCompare(valueB);
+            });
+
+            const faqContainer = document.getElementById('faq-container');
+
+            // Clear previous items from the container
+            faqContainer.innerHTML = '';
+
+            var lastTitle = "";
+
+            sortedFaqData.forEach((line, index) => {
+                lineContent = line.split(',');
+
+                const title = currentSortOption === "Age" ? lineContent[1] : lineContent[2];
+
+                if (title != lastTitle) {
+                    // Create a new h1 element
+                    const titleElement = document.createElement('h1');
+
+                    titleElement.classList.add("sub-heading");
+                    titleElement.classList.add("animated-text");
+                    // Set the text content of the h1 element to the title
+                    titleElement.textContent = title;
+
+                    // Append the h1 element to the container
+                    faqContainer.appendChild(titleElement);
+
+                    // Update lastTitle to the current title for future comparisons
+                    lastTitle = title;
+                }
+
+                query = lineContent[3];
+                query = "Q: " + query;
+                response = lineContent.slice(4, lineContent.length).join(", ");
+                response = "A: " + response;
+
+                // Create FAQ item HTML
+                const faqItem = document.createElement('div');
+                faqItem.classList.add('faq-item');
+
+                const faqIcon = document.createElement('img');
+                faqIcon.classList.add('faq-icon');
+                faqIcon.src = "../static/assets/img/add.png";
+                faqIcon.alt = "add";
+
+                // Create the user query
+                const queryElement = document.createElement('div');
+                queryElement.classList.add('query');
+                queryElement.textContent = query;
+
+                // Create the chatbot response initially hidden
+                const responseElement = document.createElement('div');
+                responseElement.classList.add('response');
+                responseElement.textContent = response;
+                responseElement.style.display = 'none';
+
+                // Append user query and response to the FAQ item
+                faqItem.appendChild(queryElement);
+                queryElement.appendChild(faqIcon);
+                faqItem.appendChild(responseElement);
+
+                // Append the FAQ item to the container
+                faqContainer.appendChild(faqItem);
+
+                // Attach a click event to toggle the response when the user query is clicked
+                faqItem.addEventListener('click', () => {
+                    toggleResponse(responseElement, faqIcon, faqItem);
+                });
+            });
+        })
+        .catch(error => {
+            console.error('Error loading CSV file:', error);
+        });
+}
+
+/* PrescriptionInfo Javascript - Used by PrescriptionInfo webpage */
+//Function to display the appropraite explenation based on user selection
+function showExplanation() {
+    var antibioticsValue = document.getElementById("antibiotic-box").innerText.trim();
+    var wordsValue = document.getElementById("abbreviations-box").innerText;
+    var numericValue = document.getElementById("notations-box").innerText;
+
+    var explanationText = document.getElementById("explanationText");
+    var explanationDiv = document.getElementById("explanation");
+
+    var abbreviation_explanations = {
+        "0-1-0": "0-1-0: Take no pills in the morning, one pill at midday, and no pills in the evening.",
+        "1-0-1": "1-0-1: One pill in the morning, skip midday, and one pill in the evening.",
+        "1-1-1": "1-1-1: Take one pill three times a day: morning, midday, and evening.",
+        "2-2-2": "2-2-2: Two pills in the morning, two at midday, and two in the evening.",
+        "1/2-1-1/2": "1/2-1-1/2: Half a pill in the morning, one full pill at midday, and half a pill in the evening",
+    };
+
+    var word_explanations = {
+        "HS": "HS: Stands for 'hora somni', meaning 'at bedtime'.",
+        "PRN": "PRN: Abbreviation for 'pro re nata', or 'as needed'.",
+        "OD": "OD: Represents 'once daily'.",
+        "BD": "BD: Short for 'bis in die', or 'twice a day'.",
+    };
+
+    var antibiotic_explanations = {
+        "Penicillin": "Explanation for Penicillin",
+        "Cephalosporins": "Explanation for Cephalosporins",
+        "Tetracyclines": "Explanation for Tetracyclines",
+        "Macrolides": "Explanation for Macrolides",
+        "Fluoroquinolones": "Explanation for Fluoroquinolones",
+        "Sulfonamides": "Explanation for Sulfonamides",
+        "Aminoglycosides": "Explanation for Aminoglycosides",
+        "Metronidazole": "Explanation for Metronidazole",
+        "Clindamycin": "Explanation for Clindamycin",
+        "Vancomycin": "Explanation for Vancomycin",
+        "Linezolid": "Explanation for Linezolid",
+        "Doxycycline": "Explanation for Doxycycline",
+    };
+
+    var explanation = "";
+
+    if (antibioticsValue in antibiotic_explanations) {
+        explanation += antibiotic_explanations[antibioticsValue];
+    }
+
+    if (wordsValue in word_explanations) {
+        if (explanation !== "") {
+            explanation += "<br><br>";
+        }
+        explanation += word_explanations[wordsValue];
+    }
+
+    if (numericValue in abbreviation_explanations) {
+        if (explanation !== "") {
+            explanation += "<br><br>";
+        }
+        explanation += abbreviation_explanations[numericValue];
+    }
+
+    if (explanation.trim() !== "") {
+        explanationDiv.style.display = "block";
+        explanationDiv.classList.add("bg-purple");
+
+        // Remove and add the class to trigger the animation
+        explanationText.classList.remove("prescription-fade-in");
+        void explanationText.offsetWidth; // This line is needed to force a reflow
+        explanationText.classList.add("prescription-fade-in");
+        explanationText.classList.add("description-text-container-inner")
+
+
+        explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
+    } else {
+        explanationText.classList.remove("prescription-fade-in");
+        explanationText.textContent = "No explanation available for this selection.";
+        explanationDiv.classList.add("bg-purple");
+        explanationDiv.style.display = "block";
+        explanationText.classList.add("prescription-fade-in");
+        explanationText.classList.add("description-text-container-inner")
+    }
+}
+
+// Function to display the dropdowns
+function toggleDropdown(id) {
+    const idItem = document.getElementById(id);
+    const dropdown = idItem.querySelector('.custom-select .options');
+    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
+}
+
+// Function to update the dropdown text based on user selection
+function updateSelectedText(option) {
+    const dropDown = document.getElementById(option.parentNode.parentNode.parentNode.id);
+    const selectBox = dropDown.querySelector('.custom-select .select-box');
+    selectBox.innerText = option.textContent;
+    showExplanation();
+}
+
+/* Map Javascript - Used by map webpage */
 //Function to show the user's position on the map
 function showPosition() {
     //Checking if the browser supports HTML5 geolocation
@@ -251,576 +827,13 @@ function calculateAndDisplayRoute(origin, destination) {
     });
 }
 
-// Function to handle choice selection
-function selectChoice(choice) {
-    document.getElementById("userInput").value = choice
-
-    sendMessage(user_icon_src, bot_icon_src)
-}
-
-
-//Function to communicate with the Chatbot
-function sendMessage(user_icon, bot_icon) {
-    const userInput = document.getElementById("userInput").value;
-    const chatbox = document.getElementById("chatBox");
-
-    var choices = document.getElementsByClassName('temporaryChoices');
-
-    for (var i = 0; i < choices.length; i++) {
-        choices[i].style.display = 'none';
-    }
-
-
-
-    if (userInput !== "") {
-        //Displaying the user's message in the chatbox
-        chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
-            <div class="ChatItem-meta">
-            <div class="ChatItem-avatar">
-                <img class="ChatItem-avatarImage" src="` + user_icon + `">
-            </div>
-            </div>
-            <div class="ChatItem-chatContent">
-            <div class="ChatItem-chatText">${userInput}
-            <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
-                    <img src="../static/assets/img/testingSpeaker2.png" alt="Speaker Icon">
-                </button>
-            </div>
-            </div>
-        </div>`;
-
-        //Making an API call to GPT-3 using JavaScript's fetch() function
-        fetch('/api/chat', {
-            method: 'POST',
-            body: JSON.stringify({ text: userInput }),
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                //Displaying the response from GPT-3 in the chatbox
-                chatbox.innerHTML += `<div class="ChatItem ChatItem--customer">
-                    <div class="ChatItem-meta">
-                        <div class="ChatItem-avatar">
-                        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
-                        </div>
-                    </div>
-                    <div class="ChatItem-chatContent">
-                        <div class="ChatItem-chatText">${data.text}
-                        <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
-                            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
-                        </button>
-                        </div>
-                    </div>
-                    </div>`
-            })
-            .catch(error => {
-                console.error(error);
-            });
-
-        //Clearing the user input field
-        document.getElementById("userInput").value = '';
-        userInput.value = "";
-    } else {
-        // The input is empty, handle this case (e.g., display an alert)
-        alert("Please enter a message before sending.");
-    }
-}
-
 //Waiting for the entire page to finish loading, then executing the showPosition() function
 window.addEventListener('load', function () {
-    const divToObserve = document.getElementById('chatBox');
-
-    if (divToObserve) {
-        const observer = new MutationObserver((mutationsList, observer) => {
-            for (let mutation of mutationsList) {
-                if (mutation.type === 'childList') {
-                    // Content of the div was changed
-                    divToObserve.scrollTop = divToObserve.scrollHeight;
-                }
-            }
-        });
-
-        const config = { childList: true };
-        observer.observe(divToObserve, config);
-    } else {
-        console.error('The specified div element was not found.');
-    }
+    showPosition();
 });
 
-function processImage() {
-    // Assuming 'file' is the File object obtained from the input element
-    var fileInput = document.getElementById('fileInput');
-    var file = fileInput.files[0];
-
-    var formData = new FormData();
-    formData.append('fileInput', file);
-
-    if (formData) {
-        console.log("YEAH");
-    }
-
-    fetch('/api/scan_barcode', {
-        method: 'POST',
-        body: formData
-    })
-        .then(response => response.json())
-        .then(data => {
-            document.getElementById('result').textContent = data.text;
-        });
-}
-
-var synth = window.speechSynthesis;
-var voices = synth.getVoices();
-var currentTextIndex = 0; // To keep track of the text being spoken
-
-function showVolumeSlider(event) {
-    event.preventDefault();
-    var slider = document.getElementById("chatVolumeSlider");
-    slider.style.display = "block";
-    var volumeRange = document.getElementById("chatVolumeSlider");
-    volumeRange.value = parseFloat(utterance.getAttribute("data-volume")) || 0.5;
-}
-
-function speak() {
-    var textarea = document.getElementsByClassName('ChatItem-chatText');
-    var lengthOfTextArea = textarea.length;
-    var text = "";
-    for (var counter = 0; counter < lengthOfTextArea; counter++) {
-        text = textarea[counter].innerText;
-
-        console.log(text)
-        // Create a new SpeechSynthesisUtterance for each text
-        var utterance = new SpeechSynthesisUtterance(text);
-
-        // Set the volume from the slider
-        var volumeRange = document.getElementById("chatVolumeSlider");
-
-        var value = parseFloat(volumeRange.value);
-        utterance.volume = value;
-
-        synth.speak(utterance);
-    }
-}
-
-function readMessage(button) {
-    // Get the text from the parent <div> element
-    console.log("Dhalna")
-    var chatText = button.parentElement.textContent.trim();
-    console.log(chatText)
-    // Create a new SpeechSynthesisUtterance for the text
-    var utterance = new SpeechSynthesisUtterance(chatText);
-
-    // Set the volume from the slider
-    var volumeRange = document.getElementById("chatVolumeSlider");
-    var value = parseFloat(volumeRange.value);
-    utterance.volume = value;
-
-    synth.speak(utterance);
-}
-
-/* ------------------------------------------------------ */
-/* Speech to Text */
-document.addEventListener('DOMContentLoaded', function () {
-    var userInput = document.getElementById('userInput'); // Get the text input element
-
-    handleFormSubmission();
-});
-
-var recognition;
-function startSpeechToText() {
-    document.getElementById("recognitionIcon").src = "../static/assets/img/speaker.png";
-
-    if (recognition && recognition.state === 'running') {
-        // A recognition instance is already running, so don't start another.
-        return;
-    }
-
-    if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        recognition = new webkitSpeechRecognition() || new SpeechRecognition();
-        recognition.continuous = true;
-
-        recognition.onresult = function (event) {
-            var text = event.results[0][0].transcript;
-            // console.log('Speech Recognition result: ' + text);
-            // console.log(userInput)
-            userInput.value += text + " "; // Set the recognized text in the input field
-        };
-
-        recognition.onerror = function (event) {
-            console.error('Speech Recognition Error: ' + event.error);
-        };
-
-        recognition.onend = function () {
-            // Optionally add logic when recognition ends
-        };
-
-        recognition.start();
-    } else {
-        alert('Speech recognition is not supported in your browser.');
-    }
-}
-
-function stopSpeechToText() {
-    document.getElementById("recognitionIcon").src = "../static/assets/img/microphone.png";
-    if (recognition) {
-        recognition.stop();
-    }
-}
-/* ------------------------------------------------------ */
-
-
-function clearChatHistory(bot_icon) {
-    const chatbox = document.getElementById("chatBox");
-
-    chatbox.innerHTML = `<div class="ChatItem ChatItem--customer">
-    <div class="ChatItem-meta">
-      <div class="ChatItem-avatar">
-        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
-      </div>
-    </div>
-    <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?
-      <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
-            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="ChatItem ChatItem--expert temporaryChoices">
-  <div class="ChatItem-meta">
-  <div class="ChatItem-avatar">
-      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
-  </div>
-  </div>
-  <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
-          Hello, I would like to learn about AntiBiotics.
-      </div>
-  </div>
-</div>
-<div class="ChatItem ChatItem--expert temporaryChoices">
-  <div class="ChatItem-meta">
-  <div class="ChatItem-avatar">
-      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
-  </div>
-  </div>
-  <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
-          When are antibiotics needed?
-      </div>
-  </div>
-</div>
-<div class="ChatItem ChatItem--expert temporaryChoices">
-  <div class="ChatItem-meta">
-  <div class="ChatItem-avatar">
-      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
-  </div>
-  </div>
-  <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
-          Can you better explain to me what Anti-Microbial Resistance means?
-      </div>
-  </div>
-</div>`
-
-
-    // JavaScript code to reset the conversation
-    fetch('/api/reset_conversation', {
-        method: 'POST',
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-    cancelClear();
-}
-
-function confirmClear() {
-    document.querySelector('.confirmation-dialog').style.display = 'block';
-    document.querySelector('.overlay').style.display = 'block';
-}
-// Function to cancel the clear operation
-function cancelClear() {
-    document.querySelector('.confirmation-dialog').style.display = 'none';
-    document.querySelector('.overlay').style.display = 'none';
-}
-
-
-function handleKeyPress(event) {
-    if (event.key === "Enter") {
-        // Trigger the same action as the "Send" button
-        sendMessage(user_icon_src, bot_icon_src);
-    }
-}
-
-function showExplanation() {
-    var antibioticsValue = document.getElementById("antibiotic-box").innerText.trim();
-    var wordsValue = document.getElementById("abbreviations-box").innerText;
-    var numericValue = document.getElementById("notations-box").innerText;
-
-    var explanationText = document.getElementById("explanationText");
-    var explanationDiv = document.getElementById("explanation");
-
-    var abbreviation_explanations = {
-        "0-1-0": "0-1-0: Take no pills in the morning, one pill at midday, and no pills in the evening.",
-        "1-0-1": "1-0-1: One pill in the morning, skip midday, and one pill in the evening.",
-        "1-1-1": "1-1-1: Take one pill three times a day: morning, midday, and evening.",
-        "2-2-2": "2-2-2: Two pills in the morning, two at midday, and two in the evening.",
-        "1/2-1-1/2": "1/2-1-1/2: Half a pill in the morning, one full pill at midday, and half a pill in the evening",
-    };
-
-    var word_explanations = {
-        "HS": "HS: Stands for 'hora somni', meaning 'at bedtime'.",
-        "PRN": "PRN: Abbreviation for 'pro re nata', or 'as needed'.",
-        "OD": "OD: Represents 'once daily'.",
-        "BD": "BD: Short for 'bis in die', or 'twice a day'.",
-    };
-
-    var antibiotic_explanations = {
-        "Penicillin": "Explanation for Penicillin",
-        "Cephalosporins": "Explanation for Cephalosporins",
-        "Tetracyclines": "Explanation for Tetracyclines",
-        "Macrolides": "Explanation for Macrolides",
-        "Fluoroquinolones": "Explanation for Fluoroquinolones",
-        "Sulfonamides": "Explanation for Sulfonamides",
-        "Aminoglycosides": "Explanation for Aminoglycosides",
-        "Metronidazole": "Explanation for Metronidazole",
-        "Clindamycin": "Explanation for Clindamycin",
-        "Vancomycin": "Explanation for Vancomycin",
-        "Linezolid": "Explanation for Linezolid",
-        "Doxycycline": "Explanation for Doxycycline",
-    };
-
-    var explanation = "";
-
-    if (antibioticsValue in antibiotic_explanations) {
-        explanation += antibiotic_explanations[antibioticsValue];
-    }
-
-    if (wordsValue in word_explanations) {
-        if (explanation !== "") {
-            explanation += "<br><br>";
-        }
-        explanation += word_explanations[wordsValue];
-    }
-
-    if (numericValue in abbreviation_explanations) {
-        if (explanation !== "") {
-            explanation += "<br><br>";
-        }
-        explanation += abbreviation_explanations[numericValue];
-    }
-
-    if (explanation.trim() !== "") {
-        explanationDiv.style.display = "block";
-        explanationDiv.classList.add("bg-purple");
-
-        // Remove and add the class to trigger the animation
-        explanationText.classList.remove("prescription-fade-in");
-        void explanationText.offsetWidth; // This line is needed to force a reflow
-        explanationText.classList.add("prescription-fade-in");
-        explanationText.classList.add("description-text-container-inner")
-
-
-        explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
-    } else {
-        explanationText.classList.remove("prescription-fade-in");
-        explanationText.textContent = "No explanation available for this selection.";
-        explanationDiv.classList.add("bg-purple");
-        explanationDiv.style.display = "block";
-        explanationText.classList.add("prescription-fade-in");
-        explanationText.classList.add("description-text-container-inner")
-    }
-}
-
-function mapExplanation(event) {
-    var popup = document.getElementById("myPopup");
-
-    // Toggle the visibility of the popup
-    if (popup.style.visibility === "visible") {
-        popup.style.visibility = "hidden";
-    } else {
-        popup.style.visibility = "visible";
-    }
-
-    // Prevent event propagation to parent elements
-    if (event) {
-        event.stopPropagation();
-    }
-}
-
-function selectText(id) {
-    // Remove the 'selected' class from all elements
-    var elements = document.getElementsByClassName('description-text-container-inner');
-    for (var i = 0; i < elements.length; i++) {
-        elements[i].classList.remove('selected');
-    }
-
-    // Add the 'selected' class to the hovered element
-    document.getElementById(id).classList.add('selected');
-}
-
-
-window.onload = showExplanation;
-
-/* Barcode Scanning */
-function handleFormSubmission() {
-    // JavaScript to handle the form submission and display the result
-    document.querySelector('form').addEventListener('submit', function (e) {
-        e.preventDefault();
-
-        var formData = new FormData(this);
-
-        fetch('/api/scan_barcode', {
-            method: 'POST',
-            body: formData
-        })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('result').textContent = data.text;
-            });
-    });
-}
-
-/*FAQs */
-
-// Function to toggle the display of the chatbot response when the question is clicked
-function toggleResponse(response, faqIcon, faqItem) {
-    faqItem.classList.toggle('expanded');
-    response.style.display = response.style.display === 'block' ? 'none' : 'block';
-    if (faqIcon.alt == "add") {
-        faqIcon.src = "../static/assets/img/minus.png";
-        faqIcon.alt = "minus"
-    }
-    else {
-        faqIcon.src = "../static/assets/img/add.png";
-        faqIcon.alt = "add"
-    }
-
-    // Check if the current height is larger than 100px, and set maxHeight accordingly
-    const currentHeight = faqItem.scrollHeight;
-    if (currentHeight < 100) {
-        faqItem.style.maxHeight = "90px";
-    } else {
-        faqItem.style.maxHeight = "1000px"
-    }
-
-    faqIcon.classList.toggle('rotate');
-}
-
-// Global variable to store the current sort option
-let currentSortOption = "Age"; // or "Symptoms"
-
-// Function to toggle the sorting option
-function toggleSortOption() {
-    currentSortOption = currentSortOption === "Age" ? "Symptoms" : "Age";
-    document.getElementById('toggle-btn').textContent = "Sort by " + currentSortOption;
-    if (currentSortOption == "Age") {
-        document.getElementById('toggle-btn').textContent = "Sort by Symptoms";
-    } else {
-        document.getElementById('toggle-btn').textContent = "Sort by Age";
-    }
-
-    loadFAQFromCSV();
-}
-
-// Function to load the FAQ from CSV
-function loadFAQFromCSV() {
-    fetch('../static/FAQs.csv')
-        .then(response => response.text())
-        .then(data => {
-            const faqData = data.split('\n');
-
-            // Sort faqData based on the currentSortOption
-            const sortedFaqData = faqData.slice(1).sort((a, b) => {
-                const valueA = a.split(',')[currentSortOption === "Age" ? 1 : 2];
-                const valueB = b.split(',')[currentSortOption === "Age" ? 1 : 2];
-
-                // Prioritize "General" to appear first
-                if (valueA === "General") return -1;
-                if (valueB === "General") return 1;
-
-                return valueA.localeCompare(valueB);
-            });
-
-            const faqContainer = document.getElementById('faq-container');
-
-            // Clear previous items from the container
-            faqContainer.innerHTML = '';
-
-            var lastTitle = "";
-
-            sortedFaqData.forEach((line, index) => {
-                lineContent = line.split(',');
-
-                const title = currentSortOption === "Age" ? lineContent[1] : lineContent[2];
-
-                if (title != lastTitle) {
-                    // Create a new h1 element
-                    const titleElement = document.createElement('h1');
-
-                    titleElement.classList.add("sub-heading");
-                    titleElement.classList.add("animated-text");
-                    // Set the text content of the h1 element to the title
-                    titleElement.textContent = title;
-
-                    // Append the h1 element to the container
-                    faqContainer.appendChild(titleElement);
-
-                    // Update lastTitle to the current title for future comparisons
-                    lastTitle = title;
-                }
-
-                query = lineContent[3];
-                query = "Q: " + query;
-                response = lineContent.slice(4, lineContent.length).join(", ");
-                response = "A: " + response;
-
-                // Create FAQ item HTML
-                const faqItem = document.createElement('div');
-                faqItem.classList.add('faq-item');
-
-                const faqIcon = document.createElement('img');
-                faqIcon.classList.add('faq-icon');
-                faqIcon.src = "../static/assets/img/add.png";
-                faqIcon.alt = "add";
-
-                // Create the user query
-                const queryElement = document.createElement('div');
-                queryElement.classList.add('query');
-                queryElement.textContent = query;
-
-                // Create the chatbot response initially hidden
-                const responseElement = document.createElement('div');
-                responseElement.classList.add('response');
-                responseElement.textContent = response;
-                responseElement.style.display = 'none';
-
-                // Append user query and response to the FAQ item
-                faqItem.appendChild(queryElement);
-                queryElement.appendChild(faqIcon);
-                faqItem.appendChild(responseElement);
-
-                // Append the FAQ item to the container
-                faqContainer.appendChild(faqItem);
-
-                // Attach a click event to toggle the response when the user query is clicked
-                faqItem.addEventListener('click', () => {
-                    toggleResponse(responseElement, faqIcon, faqItem);
-                });
-            });
-        })
-        .catch(error => {
-            console.error('Error loading CSV file:', error);
-        });
-}
-
-/*Quiz */
+/* Quiz Javascript - Used by quiz webpage */
+// Function to shuffle the questions present
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -828,8 +841,7 @@ function shuffleArray(array) {
     }
 }
 
-let selectedAnswers = [];
-
+// Function to load the quiz question/answers from CSV
 function loadQuizFromCSV() {
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     alphabetIndex = 0;
@@ -879,6 +891,7 @@ function loadQuizFromCSV() {
         });
 }
 
+// Function to handle user answer selection
 function handleUserSelection(button) {
     const selectedAnswer = button.getAttribute('data-value');
     const correctAnswer = button.getAttribute('data-correct-answer');
@@ -908,119 +921,7 @@ function handleUserSelection(button) {
     button.classList.add('active');
 }
 
-function toggleDropdown(id) {
-    const idItem = document.getElementById(id);
-    const dropdown = idItem.querySelector('.custom-select .options');
-    dropdown.style.display = dropdown.style.display === 'block' ? 'none' : 'block';
-}
-
-function updateSelectedText(option) {
-    const dropDown = document.getElementById(option.parentNode.parentNode.parentNode.id);
-    const selectBox = dropDown.querySelector('.custom-select .select-box');
-    selectBox.innerText = option.textContent;
-    showExplanation();
-}
-
-// Function to get the value of a cookie by its name
-function getCookie(name) {
-    var cookies = document.cookie.split(';');
-    for (var i = 0; i < cookies.length; i++) {
-        var cookie = cookies[i].trim();
-        if (cookie.startsWith(name + "=")) {
-            return cookie.substring(name.length + 1);
-        }
-    }
-    return "";
-}
-
-// Function to parse a JSON string from a cookie and return a dictionary
-function getDictionaryFromCookie(cookieName) {
-    var cookieValue = getCookie(cookieName);
-    if (cookieValue) {
-        return JSON.parse(decodeURIComponent(cookieValue));
-    }
-    return {};
-}
-
-function startDemo(dictionary) {
-
-    let dict = JSON.parse(dictionary)
-
-    if (dict[window.location.pathname] == 1) {
-        return;
-    }
-
-    const userResponse = confirm("Do you want to go through the tutorial?");
-    if (userResponse) {
-        positionPopup(currentReferencePopup);
-    }
-
-    // Setting the demo completed inidicator to true to avoid reasking the user every time
-    dict[window.location.pathname] = 1;
-
-    fetch('/updateCompletedList', {
-        method: 'POST',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(dict),
-    })
-        .then(response => response.json())
-        .then(data => {
-            console.log(data.message);
-        })
-        .catch(error => {
-            console.error('Error:', error);
-        });
-}
-
-function positionPopup(referenceID) {
-    const location = document.getElementById(referenceID).getBoundingClientRect();
-    const visiblePopup = document.getElementById("popup1");
-
-    const offsetY = location.height * 2;
-    const offsetX = location.width / 2;
-
-    const scrollX = window.scrollX || window.pageXOffset;
-    const scrollY = window.scrollY || window.pageYOffset;
-
-    visiblePopup.style.display = "block";
-    visiblePopup.style.position = "absolute";
-    visiblePopup.style.top = `${location.top + scrollY - offsetY}px`;
-    visiblePopup.style.left = `${location.left + scrollX + offsetX}px`;
-    visiblePopup.style.width = `20%`;
-    visiblePopup.style.height = `auto`;
-    visiblePopup.style.overflow = "hidden";
-
-    visiblePopup.children[1].innerText = popupText;
-}
-
-//Waiting for the entire page to finish loading, then executing the showPosition() function
-window.addEventListener('load', function () {
-    showPosition();
-});
-
-// Call the positioning function on page load and on window rup)esize
-window.addEventListener('resize', function () {
-    if (popupTextList[window.location.pathname].indexOf(popupText) != popupTextList[window.location.pathname].length - 1) {
-        positionPopup(currentReferencePopup);
-    }
-});
-
-// Function to close the popup
-function nextPopup() {
-    console.log(popupReferenceList[window.location.pathname])
-    if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
-        const visiblePopup = document.getElementById("popup1");
-        visiblePopup.style.display = "none";
-    } else {
-        currentReferencePopup = popupReferenceList[window.location.pathname][popupReferenceList[window.location.pathname].indexOf(currentReferencePopup) + 1];
-        popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText) + 1];
-
-        positionPopup(currentReferencePopup);
-    }
-}
-
+// Window onload functions
+window.onload = showExplanation;
 window.onload = loadFAQFromCSV();
 window.onload = loadQuizFromCSV();
