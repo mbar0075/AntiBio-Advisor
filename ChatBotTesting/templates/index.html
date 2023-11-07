@@ -137,7 +137,7 @@
                     <div class="ChatItem-chatContent">
                         <div class="ChatItem-chatText">
                             Hey there 👋, you can call me MediBot. How can I assist you today?
-                            <button id="readMessage" onclick="readMessage(this)"
+                            <button class="readMessage" onclick="readMessage(this)"
                                 oncontextmenu="showVolumeSlider(event)">
                                 <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
                             </button>
@@ -152,7 +152,7 @@
                         </div>
                     </div>
                     <div class="ChatItem-chatContent">
-                        <div class="ChatSelection"
+                        <div class="ChatSelection ChatItem-chatText"
                             onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
                             Hello, I would like to learn about AntiBiotics.
                         </div>
@@ -165,7 +165,8 @@
                         </div>
                     </div>
                     <div class="ChatItem-chatContent">
-                        <div class="ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
+                        <div class="ChatSelection ChatItem-chatText"
+                            onclick="selectChoice('When are antibiotics needed?')">
                             When are antibiotics needed?
                         </div>
                     </div>
@@ -177,7 +178,7 @@
                         </div>
                     </div>
                     <div class="ChatItem-chatContent">
-                        <div id="example-message" class="ChatSelection"
+                        <div id="example-message" class="ChatSelection ChatItem-chatText"
                             onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
                             Can you better explain to me what Anti-Microbial Resistance means?
                         </div>
@@ -190,7 +191,7 @@
                         </div>
                     </div>
                     <div class="ChatItem-chatContent">
-                        <div class="ChatSelection"
+                        <div class="ChatSelection ChatItem-chatText"
                             onclick="selectChoice('What types of antibiotics are safe to give my child if prescribed by a doctor?')">
                             Which antibiotics, when prescribed by a doctor, are safe to administer to my child?
                         </div>

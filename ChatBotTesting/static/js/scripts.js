@@ -3,9 +3,6 @@
 * Copyright 2013-2023 Start Bootstrap
 * Licensed under MIT (https://github.com/StartBootstrap/startbootstrap-grayscale/blob/master/LICENSE)
 */
-//
-// Scripts
-// 
 
 // Demo showcase variables
 homeDemoText = [
@@ -235,7 +232,7 @@ function sendMessage(user_icon, bot_icon) {
             </div>
             <div class="ChatItem-chatContent">
             <div class="ChatItem-chatText">${userInput}
-            <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+            <button class="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
                     <img src="../static/assets/img/testingSpeaker2.png" alt="Speaker Icon">
                 </button>
             </div>
@@ -261,7 +258,7 @@ function sendMessage(user_icon, bot_icon) {
                     </div>
                     <div class="ChatItem-chatContent">
                         <div class="ChatItem-chatText">${data.text}
-                        <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                        <button class="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
                             <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
                         </button>
                         </div>
@@ -375,7 +372,7 @@ function clearChatHistory(bot_icon) {
     </div>
     <div class="ChatItem-chatContent">
       <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?
-      <button id="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+      <button class="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
             <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
         </button>
       </div>
