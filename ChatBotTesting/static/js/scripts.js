@@ -57,6 +57,8 @@ var infoPanel;
 
 //Quiz variables
 let selectedAnswers = []; //variable to store the selected answers
+let correctAnswersCounter = 0; // Define a counter variable to keep track of correct answers
+let answeredQuestions = {}; // Keep track of answered questions to avoid double-counting
 
 /* General Javascript - Used by all webpages */
 window.addEventListener('DOMContentLoaded', event => {
@@ -468,19 +470,21 @@ function toggleResponse(response, faqIcon, faqItem) {
     const currentHeight = faqItem.scrollHeight;
     
     if (!window.matchMedia('(max-width: 767px)').matches) {
-        if (currentHeight < 100) {
-            faqItem.style.maxHeight = "90px";
+        console.log(currentHeight);
+        if (currentHeight < 115) {
+            faqItem.style.maxHeight = "110px";
+        } else if (currentHeight < 145) {
+            faqItem.style.maxHeight = "140px";
         } else {
-            faqItem.style.maxHeight = "1000px"
+            faqItem.style.maxHeight = "1000px";
         }
 
         faqIcon.classList.toggle('rotate');
     } else {
-        console.log("Dhalna");
         if (currentHeight < 120) {
-            faqItem.style.maxHeight = "110px";
+            faqItem.style.maxHeight = "115px";
         } else if (currentHeight < 150) {
-            faqItem.style.maxHeight = "130px";
+            faqItem.style.maxHeight = "135px";
         } else {
             faqItem.style.maxHeight = "1000px";
         }
@@ -852,35 +856,34 @@ function shuffleArray(array) {
     }
 }
 
-// Function to load the quiz question/answers from CSV
-function loadQuizFromCSV() {
+// Function to load the quiz question/answers from JSON
+function loadQuizFromJSON() {
+    selectedAnswers = [];
+    correctAnswersCounter = 0;
+    answeredQuestions = {};
     alphabet = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
     alphabetIndex = 0;
-    fetch('../static/Quiz.csv')
-        .then(response => response.text())
+    fetch('../static/Quiz.json')
+        .then(response => response.json())
         .then(data => {
-            const quizData = data.split('\n');
             const quizContainer = document.getElementById('quiz-container');
-            const shuffledQuizData = [...quizData.slice(1)].sort(() => Math.random() - 0.5);
-            const quizItemsHTML = shuffledQuizData.slice(0, 4).map((line, index) => {
-                const [question, answersCSV] = line.split(',');
-                const answers = answersCSV.split('|').map(answer => answer.trim());
-
-                // Shuffle the options randomly
-                const shuffledOptions = [...answers];
+            const shuffledQuizData = [...data].sort(() => Math.random() - 0.5);
+            const quizItemsHTML = shuffledQuizData.slice(0, 4).map((questionData, index) => {
+                const { Question, Answers } = questionData;
+                const shuffledOptions = [...Answers];
                 shuffleArray(shuffledOptions);
                 return `
                     <div class="quiz-item">
-                        <div class="question">Question ${index + 1} - ${question}</div>
+                        <div class="question">Question ${index + 1} - ${Question}</div>
                         <div class="options">
-                            ${shuffledOptions.map((option, alphabetIndex) => `
-                                <div class="answer-button" data-value="${option}" data-correct-answer="${answers[0]}" data-question="${index + 1}">
-                                    ${alphabet[alphabetIndex] + ": " + option}
+                            ${shuffledOptions.map((option, optionIndex) => `
+                                <div class="answer-button" data-value="${option}" data-correct-answer="${Answers[0]}" data-question="${index + 1}">
+                                    ${alphabet[optionIndex] + ": " + option}
                                 </div>
                             `).join('')}
                         </div>
                         <div class="user-answer" style="display: none;">
-                            <p>Correct Answer: ${answers[0]}</p>
+                            <p>Correct Answer: ${Answers[0]}</p>
                         </div>
                     </div>`;
             });
@@ -898,29 +901,32 @@ function loadQuizFromCSV() {
             });
         })
         .catch(error => {
-            console.error('Error loading CSV file:', error);
+            console.error('Error loading JSON file:', error);
         });
+    // Enable the submit button and change its text back to "Submit"
+    let submitButton = document.getElementById("submitQuizButton");
+    submitButton.style.display = "inline-block";
+    submitButton.textContent = 'Submit';
 }
 
 // Function to handle user answer selection
 function handleUserSelection(button) {
+    const questionIndex = button.getAttribute('data-question');
+
     const selectedAnswer = button.getAttribute('data-value');
     const correctAnswer = button.getAttribute('data-correct-answer');
-    const userAnswerElement = button.parentElement.parentElement.querySelector('.user-answer');
-
-    if (selectedAnswer === correctAnswer) {
-        userAnswerElement.textContent = 'Correct!';
-        userAnswerElement.style.color = 'green';
-    } else {
-        userAnswerElement.textContent = 'Incorrect. Correct answer: ' + correctAnswer;
-        userAnswerElement.style.color = 'red';
-    }
-
-    userAnswerElement.style.display = 'block';
 
     // Update the selected answer array
-    const questionIndex = button.getAttribute('data-question');
     selectedAnswers[questionIndex] = selectedAnswer;
+
+    if (selectedAnswer === correctAnswer) {
+        // Mark the question as answered to prevent double-counting
+        answeredQuestions[questionIndex] = true;
+    } else {
+        answeredQuestions[questionIndex] = false;
+    }
+
+    correctAnswersCounter = Object.values(answeredQuestions).filter(value => value === true).length;
 
     // Remove 'active' class from all options within the same question
     const optionsWithinQuestion = document.querySelectorAll(`.answer-button[data-question="${questionIndex}"]`);
@@ -932,7 +938,48 @@ function handleUserSelection(button) {
     button.classList.add('active');
 }
 
+// Function to display the total number of points and check each quiz item
+function submitQuizResults(button) {
+    button.style.display = "none";
+
+    document.getElementById('resulting-points-text').innerText = "You got " + correctAnswersCounter + "/4 points.";
+    document.querySelector('.confirmation-dialog').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+
+
+    // Call a function for each quiz item to display whether it is correct or not
+    document.querySelectorAll('.quiz-item').forEach((item, index) => {
+        displayResult(item, index + 1);
+    });
+}
+
+// Function to display whether a quiz item is correct or not
+function displayResult(item, questionNumber) {
+    const userAnswer = selectedAnswers[questionNumber];
+    const correctAnswer = item.querySelector('.user-answer p').textContent.split(': ')[1].trim();
+
+    // Check if a result element already exists
+    let resultElement = item.querySelector('.result');
+
+    if (!resultElement) {
+        // If it doesn't exist, create a new result element
+        resultElement = document.createElement('div');
+        resultElement.classList.add('result');
+    }
+
+    if (userAnswer === correctAnswer) {
+        resultElement.textContent = 'Correct!';
+        resultElement.style.color = 'green';
+    } else {
+        resultElement.textContent = 'Incorrect. Correct answer: ' + correctAnswer;
+        resultElement.style.color = "#bf0000";
+    }
+
+    // Append the result element to the quiz item
+    item.appendChild(resultElement);
+}
+
 // Window onload functions
 window.onload = showExplanation;
 window.onload = loadFAQFromCSV();
-window.onload = loadQuizFromCSV();
+window.onload = loadQuizFromJSON();

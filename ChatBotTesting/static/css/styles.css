@@ -13502,7 +13502,7 @@ body {
 }
 
 .expanded {
-  height: 110px;
+  height: 200px;
 }
 
 .faq-icon {
@@ -14089,6 +14089,10 @@ body {
   .quiz-item {
     padding-bottom: 10px;
   }
+
+  .quiz-button-container {
+    display: flex;
+}
 
   .question,
   .answer-button,

@@ -75,7 +75,10 @@
         <div id="quiz-container">
             <!-- Quiz items will be dynamically added here -->
         </div>
-        <button class="toggle-button" onclick="loadQuizFromCSV()">Regenerate Questions</button>
+        <div id="quiz-button-container">
+            <button class="toggle-button" id="submitQuizButton" onclick="submitQuizResults(this)">Submit</button>
+            <button class="toggle-button" onclick="loadQuizFromJSON()">Regenerate Questions</button>
+        </div>
     </section>
 
     <!-- Footer-->
@@ -90,6 +93,13 @@
         </div>
         </div>
     </footer>
+    <!-- Confirmation dialog -->
+    <div class="confirmation-dialog quiz-item">
+        <p id="resulting-points-text"></p>
+        <button class="answer-button padding-button" onclick="cancelClear()">OK</button>
+    </div>
+    <!-- Overlay for the confirmation dialog -->
+    <div class="overlay"></div>
 
     <!-- Bootstrap core JS-->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>

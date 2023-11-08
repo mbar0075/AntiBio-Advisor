@@ -1,0 +1,270 @@
+[
+  {
+    "Question": "What is the primary purpose of antibiotics?",
+    "Answers": [
+      "To treat bacterial infections and kill harmful bacteria",
+      "To eliminate harmful bacteria and reduce inflammation",
+      "To boost the immune system and provide pain relief",
+      "To treat fungal infections and enhance digestion"
+    ]
+  },
+  {
+    "Question": "Can antibiotics be used to treat viral infections?",
+    "Answers": [
+      "No, antibiotics are ineffective against viruses",
+      "Yes, antibiotics are effective against viruses, To alleviate cold symptoms",
+      "Yes, but only if taken in higher doses",
+      "No, antibiotics work best on allergies and skin conditions"
+    ]
+  },
+  {
+    "Question": "Why is it essential to complete a full course of antibiotics even if you start feeling better?",
+    "Answers": [
+      "To ensure complete eradication of bacteria and prevent antibiotic resistance",
+      "You can stop when symptoms improve, Completing the course is unnecessary",
+      "To save antibiotics for later use and prevent antibiotic resistance",
+      "You should stop to avoid potential side effects",
+      "To reduce the risk of bacterial overgrowth"
+    ]
+  },
+  {
+    "Question": "What should you do if you miss a dose of antibiotics?",
+    "Answers": [
+      "Take it as soon as you remember unless it's close to the next scheduled dose",
+      "Skip the missed dose, Double the next dose",
+      "Take two doses at once to catch up",
+      "Missed doses have no impact on treatment",
+      "Completely stop the course if you miss one dose"
+    ]
+  },
+  {
+    "Question": "Can you buy antibiotics without a prescription?",
+    "Answers": [
+      "In some countries, you can, but it's not advisable",
+      "Yes, antibiotics are over-the-counter drugs, Always available without a prescription",
+      "You can buy antibiotics from any pharmacy without restrictions",
+      "Only if you have a friend who's a doctor",
+      "Over-the-counter antibiotics are widely available"
+    ]
+  },
+  {
+    "Question": "What's the most common side effect of antibiotics?",
+    "Answers": [
+      "Upset stomach and diarrhea",
+      "Improved digestion, Stronger immune system",
+      "Enhanced taste and smell",
+      "Clear skin and increased energy",
+      "Stronger bones and healthier hair"
+    ]
+  },
+  {
+    "Question": "How should you store antibiotics at home?",
+    "Answers": [
+      "In a cool, dry place away from direct sunlight",
+      "Store them in a warm, humid area, Expose them to direct sunlight",
+      "Store them in the refrigerator to keep them fresh",
+      "Keep antibiotics in the bathroom for easy access",
+      "It doesn't matter where you store them"
+    ]
+  },
+  {
+    "Question": "What's the difference between broad-spectrum and narrow-spectrum antibiotics?",
+    "Answers": [
+      "Broad-spectrum antibiotics work against a wide range of bacteria, while narrow-spectrum antibiotics target specific bacteria",
+      "Narrow-spectrum antibiotics work against all bacteria, Broad-spectrum antibiotics are highly specific",
+      "Broad-spectrum antibiotics only work on viral infections",
+      "Narrow-spectrum antibiotics work better against fungal infections",
+      "Broad-spectrum antibiotics are only used for skin conditions"
+    ]
+  },
+  {
+    "Question": "If you experience an allergic reaction to antibiotics, what should you do?",
+    "Answers": [
+      "Seek immediate medical attention",
+      "Continue taking the antibiotics, Wait for the reaction to subside",
+      "Take antihistamines to relieve symptoms",
+      "Stop taking antibiotics and take painkillers instead",
+      "Wait for a few days to see if the reaction goes away"
+    ]
+  },
+  {
+    "Question": "What's the significance of antibiotic resistance?",
+    "Answers": [
+      "It makes bacteria less responsive to antibiotics, making infections harder to treat",
+      "Antibiotic resistance doesn't affect treatment outcomes, It makes antibiotics more effective",
+      "Antibiotic resistance speeds up recovery",
+      "Antibiotic resistance only affects older individuals",
+      "It has no impact on the effectiveness of antibiotics"
+    ]
+  },
+  {
+    "Question": "Can antibiotics interact with other medications?",
+    "Answers": [
+      "Yes, they can. Always inform your healthcare provider about other medications you're taking",
+      "Antibiotics have no interactions with other drugs, Antibiotics only interact with herbal supplements",
+      "Antibiotics only interact with vitamins",
+      "All medications are safe to take with antibiotics",
+      "You don't need to tell your healthcare provider about other medications"
+    ]
+  },
+  {
+    "Question": "Is it safe to share antibiotics with family or friends?",
+    "Answers": [
+      "No, it can be harmful and contribute to antibiotic resistance",
+      "Sharing antibiotics is a common practice, It's safe to share antibiotics occasionally",
+      "Sharing antibiotics is encouraged to save money",
+      "Sharing antibiotics is fine as long as the illness is minor",
+      "Sharing antibiotics is only harmful to the person sharing"
+    ]
+  },
+  {
+    "Question": "Why do antibiotics sometimes cause an upset stomach?",
+    "Answers": [
+      "They can disrupt the balance of beneficial bacteria in the gut",
+      "Antibiotics improve gut health, Antibiotics have no impact on gut bacteria",
+      "Antibiotics aid digestion",
+      "Upset stomach is a sign that the antibiotics are working",
+      "Antibiotics have no effect on the digestive system"
+    ]
+  },
+  {
+    "Question": "Are there alternatives to antibiotics for certain bacterial infections?",
+    "Answers": [
+      "In some cases, healthcare professionals may recommend alternative treatments",
+      "Antibiotics are the only option for bacterial infections, Alternative treatments are ineffective",
+      "Alternative treatments work better than antibiotics",
+      "Herbal remedies are the best alternatives to antibiotics",
+      "Bacterial infections always require surgery"
+    ]
+  },
+  {
+    "Question": "What are probiotics, and how are they related to antibiotics?",
+    "Answers": [
+      "Probiotics are beneficial bacteria that can help restore gut balance when taking antibiotics",
+      "Probiotics are harmful bacteria, Probiotics are not related to antibiotics",
+      "Probiotics are only used for fungal infections",
+      "Probiotics are prescription medications",
+      "Probiotics can replace antibiotics for all infections"
+    ]
+  },
+  {
+    "Question": "Who discovered the first antibiotic and when?",
+    "Answers": [
+      "Alexander Fleming discovered penicillin in 1928",
+      "Marie Curie discovered penicillin in 1901, Jonas Salk discovered penicillin in 1945",
+      "Isaac Newton discovered penicillin in 1665",
+      "Benjamin Franklin discovered penicillin in 1776",
+      "Einstein discovered penicillin in 1905"
+    ]
+  },
+  {
+    "Question": "What's the term for antibiotics that are effective against a wide range of bacteria?",
+    "Answers": [
+      "Broad-spectrum antibiotics",
+      "Multi-spectrum antibiotics, Universal antibiotics",
+      "All-purpose antibiotics",
+      "Super antibiotics",
+      "Broad-spectrum antibiotics are only for skin conditions"
+    ]
+  },
+  {
+    "Question": "How do antibiotics work to combat bacterial infections?",
+    "Answers": [
+      "They either kill bacteria or inhibit their growth",
+      "They strengthen bacteria, They have no impact on bacteria",
+      "Antibiotics help bacteria multiply",
+      "Antibiotics boost the immune system",
+      "Antibiotics work by making bacteria dormant"
+    ]
+  },
+  {
+    "Question": "Can antibiotics be used to treat fungal or yeast infections?",
+    "Answers": [
+      "No, antibiotics target bacteria, not fungi",
+      "Antibiotics are effective against fungi, Antibiotics treat both bacteria and fungi",
+      "Antibiotics can cure fungal infections faster",
+      "Antibiotics work best for yeast infections",
+      "Using antibiotics for fungal infections is recommended"
+    ]
+  },
+  {
+    "Question": "What's the typical duration of an antibiotic course for most infections?",
+    "Answers": [
+      "7 to 14 days, although it can vary",
+      "1 to 2 days, 30 days or more",
+      "Most infections only require a few hours of antibiotics",
+      "Antibiotics are taken for a minimum of 3 months",
+      "There is no set duration for antibiotic courses"
+    ]
+  },
+  {
+    "Question": "What can happen if you stop taking antibiotics before completing the full course?",
+    "Answers": [
+      "It may not completely eradicate the infection, and antibiotic resistance can develop",
+      "Stopping early is recommended, No consequences for stopping early",
+      "Stopping early is fine as long as symptoms improve",
+      "The infection will go away on its own",
+      "Stopping early speeds up recovery"
+    ]
+  },
+  {
+    "Question": "Why should you not keep and reuse antibiotics for a different illness?",
+    "Answers": [
+      "The antibiotic may not be effective against the new infection, and it can contribute to antibiotic resistance",
+      "Reusing antibiotics is cost-effective, Reusing antibiotics is safe",
+      "Reusing antibiotics is encouraged to reduce waste",
+      "Reusing antibiotics can improve their effectiveness",
+      "Antibiotics can be used for any illness, so reusing is acceptable"
+    ]
+  },
+  {
+    "Question": "What's one way to minimize the risk of a yeast infection while taking antibiotics?",
+    "Answers": [
+      "Taking probiotics to help maintain a healthy balance of gut bacteria",
+      "Avoiding all dairy products, Avoiding water consumption",
+      "Drinking more alcohol to kill yeast",
+      "Avoiding sugar in your diet",
+      "Wearing extra layers of clothing"
+    ]
+  },
+  {
+    "Question": "What's the term for bacteria becoming resistant to antibiotics over time?",
+    "Answers": [
+      "Antibiotic resistance",
+      "Antibiotic sensitivity, Bacterial susceptibility",
+      "Bacterial immunity",
+      "Antibiotic vulnerability",
+      "Bacteria adaptability"
+    ]
+  },
+  {
+    "Question": "Can antibiotics interact with birth control pills?",
+    "Answers": [
+      "Some antibiotics may reduce the effectiveness of birth control pills",
+      "Antibiotics have no impact on birth control, All antibiotics increase birth control effectiveness",
+      "All antibiotics reduce the effectiveness of birth control",
+      "Only a few specific antibiotics interact with birth control",
+      "Birth control pills enhance the effects of antibiotics"
+    ]
+  },
+  {
+    "Question": "Why is it essential to inform your healthcare provider about all medications you're taking when prescribed antibiotics?",
+    "Answers": [
+      "To prevent harmful interactions between antibiotics and other medications",
+      "No need to inform your healthcare provider, It's a personal choice",
+      "Healthcare providers don't need to know about other medications",
+      "Informing your healthcare provider is only necessary for herbal supplements",
+      "It's important to keep your medication history private"
+    ]
+  },
+  {
+    "Question": "What's the role of the immune system in fighting bacterial infections?",
+    "Answers": [
+      "The immune system plays a vital role in recognizing and attacking bacteria, complementing the action of antibiotics",
+      "The immune system has no role in fighting infections, Antibiotics solely combat infections",
+      "The immune system primarily fights viral infections",
+      "Antibiotics make the immune system obsolete",
+      "The immune system's main function is to cause inflammation"
+    ]
+  }
+]
