@@ -13236,6 +13236,7 @@ body {
   box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.5);
   display: inline-block;
   width: auto;
+  text-align: justify;
 }
 
 .section-notation {
@@ -13668,6 +13669,7 @@ body {
   border-radius: 10px;
   cursor: pointer;
   opacity: 0.95;
+  width: 200px;
 }
 
 /* Custom select box on hover */
@@ -13684,8 +13686,8 @@ body {
   overflow-y: auto;
   z-index: 1;
   opacity: 0.95;
-  width: 100px;
-  left: calc(50% - 50px);
+  width: 170px;
+  left: calc(50% - 60px);
 }
 
 /* Removing the scroll bar */
@@ -13697,6 +13699,13 @@ body {
 .custom-select .options .option {
   padding: 5px;
   cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.custom-select .option{
+  border-width: 0.2px;
+  border-style: solid;
+  border-color: rgba(var(--palette-purple-5-rgb), 0.2);
 }
 
 /* Custom option on hover */
@@ -13710,8 +13719,6 @@ body {
   display: flex;
   justify-content: center;
 }
-
-/**/
 
 /* Carousel Styles */
 .carousel-section {
@@ -13787,7 +13794,8 @@ body {
   display: flex;
   align-items: center;
   flex-direction: row;
-  justify-content: center
+  justify-content: center;
+  gap: 55px;
 }
 
 /* Width of the scrollbar */
@@ -13816,6 +13824,12 @@ body {
 
 .dropdown-options-position {
   position: absolute;
+  border-color: rgba(var(--palette-purple-5-rgb), var(--bs-bg-opacity)); 
+  border-style: solid; 
+  border-width: 2px; 
+  border-top: none; 
+  border-bottom-left-radius: 10px; 
+  border-bottom-right-radius: 10px; 
 }
 
 .custom-paragraph-container {
@@ -13929,10 +13943,24 @@ body {
   opacity: 1;
 }
 
-.antibiotic-image-container {
-  width: 60%;
+.antibiotic-image-wrapper {
+  display: block;
+  padding: 30px;
+  border-radius: 100%;
+  background-color: var(--palette-purple-2);
+  border: 2px solid var(--palette-purple-1);
+  width:35%;
+  margin-left: auto;
+  margin-right: auto;
+  align-items: center;
+}
+
+.antibiotic-image {
+  width: 100%;
   height: auto;
-  margin: 2em;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 /* Mobile-specific styles using a media query */
@@ -13944,7 +13972,8 @@ body {
   }
 
   .masthead h1 {
-    font-size: 0.9rem;
+    font-size: 1.5rem;
+    font-style: bold;
   }
 
   /* HOME */
@@ -14112,5 +14141,34 @@ body {
 
   .expanded {
     height: 160px;
+  }
+
+  .antibiotic-image{
+    width: 70%;
+  }
+  
+  .footer {
+    font-size: 0.5rem;
+  }
+
+  .option{
+    font-size: 0.7rem !important;
+  }
+
+  .custom-select .select-box {
+    width: 150px;
+  }
+
+  .custom-select .options {
+    width: 130px;
+    left: calc(50% - 65px);
+  }
+
+  .antibiotic-image-wrapper{
+    width: 50%;
+  }
+
+  .horizontal-content{
+    gap: 20px;
   }
 }

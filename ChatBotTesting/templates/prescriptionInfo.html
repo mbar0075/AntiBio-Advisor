@@ -96,8 +96,8 @@
                 <div id="antibiotic-box" class="select-box">
                     --
                 </div>
-                <div class="options dropdown-options-position">
-                    <div class="option" value="--" onclick="updateSelectedText(this)">--
+                <div class="options dropdown-options-position" style="z-index: 5;">
+                    <div class="option" id="default-option" value="--" onclick="updateSelectedText(this)">--
                     </div>
                     <div class="option" value="Penicillin" onclick="updateSelectedText(this)">Penicillin
                     </div>
@@ -173,8 +173,8 @@
             <br>
             <h1 class="py-3 animated-text">Explanation:</h1>
             <br>
-            <p id="explanationText" class="text-white explanation-box"></p>
-            <div id="antibiotic-image-container"></div>
+            <div id="explanationText" class="text-white explanation-box"></div>
+            <!-- <div id="antibiotic-image-container"></div> -->
         </div>
 
     </section>

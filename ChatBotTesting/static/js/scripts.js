@@ -162,8 +162,15 @@ function positionPopup(referenceID) {
     visiblePopup.style.display = "block";
     visiblePopup.style.position = "absolute";
     visiblePopup.style.top = `${location.top + scrollY - offsetY}px`;
-    visiblePopup.style.left = `${location.left + scrollX + offsetX}px`;
-    visiblePopup.style.width = `20%`;
+
+    //Custom css for smaller screen sizes
+    if (screen.width >= 767) {
+        visiblePopup.style.left = `${location.left + scrollX + offsetX}px`;
+        visiblePopup.style.width = `20%`;
+    }
+    else {
+        visiblePopup.style.width = `auto`;
+    }
     visiblePopup.style.height = `auto`;
     visiblePopup.style.overflow = "hidden";
 
@@ -609,37 +616,37 @@ function showExplanation() {
     var explanationDiv = document.getElementById("explanation");
 
     var abbreviation_explanations = {
-        "0-1-0": "0-1-0: Take no pills in the morning, one pill at midday, and no pills in the evening.",
-        "1-0-1": "1-0-1: One pill in the morning, skip midday, and one pill in the evening.",
-        "1-1-1": "1-1-1: Take one pill three times a day: morning, midday, and evening.",
-        "2-2-2": "2-2-2: Two pills in the morning, two at midday, and two in the evening.",
-        "1/2-1-1/2": "1/2-1-1/2: Half a pill in the morning, one full pill at midday, and half a pill in the evening",
+        "0-1-0": "<b>0-1-0:</b> Take no pills in the morning, one pill at midday, and no pills in the evening.",
+        "1-0-1": "<b>1-0-1:</b> One pill in the morning, skip midday, and one pill in the evening.",
+        "1-1-1": "<b>1-1-1:</b> Take one pill three times a day: morning, midday, and evening.",
+        "2-2-2": "<b>2-2-2:</b> Two pills in the morning, two at midday, and two in the evening.",
+        "1/2-1-1/2": "<b>1/2-1-1/2:</b> Half a pill in the morning, one full pill at midday, and half a pill in the evening",
     };
 
     var word_explanations = {
-        "HS": "HS: Stands for 'hora somni', meaning 'at bedtime'.",
-        "PRN": "PRN: Abbreviation for 'pro re nata', or 'as needed'.",
-        "OD": "OD: Represents 'once daily'.",
-        "BD": "BD: Short for 'bis in die', or 'twice a day'.",
+        "HS": "<b>HS:</b> Stands for 'hora somni', meaning 'at bedtime'.",
+        "PRN": "<b>PRN:</b> Abbreviation for 'pro re nata', or 'as needed'.",
+        "OD": "<b>OD:</b> Represents 'once daily'.",
+        "BD": "<b>BD:</b> Short for 'bis in die', or 'twice a day'.",
     };
 
     var antibiotic_explanations = {
-        "Penicillin": "Penicillin is one of the first antibiotics discovered by Alexander Fleming in 1928. It's effective against a wide range of bacteria and has been used to treat various infections, including strep throat and syphilis.",
-        "Cephalosporins": "Cephalosporins are a group of antibiotics that are effective against a broad spectrum of bacteria. They are commonly used to treat respiratory and skin infections.",
-        "Tetracyclines": "Tetracyclines are a class of antibiotics that can treat a variety of infections, including acne and respiratory tract infections. They work by inhibiting bacterial protein synthesis.",
-        "Macrolides": "Macrolides are antibiotics often used to treat respiratory infections, such as pneumonia and bronchitis. They work by inhibiting bacterial protein synthesis.",
-        "Fluoroquinolones": "Fluoroquinolones are a group of antibiotics used to treat a wide range of bacterial infections, including urinary tract and respiratory infections. They work by interfering with bacterial DNA replication.",
-        "Sulfonamides": "Sulfonamides are antibiotics that inhibit the growth of bacteria by interfering with their folic acid synthesis. They are used to treat urinary tract infections and other bacterial infections.",
-        "Aminoglycosides": "Aminoglycosides are antibiotics used to treat severe bacterial infections. They work by disrupting bacterial protein synthesis. They are often administered intravenously.",
-        "Metronidazole": "Metronidazole is an antibiotic used to treat infections caused by certain parasites and anaerobic bacteria. It's effective against infections of the gastrointestinal tract and vaginal infections.",
-        "Clindamycin": "Clindamycin is an antibiotic that's effective against a variety of bacteria, including those responsible for skin and respiratory infections. It works by inhibiting protein synthesis in bacteria.",
-        "Vancomycin": "Vancomycin is an antibiotic used to treat serious bacterial infections, including those resistant to other antibiotics. It's often administered intravenously and works by disrupting cell wall synthesis in bacteria.",
-        "Linezolid": "Linezolid is an antibiotic used to treat certain bacterial infections, including those caused by drug-resistant bacteria. It inhibits protein synthesis in bacteria and is available in oral and intravenous forms.",
-        "Doxycycline": "Doxycycline is a tetracycline antibiotic used to treat various infections, including acne and respiratory tract infections. It inhibits protein synthesis in bacteria and is available in oral and intravenous forms.",
-        "Amoxicillin": "Amoxicillin is a widely used antibiotic that belongs to the penicillin class. It's effective against various bacterial infections, including ear and throat infections.",
-        "Azithromycin": "Azithromycin is a macrolide antibiotic commonly prescribed for respiratory tract infections, including bronchitis and pneumonia.",
-        "Ciprofloxacin": "Ciprofloxacin is a fluoroquinolone antibiotic used to treat a range of infections, including urinary tract and skin infections.",
-        "Trimethoprim": "Trimethoprim-sulfamethoxazole is a combination antibiotic effective against various bacterial infections, such as urinary tract and respiratory infections.",
+        "Penicillin": "<b>Penicillin</b> is one of the first antibiotics discovered by Alexander Fleming in 1928. It's effective against a wide range of bacteria and has been used to treat various infections, including strep throat and syphilis.",
+        "Cephalosporins": "<b>Cephalosporins</b> are a group of antibiotics that are effective against a broad spectrum of bacteria. They are commonly used to treat respiratory and skin infections.",
+        "Tetracyclines": "<b>Tetracyclines</b> are a class of antibiotics that can treat a variety of infections, including acne and respiratory tract infections. They work by inhibiting bacterial protein synthesis.",
+        "Macrolides": "<b>Macrolides</b> are antibiotics often used to treat respiratory infections, such as pneumonia and bronchitis. They work by inhibiting bacterial protein synthesis.",
+        "Fluoroquinolones": "<b>Fluoroquinolones</b> are a group of antibiotics used to treat a wide range of bacterial infections, including urinary tract and respiratory infections. They work by interfering with bacterial DNA replication.",
+        "Sulfonamides": "<b>Sulfonamides</b> are antibiotics that inhibit the growth of bacteria by interfering with their folic acid synthesis. They are used to treat urinary tract infections and other bacterial infections.",
+        "Aminoglycosides": "<b>Aminoglycosides</b> are antibiotics used to treat severe bacterial infections. They work by disrupting bacterial protein synthesis. They are often administered intravenously.",
+        "Metronidazole": "<b>Metronidazole</b> is an antibiotic used to treat infections caused by certain parasites and anaerobic bacteria. It's effective against infections of the gastrointestinal tract and vaginal infections.",
+        "Clindamycin": "<b>Clindamycin</b> is an antibiotic that's effective against a variety of bacteria, including those responsible for skin and respiratory infections. It works by inhibiting protein synthesis in bacteria.",
+        "Vancomycin": "<b>Vancomycin</b> is an antibiotic used to treat serious bacterial infections, including those resistant to other antibiotics. It's often administered intravenously and works by disrupting cell wall synthesis in bacteria.",
+        "Linezolid": "<b>Linezolid</b> is an antibiotic used to treat certain bacterial infections, including those caused by drug-resistant bacteria. It inhibits protein synthesis in bacteria and is available in oral and intravenous forms.",
+        "Doxycycline": "<b>Doxycycline</b> is a tetracycline antibiotic used to treat various infections, including acne and respiratory tract infections. It inhibits protein synthesis in bacteria and is available in oral and intravenous forms.",
+        "Amoxicillin": "<b>Amoxicillin</b> is a widely used antibiotic that belongs to the penicillin class. It's effective against various bacterial infections, including ear and throat infections.",
+        "Azithromycin": "<b>Azithromycin</b> is a macrolide antibiotic commonly prescribed for respiratory tract infections, including bronchitis and pneumonia.",
+        "Ciprofloxacin": "<b>Ciprofloxacin</b> is a fluoroquinolone antibiotic used to treat a range of infections, including urinary tract and skin infections.",
+        "Trimethoprim": "<b>Trimethoprim-sulfamethoxazole</b> is a combination antibiotic effective against various bacterial infections, such as urinary tract and respiratory infections.",
     };
 
     var explanation = "";
@@ -662,34 +669,24 @@ function showExplanation() {
                     }
                     
                 }
-                explanation += antibiotic_explanations[antibioticsValue];
-        
                 // Create an image element
                 var antibioticImage = document.createElement("img");
-                antibioticImage.style.height = "auto";
-                antibioticImage.style.maxWidth = "60%";
+
                 // Set attributes for the image element
                 antibioticImage.src = antibioticData[antibioticsValue];
                 antibioticImage.alt = "Antibiotic Image";
+                antibioticImage.classList.add("antibiotic-image");
 
-                // Get the container where you want to append the image
-                var imageContainer = document.getElementById("antibiotic-image-container");
+                // Create a wrapper for the image
+                var wrapper = document.createElement("div");
+                wrapper.classList.add("antibiotic-image-wrapper");
 
-                // Remove any existing image elements in the container
-                while (imageContainer.firstChild) {
-                    imageContainer.removeChild(imageContainer.firstChild);
-                }
+                // Append the image to the wrapper
+                wrapper.appendChild(antibioticImage);
 
-                // Append the image element to the container
-                imageContainer.appendChild(antibioticImage);
-            } else {
-                // Get the container where you want to append the image
-                var imageContainer = document.getElementById("antibiotic-image-container");
-
-                // Remove any existing image elements in the container
-                while (imageContainer.firstChild) {
-                    imageContainer.removeChild(imageContainer.firstChild);
-                }
+                // Add the wrapper's HTML to the explanation
+                explanation += wrapper.outerHTML + "<br>";
+                explanation += antibiotic_explanations[antibioticsValue];
             }
 
             if (wordsValue in word_explanations) {
@@ -1028,6 +1025,13 @@ function displayResult(item, questionNumber) {
     // Append the result element to the quiz item
     item.appendChild(resultElement);
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+    var defaultOption = document.getElementById('default-option');
+    if (defaultOption && typeof updateSelectedText === 'function') {
+      updateSelectedText(defaultOption);
+    }
+  });
 
 // Window onload functions
 window.onload = loadFAQFromCSV();
