@@ -13656,7 +13656,7 @@ body {
 /* Custom dropdown container */
 .custom-select {
   /* position: relative; */
-  width: 150px;
+  width: 160px;
   padding: 5px;
 }
 
@@ -13927,6 +13927,12 @@ body {
 
 .next-button:hover {
   opacity: 1;
+}
+
+.antibiotic-image-container {
+  width: 60%;
+  height: auto;
+  margin: 2em;
 }
 
 /* Mobile-specific styles using a media query */

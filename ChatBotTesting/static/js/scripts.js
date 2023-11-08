@@ -600,6 +600,7 @@ function loadFAQFromCSV() {
 /* PrescriptionInfo Javascript - Used by PrescriptionInfo webpage */
 //Function to display the appropraite explenation based on user selection
 function showExplanation() {
+    
     var antibioticsValue = document.getElementById("antibiotic-box").innerText.trim();
     var wordsValue = document.getElementById("abbreviations-box").innerText;
     var numericValue = document.getElementById("notations-box").innerText;
@@ -623,60 +624,109 @@ function showExplanation() {
     };
 
     var antibiotic_explanations = {
-        "Penicillin": "Explanation for Penicillin",
-        "Cephalosporins": "Explanation for Cephalosporins",
-        "Tetracyclines": "Explanation for Tetracyclines",
-        "Macrolides": "Explanation for Macrolides",
-        "Fluoroquinolones": "Explanation for Fluoroquinolones",
-        "Sulfonamides": "Explanation for Sulfonamides",
-        "Aminoglycosides": "Explanation for Aminoglycosides",
-        "Metronidazole": "Explanation for Metronidazole",
-        "Clindamycin": "Explanation for Clindamycin",
-        "Vancomycin": "Explanation for Vancomycin",
-        "Linezolid": "Explanation for Linezolid",
-        "Doxycycline": "Explanation for Doxycycline",
+        "Penicillin": "Penicillin is one of the first antibiotics discovered by Alexander Fleming in 1928. It's effective against a wide range of bacteria and has been used to treat various infections, including strep throat and syphilis.",
+        "Cephalosporins": "Cephalosporins are a group of antibiotics that are effective against a broad spectrum of bacteria. They are commonly used to treat respiratory and skin infections.",
+        "Tetracyclines": "Tetracyclines are a class of antibiotics that can treat a variety of infections, including acne and respiratory tract infections. They work by inhibiting bacterial protein synthesis.",
+        "Macrolides": "Macrolides are antibiotics often used to treat respiratory infections, such as pneumonia and bronchitis. They work by inhibiting bacterial protein synthesis.",
+        "Fluoroquinolones": "Fluoroquinolones are a group of antibiotics used to treat a wide range of bacterial infections, including urinary tract and respiratory infections. They work by interfering with bacterial DNA replication.",
+        "Sulfonamides": "Sulfonamides are antibiotics that inhibit the growth of bacteria by interfering with their folic acid synthesis. They are used to treat urinary tract infections and other bacterial infections.",
+        "Aminoglycosides": "Aminoglycosides are antibiotics used to treat severe bacterial infections. They work by disrupting bacterial protein synthesis. They are often administered intravenously.",
+        "Metronidazole": "Metronidazole is an antibiotic used to treat infections caused by certain parasites and anaerobic bacteria. It's effective against infections of the gastrointestinal tract and vaginal infections.",
+        "Clindamycin": "Clindamycin is an antibiotic that's effective against a variety of bacteria, including those responsible for skin and respiratory infections. It works by inhibiting protein synthesis in bacteria.",
+        "Vancomycin": "Vancomycin is an antibiotic used to treat serious bacterial infections, including those resistant to other antibiotics. It's often administered intravenously and works by disrupting cell wall synthesis in bacteria.",
+        "Linezolid": "Linezolid is an antibiotic used to treat certain bacterial infections, including those caused by drug-resistant bacteria. It inhibits protein synthesis in bacteria and is available in oral and intravenous forms.",
+        "Doxycycline": "Doxycycline is a tetracycline antibiotic used to treat various infections, including acne and respiratory tract infections. It inhibits protein synthesis in bacteria and is available in oral and intravenous forms.",
+        "Amoxicillin": "Amoxicillin is a widely used antibiotic that belongs to the penicillin class. It's effective against various bacterial infections, including ear and throat infections.",
+        "Azithromycin": "Azithromycin is a macrolide antibiotic commonly prescribed for respiratory tract infections, including bronchitis and pneumonia.",
+        "Ciprofloxacin": "Ciprofloxacin is a fluoroquinolone antibiotic used to treat a range of infections, including urinary tract and skin infections.",
+        "Trimethoprim": "Trimethoprim-sulfamethoxazole is a combination antibiotic effective against various bacterial infections, such as urinary tract and respiratory infections.",
     };
 
     var explanation = "";
 
-    if (antibioticsValue in antibiotic_explanations) {
-        explanation += antibiotic_explanations[antibioticsValue];
-    }
+    fetch('../static/PrescriptionInfo.csv')
+        .then(response => response.text())
+        .then(data => {
+            const rows = data.split('\n');
 
-    if (wordsValue in word_explanations) {
-        if (explanation !== "") {
-            explanation += "<br><br>";
-        }
-        explanation += word_explanations[wordsValue];
-    }
+            if (antibioticsValue in antibiotic_explanations) {
+                // Parse CSV data
+                const antibioticData = {};
+                for (const row of rows.slice(1)) {
+                    let columns = row.split(',');
+                    let antibioticName = columns[2].trim();
+                    let antibioticImgLink = columns[1].trim();
+                    if (antibioticName == antibioticsValue) {
+                        antibioticData[antibioticName] = antibioticImgLink;
+                        break;
+                    }
+                    
+                }
+                explanation += antibiotic_explanations[antibioticsValue];
+        
+                // Create an image element
+                var antibioticImage = document.createElement("img");
+                antibioticImage.style.height = "auto";
+                antibioticImage.style.maxWidth = "60%";
+                // Set attributes for the image element
+                antibioticImage.src = antibioticData[antibioticsValue];
+                antibioticImage.alt = "Antibiotic Image";
 
-    if (numericValue in abbreviation_explanations) {
-        if (explanation !== "") {
-            explanation += "<br><br>";
-        }
-        explanation += abbreviation_explanations[numericValue];
-    }
+                // Get the container where you want to append the image
+                var imageContainer = document.getElementById("antibiotic-image-container");
 
-    if (explanation.trim() !== "") {
-        explanationDiv.style.display = "block";
-        explanationDiv.classList.add("bg-purple");
+                // Remove any existing image elements in the container
+                while (imageContainer.firstChild) {
+                    imageContainer.removeChild(imageContainer.firstChild);
+                }
 
-        // Remove and add the class to trigger the animation
-        explanationText.classList.remove("prescription-fade-in");
-        void explanationText.offsetWidth; // This line is needed to force a reflow
-        explanationText.classList.add("prescription-fade-in");
-        explanationText.classList.add("description-text-container-inner")
+                // Append the image element to the container
+                imageContainer.appendChild(antibioticImage);
+            } else {
+                // Get the container where you want to append the image
+                var imageContainer = document.getElementById("antibiotic-image-container");
+
+                // Remove any existing image elements in the container
+                while (imageContainer.firstChild) {
+                    imageContainer.removeChild(imageContainer.firstChild);
+                }
+            }
+
+            if (wordsValue in word_explanations) {
+                if (explanation !== "") {
+                    explanation += "<br><br>";
+                }
+                explanation += word_explanations[wordsValue];
+            }
+
+            if (numericValue in abbreviation_explanations) {
+                if (explanation !== "") {
+                    explanation += "<br><br>";
+                }
+                explanation += abbreviation_explanations[numericValue];
+            }
+
+            if (explanation.trim() !== "") {
+                explanationDiv.style.display = "block";
+                explanationDiv.classList.add("bg-purple");
+
+                // Remove and add the class to trigger the animation
+                explanationText.classList.remove("prescription-fade-in");
+                void explanationText.offsetWidth; // This line is needed to force a reflow
+                explanationText.classList.add("prescription-fade-in");
+                explanationText.classList.add("description-text-container-inner")
 
 
-        explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
-    } else {
-        explanationText.classList.remove("prescription-fade-in");
-        explanationText.textContent = "No explanation available for this selection.";
-        explanationDiv.classList.add("bg-purple");
-        explanationDiv.style.display = "block";
-        explanationText.classList.add("prescription-fade-in");
-        explanationText.classList.add("description-text-container-inner")
-    }
+                explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
+            } else {
+                explanationText.classList.remove("prescription-fade-in");
+                explanationText.textContent = "No explanation available for this selection.";
+                explanationDiv.classList.add("bg-purple");
+                explanationDiv.style.display = "block";
+                explanationText.classList.add("prescription-fade-in");
+                explanationText.classList.add("description-text-container-inner");
+            }
+        })
 }
 
 // Function to display the dropdowns
@@ -980,6 +1030,5 @@ function displayResult(item, questionNumber) {
 }
 
 // Window onload functions
-window.onload = showExplanation;
 window.onload = loadFAQFromCSV();
 window.onload = loadQuizFromJSON();
