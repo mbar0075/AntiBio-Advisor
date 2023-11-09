@@ -6796,10 +6796,13 @@ fieldset:disabled .btn {
 }
 
 .carousel-item {
+  justify-content: center;
   position: relative;
   display: none;
   float: left;
+  height: 100%;
   width: 100%;
+  border-radius: 10px;
   margin-right: -100%;
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
@@ -6815,7 +6818,7 @@ fieldset:disabled .btn {
 .carousel-item.active,
 .carousel-item-next,
 .carousel-item-prev {
-  display: block;
+  display: flex;
 }
 
 .carousel-item-next:not(.carousel-item-start),
@@ -12958,7 +12961,7 @@ body {
 
 .about-section {
   padding-top: 7rem;
-  padding-bottom: 15rem;
+  padding-bottom: 15em;
 }
 
 .about-section p {
@@ -13314,6 +13317,10 @@ body {
   animation: fadeIn 2.7s ease-in-out forwards;
 }
 
+.prescription-explanation-introduction {
+  color: var(--palette-purple-1)
+}
+
 @keyframes prescription-fadeIn {
   from {
     opacity: 0;
@@ -13657,7 +13664,7 @@ body {
 /* Custom dropdown container */
 .custom-select {
   /* position: relative; */
-  width: 160px;
+  /* width: 160px; */
   padding: 5px;
 }
 
@@ -13686,8 +13693,8 @@ body {
   overflow-y: auto;
   z-index: 1;
   opacity: 0.95;
-  width: 170px;
-  left: calc(50% - 60px);
+  width: 160px;
+  left: calc(0% + 25px);
 }
 
 /* Removing the scroll bar */
@@ -13722,19 +13729,16 @@ body {
 
 /* Carousel Styles */
 .carousel-section {
-  padding: 60px 0;
+  /* padding: 60px 0; */
   background-color: var(--palette-purple-1);
   /* Set the background color based on --palette-purple-1 */
 }
 
-.carousel-item {
-  text-align: center;
-  /* height: 300px */
+.carousel-item-text {
+  height: 100%;
 }
 
 .carousel-item img {
-  width: 100%;
-  max-height: 300px;
   object-fit: contain;
   border-radius: 10px;
 }
@@ -14066,6 +14070,7 @@ body {
 
   .quiz-item {
     margin: 0%;
+    max-width: 90%;
   }
 
   /* LEARN MORE */
@@ -14171,4 +14176,9 @@ body {
   .horizontal-content{
     gap: 20px;
   }
+
+  .about-section {
+    padding-bottom: 0rem;
+  }
 }
+

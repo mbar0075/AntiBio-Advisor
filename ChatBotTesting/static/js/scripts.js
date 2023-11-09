@@ -47,7 +47,7 @@ var currentTextIndex = 0; //To keep track of the text being spoken
 var recognition; //Speech recognition
 
 //FAQ variables
-let currentSortOption = "Age"; //variable to store the current sort option
+let currentSortOption = "Symptoms"; //variable to store the current sort option
 
 //Map variables
 var infoWindow;
@@ -179,7 +179,6 @@ function positionPopup(referenceID) {
 
 // Function to close current popup and display the next one
 function nextPopup() {
-    console.log(popupReferenceList[window.location.pathname])
     if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
         const visiblePopup = document.getElementById("popup1");
         visiblePopup.style.display = "none";
@@ -502,7 +501,7 @@ function toggleResponse(response, faqIcon, faqItem) {
 
 // Function to toggle the sorting option
 function toggleSortOption() {
-    currentSortOption = currentSortOption === "Age" ? "Symptoms" : "Age";
+    currentSortOption = currentSortOption === "Symptoms" ? "Age" : "Symptoms";
     document.getElementById('toggle-btn').textContent = "Sort by " + currentSortOption;
     if (currentSortOption == "Age") {
         document.getElementById('toggle-btn').textContent = "Sort by Symptoms";
