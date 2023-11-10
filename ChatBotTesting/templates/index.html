@@ -187,11 +187,15 @@
             </div>
         </div>
         <!-- Confirmation dialog -->
-        <div class="confirmation-dialog quiz-item">
+        <div class="confirmation-dialog popupContainer">
+            <div class="dialog-header">
+                <!-- Close icon (you can replace 'X' with your preferred close icon) -->
+                <span class="close-icon" onclick="cancelClear()">X</span>
+            </div>
             <p>Are you sure you want to clear the conversation?</p>
             <button class="answer-button padding-button" onclick="clearChatHistory(bot_icon_src)">Yes</button>
             <button class="answer-button padding-button" onclick="cancelClear()">No</button>
-        </div>
+        </div>        
         <!-- Overlay for the confirmation dialog -->
         <div class="overlay"></div>
     </section>

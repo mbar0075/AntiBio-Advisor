@@ -224,13 +224,12 @@ function sendMessage(user_icon, bot_icon) {
 
     var choices = document.getElementsByClassName('temporaryChoices');
 
-    for (var i = 0; i < choices.length; i++) {
-        choices[i].style.display = 'none';
-    }
-
-
-
     if (userInput !== "") {
+        // Deleting the temporary choices
+        for (var i = 0; i < choices.length; i++) {
+            choices[i].remove();
+        }
+
         //Displaying the user's message in the chatbox
         chatbox.innerHTML += `<div class="ChatItem ChatItem--expert">
             <div class="ChatItem-meta">
@@ -727,6 +726,12 @@ function updateSelectedText(option) {
     const selectBox = dropDown.querySelector('.custom-select .select-box');
     selectBox.innerText = option.textContent;
     showExplanation();
+    
+    // Get the element with the 'explanation' id
+    const explanationElement = document.getElementById('explanation');
+
+    // Scroll to the explanation element smoothly
+    explanationElement.scrollIntoView({ behavior: 'smooth' });
 }
 
 /* Map Javascript - Used by map webpage */
@@ -1015,7 +1020,7 @@ function displayResult(item, questionNumber) {
 }
 
 document.addEventListener('DOMContentLoaded', function () {
-    var defaultOption = document.getElementById('default-option');
+    var defaultOption = document.getElementById('antibiotic-button-name');
     if (defaultOption && typeof updateSelectedText === 'function') {
         updateSelectedText(defaultOption);
     }

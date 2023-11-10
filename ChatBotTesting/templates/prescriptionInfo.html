@@ -90,7 +90,7 @@
     <section class="section-notation bg-purple text-center py-4" id="notations">
         <h1 class="animated-text sub-title">Select an Antibiotic</h1>
         <div class="center-content">
-            <div class="quiz-item">
+            <div class="prescription-explanation-background">
                 <p class="prescription-explanation-introduction">In this section, learn more about your prescription by
                     selecting the appropriate antibiotic, abbreviation and notation from the dropdowns. If something is
                     missing from the dropdowns below, please contact us so we can add it to the list, furthermore feel
@@ -103,9 +103,11 @@
             <div id="antibiotics-dropdown" class="custom-select dropdown-custom-position"
                 onclick="toggleDropdown(this.id)">
                 <div id="antibiotic-box" class="select-box">
-                    --
+                    Antibiotic
                 </div>
-                <div class="options dropdown-options-position" style="z-index: 5;">
+                <div class="options dropdown-options-position  customized-scroll-bar" style="z-index: 5;">
+                    <div class="option" id="antibiotic-button-name" value="--" onclick="updateSelectedText(this)">Antibiotic
+                    </div>
                     <div class="option" id="default-option" value="--" onclick="updateSelectedText(this)">--
                     </div>
                     <div class="option" value="Penicillin" onclick="updateSelectedText(this)">Penicillin
@@ -148,9 +150,9 @@
                 <div id="abbreviations-dropdown" class="custom-select dropdown-custom-position"
                     onclick="toggleDropdown(this.id)">
                     <div id="abbreviations-box" class="select-box">
-                        --
+                        Abbreviation
                     </div>
-                    <div class="options dropdown-options-position">
+                    <div class="options dropdown-options-position customized-scroll-bar">
                         <div class="option" value="--" onclick="updateSelectedText(this)">--</div>
                         <div class="option" value="HS" onclick="updateSelectedText(this)">HS</div>
                         <div class="option" value="PRN" onclick="updateSelectedText(this)">PRN</div>
@@ -164,9 +166,9 @@
                 <div id="notations-dropdown" class="custom-select dropdown-custom-position"
                     onclick="toggleDropdown(this.id)">
                     <div id="notations-box" class="select-box">
-                        --
+                        Notation
                     </div>
-                    <div class="options dropdown-options-position">
+                    <div class="options dropdown-options-position customized-scroll-bar">
                         <div class="option" value="--" onclick="updateSelectedText(this)">--</div>
                         <div class="option" value="0-1-0" onclick="updateSelectedText(this)">0-1-0</div>
                         <div class="option" value="1-0-1" onclick="updateSelectedText(this)">1-0-1</div>
