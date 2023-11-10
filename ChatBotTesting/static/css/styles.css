@@ -6781,7 +6781,7 @@ fieldset:disabled .btn {
 .carousel-inner {
   display: flex;
   align-items: center;
-  overflow: hidden; 
+  overflow: hidden;
   position: relative;
   border-radius: 10px;
   width: 100%;
@@ -9266,7 +9266,7 @@ fieldset:disabled .btn {
 
 .text-white-50 {
   --bs-text-opacity: 1;
-  color: rgba(255, 255, 255, 0.5) !important;
+  color: rgba(255, 255, 255, 0.7) !important;
 }
 
 .text-reset {
@@ -13699,7 +13699,7 @@ body {
 
 /* Removing the scroll bar */
 .custom-select .options::-webkit-scrollbar {
-  display: none;
+  display: auto;
 }
 
 /* Custom option style */
@@ -13709,7 +13709,7 @@ body {
   font-size: 0.9rem;
 }
 
-.custom-select .option{
+.custom-select .option {
   border-width: 0.2px;
   border-style: solid;
   border-color: rgba(var(--palette-purple-5-rgb), 0.2);
@@ -13828,12 +13828,12 @@ body {
 
 .dropdown-options-position {
   position: absolute;
-  border-color: rgba(var(--palette-purple-5-rgb), var(--bs-bg-opacity)); 
-  border-style: solid; 
-  border-width: 2px; 
-  border-top: none; 
-  border-bottom-left-radius: 10px; 
-  border-bottom-right-radius: 10px; 
+  border-color: rgba(var(--palette-purple-5-rgb), var(--bs-bg-opacity));
+  border-style: solid;
+  border-width: 2px;
+  border-top: none;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
 }
 
 .custom-paragraph-container {
@@ -13844,7 +13844,7 @@ body {
   display: flex;
   align-items: center;
   height: 100%;
-  overflow: hidden;  
+  overflow: hidden;
   display: flex;
   width: fit-content;
   padding: 20px;
@@ -13953,7 +13953,7 @@ body {
   border-radius: 100%;
   background-color: var(--palette-purple-2);
   border: 2px solid var(--palette-purple-1);
-  width:35%;
+  width: 35%;
   margin-left: auto;
   margin-right: auto;
   align-items: center;
@@ -14132,7 +14132,7 @@ body {
 
   .quiz-button-container {
     display: flex;
-}
+  }
 
   .question,
   .answer-button,
@@ -14148,15 +14148,15 @@ body {
     height: 160px;
   }
 
-  .antibiotic-image{
+  .antibiotic-image {
     width: 70%;
   }
-  
+
   .footer {
     font-size: 0.5rem;
   }
 
-  .option{
+  .option {
     font-size: 0.7rem !important;
   }
 
@@ -14169,16 +14169,19 @@ body {
     left: calc(50% - 65px);
   }
 
-  .antibiotic-image-wrapper{
+  .antibiotic-image-wrapper {
     width: 50%;
   }
 
-  .horizontal-content{
+  .horizontal-content {
     gap: 20px;
   }
 
   .about-section {
     padding-bottom: 0rem;
   }
-}
 
+  .description-text-container-inner {
+    opacity: 1;
+  }
+}

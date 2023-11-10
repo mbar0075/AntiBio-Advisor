@@ -373,56 +373,45 @@ function clearChatHistory(bot_icon) {
     const chatbox = document.getElementById("chatBox");
 
     chatbox.innerHTML = `<div class="ChatItem ChatItem--customer">
-    <div class="ChatItem-meta">
-      <div class="ChatItem-avatar">
-        <img class="ChatItem-avatarImage" src="` + bot_icon + `">
-      </div>
+        <div class="ChatItem-meta">
+        <div class="ChatItem-avatar">
+            <img class="ChatItem-avatarImage" src="` + bot_icon + `">
+        </div>
+        </div>
+        <div class="ChatItem-chatContent">
+        <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?
+        <button class="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
+                <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+            </button>
+        </div>
+        </div>
     </div>
-    <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText">Hey there 👋, you can call me MediBot. How can I assist you today?
-      <button class="readMessage" onclick="readMessage(this)" oncontextmenu="showVolumeSlider(event)">
-            <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
-        </button>
-      </div>
-    </div>
-  </div>
-  <div class="ChatItem ChatItem--expert temporaryChoices">
-  <div class="ChatItem-meta">
-  <div class="ChatItem-avatar">
-      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
-  </div>
-  </div>
-  <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
-          Hello, I would like to learn about AntiBiotics.
-      </div>
-  </div>
-</div>
-<div class="ChatItem ChatItem--expert temporaryChoices">
-  <div class="ChatItem-meta">
-  <div class="ChatItem-avatar">
-      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
-  </div>
-  </div>
-  <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('When are antibiotics needed?')">
-          When are antibiotics needed?
-      </div>
-  </div>
-</div>
-<div class="ChatItem ChatItem--expert temporaryChoices">
-  <div class="ChatItem-meta">
-  <div class="ChatItem-avatar">
-      <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
-  </div>
-  </div>
-  <div class="ChatItem-chatContent">
-      <div class="ChatItem-chatText ChatSelection" onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
-          Can you better explain to me what Anti-Microbial Resistance means?
-      </div>
-  </div>
-</div>`
-
+    <div class="ChatItem ChatItem--expert temporaryChoices">
+        <div class="ChatItem-meta">
+            <div class="ChatItem-avatar">
+                <img class="ChatItem-avatarImage" src="` + user_icon_src + `">
+            </div>
+        </div>
+        <div class="ChatItem-chatContent">
+            <div class="ChatSelection ChatItem-chatText"
+                onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
+                Hello, I would like to learn about AntiBiotics.
+            </div>
+            <div class="ChatSelection ChatItem-chatText"
+                onclick="selectChoice('When are antibiotics needed?')">
+                When are antibiotics needed?
+            </div>
+            <div id="example-message" class="ChatSelection ChatItem-chatText"
+                onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
+                Can you better explain to me what Anti-Microbial Resistance means?
+            </div>
+            <div class="ChatSelection ChatItem-chatText"
+                onclick="selectChoice('What types of antibiotics are safe to give my child if prescribed by a doctor?')">
+                Which antibiotics, when prescribed by a doctor, are safe to administer to my child?
+            </div>
+        </div>
+        </div>
+    </div>`
 
     // JavaScript code to reset the conversation
     fetch('/api/reset_conversation', {
@@ -474,7 +463,7 @@ function toggleResponse(response, faqIcon, faqItem) {
 
     // Check if the current height is larger than 100px, and set maxHeight accordingly
     const currentHeight = faqItem.scrollHeight;
-    
+
     if (!window.matchMedia('(max-width: 767px)').matches) {
         console.log(currentHeight);
         if (currentHeight < 115) {
@@ -606,7 +595,7 @@ function loadFAQFromCSV() {
 /* PrescriptionInfo Javascript - Used by PrescriptionInfo webpage */
 //Function to display the appropraite explenation based on user selection
 function showExplanation() {
-    
+
     var antibioticsValue = document.getElementById("antibiotic-box").innerText.trim();
     var wordsValue = document.getElementById("abbreviations-box").innerText;
     var numericValue = document.getElementById("notations-box").innerText;
@@ -666,7 +655,7 @@ function showExplanation() {
                         antibioticData[antibioticName] = antibioticImgLink;
                         break;
                     }
-                    
+
                 }
                 // Create an image element
                 var antibioticImage = document.createElement("img");
@@ -716,7 +705,7 @@ function showExplanation() {
                 explanationText.innerHTML = explanation; // Use innerHTML to render line breaks
             } else {
                 explanationText.classList.remove("prescription-fade-in");
-                explanationText.textContent = "No explanation available for this selection.";
+                explanationText.textContent = "Please select one of the above options to see an explanation.";
                 explanationDiv.classList.add("bg-purple");
                 explanationDiv.style.display = "block";
                 explanationText.classList.add("prescription-fade-in");
@@ -1025,12 +1014,12 @@ function displayResult(item, questionNumber) {
     item.appendChild(resultElement);
 }
 
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     var defaultOption = document.getElementById('default-option');
     if (defaultOption && typeof updateSelectedText === 'function') {
-      updateSelectedText(defaultOption);
+        updateSelectedText(defaultOption);
     }
-  });
+});
 
 // Window onload functions
 window.onload = loadFAQFromCSV();
