@@ -13312,6 +13312,12 @@ body {
 }
 
 /* Prescription Fade-in*/
+.dropdown-icon {
+  margin-left: 10px;
+  color: var(--palette-purple-2);
+  font-size: 1.5rem;
+}
+
 .prescription-fade-in {
   opacity: 0;
   animation: fadeIn 2.7s ease-in-out forwards;
@@ -13338,7 +13344,7 @@ body {
   border-radius: 10px;
   margin: 15px;
   padding: 10px;
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-3), var(--palette-purple-4));
   width: 700px;
 }
 
@@ -13355,7 +13361,7 @@ body {
 #chatContainerInput {
   border: 3px solid var(--bs-white);
   border-radius: 10px;
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-2), var(--palette-purple-3));
   display: flex;
   align-items: center;
   padding-top: 5px;
@@ -13480,7 +13486,7 @@ body {
   width: 40%;
   padding: 20px;
   box-sizing: border-box;
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-3), var(--palette-purple-4));
   border: 2px solid #333;
   border-radius: 8px;
   margin: 10px;
@@ -13517,7 +13523,7 @@ body {
   border-radius: 10px;
   margin: 15px;
   padding: 10px;
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-2), var(--palette-purple-3));
   width: 700px;
   cursor: pointer;
   overflow: hidden;
@@ -13561,7 +13567,7 @@ body {
   border-radius: 10px;
   margin: 15px;
   padding: 10px;
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-3), var(--palette-purple-4));
   width: 700px;
 }
 
@@ -13706,19 +13712,21 @@ body {
   overflow: auto;
 }
 
-.customized-scroll-bar::-webkit-scrollbar {
+/* .customized-scroll-bar::-webkit-scrollbar {
   border-radius: 10px;
   scrollbar-color: var(--palette-purple-1) var(--palette-purple-2);
-}
+} */
 
 /* Specify the color for the scrollbar thumb */
 .customized-scroll-bar::-webkit-scrollbar-thumb {
   background-color: var(--palette-purple-2);
+  border-radius: 10px;
 }
 
 /* Specify the color for the scrollbar track */
 .customized-scroll-bar::-webkit-scrollbar-track {
   background-color: var(--palette-purple-5);
+  border-radius: 0 0 10px 10px; /* Border-radius only at the bottom */
 }
 
 /* Custom select box on hover */
@@ -13816,7 +13824,7 @@ body {
 }
 
 .toggle-button {
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-2), var(--palette-purple-3));
   color: var(--bs-white);
   border-radius: 10px;
   text-align: center;
@@ -13843,6 +13851,14 @@ body {
   flex-direction: row;
   justify-content: center;
   gap: 55px;
+}
+
+.horizontal-content-prescription {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: center;
+  gap: 1rem; /* Adjust the value as needed */
 }
 
 /* Width of the scrollbar */
@@ -13964,7 +13980,7 @@ body {
 .close-icon {
   font-size: 20px;
   color: rgba(var(--bs-white), 0.6);
-  background-color: var(--palette-purple-3);
+  /* background-color: var(--palette-purple-3); */
   border-radius: 10px;
   padding: 5px;
   font-weight: bold;
@@ -14265,5 +14281,10 @@ body {
 
   .description-text-container-inner {
     opacity: 1;
+  }
+
+  .horizontal-content-prescription{
+    font-size: 0.7em;
+    gap: 0.7em;
   }
 }

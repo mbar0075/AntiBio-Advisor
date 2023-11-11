@@ -724,15 +724,19 @@ function toggleDropdown(id) {
 function updateSelectedText(option) {
     const dropDown = document.getElementById(option.parentNode.parentNode.parentNode.id);
     const selectBox = dropDown.querySelector('.custom-select .select-box');
-    selectBox.innerText = option.textContent;
+    selectBox.innerHTML = option.textContent + ' <i class="dropdown-icon fa fa-caret-down"></i>';
     showExplanation();
-    
+
+    // Adding an icon to the dropdown <i class="fa fa-caret-down"></i>
+    console.log(selectBox.innerHTML);
+
     // Get the element with the 'explanation' id
     const explanationElement = document.getElementById('explanation');
 
     // Scroll to the explanation element smoothly
     explanationElement.scrollIntoView({ behavior: 'smooth' });
 }
+
 
 /* Map Javascript - Used by map webpage */
 //Function to show the user's position on the map
