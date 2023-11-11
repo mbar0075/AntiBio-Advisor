@@ -41,9 +41,18 @@
         });
     </script>
 
-    <div id="popup1" class="popup-container">
-        <button class="next-button" onclick="nextPopup()">Next</button>
-        <span class="popuptext" id="myPopup">A Simple Popup!</span>
+    <div id="popup-container" class="popup-container">
+        <div class="speech-bubble">
+            <div class="speech-bubble-tail"></div>
+            <div class="speech-bubble-content">
+                <p id="popup-text" >Hello!</p>
+                <button class="next-button" onclick="nextPopup()">Next</button>
+            </div>
+        </div>
+        <div class="popup-container-bot">
+            <img class="ChatItem-avatarImage"
+                src="{{ url_for('static', filename='assets/img/demo-bot-smile.png') }}" alt="Bot Icon">
+        </div>
     </div>
 
     <!-- Navigation-->
@@ -137,7 +146,7 @@
                     <div class="ChatItem-chatContent">
                         <div class="ChatItem-chatText">
                             Hey there 👋, you can call me MediBot. How can I assist you today?
-                            <button class="readMessage" onclick="readMessage(this)"
+                            <button id="speakerIcon" class="readMessage" onclick="readMessage(this)"
                                 oncontextmenu="showVolumeSlider(event)">
                                 <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
                             </button>

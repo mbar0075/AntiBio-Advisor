@@ -39,10 +39,22 @@
         });
     </script>
 
-    <div id="popup1" class="popup-container">
-        <button class="next-button" onclick="nextPopup()">Next</button>
-        <span class="popuptext" id="myPopup">A Simple Popup!</span>
+
+    <div id="popup-container" class="popup-container">
+        <div class="speech-bubble">
+            <div class="speech-bubble-tail"></div>
+            <div class="speech-bubble-content">
+                <p id="popup-text" >Hello!</p>
+                <button class="next-button" onclick="nextPopup()">Next</button>
+            </div>
+        </div>
+        <div class="popup-container-bot">
+            <img class="ChatItem-avatarImage"
+                src="{{ url_for('static', filename='assets/img/demo-bot-smile.png') }}" alt="Bot Icon">
+        </div>
     </div>
+    <!-- Overlay for the confirmation dialog -->
+    <div class="overlay"></div>
 
     <!-- Navigation-->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">

@@ -13581,7 +13581,7 @@ body {
 .answer-button {
   border-radius: 10px;
   color: var(--bs-white);
-  background-color: var(--palette-purple-2);
+  background: linear-gradient(to right, var(--palette-purple-2), var(--palette-purple-3));
   padding: 10px;
   cursor: pointer;
   opacity: 0.6;
@@ -13897,17 +13897,21 @@ body {
 
 .custom-paragraph-container {
   display: flex;
+  align-self: center;
+}
+
+.custom-paragraph {
+  font-size: 1.6rem;
+  color: var(--bs-white);
+  text-align: justify;
 }
 
 .outer-paragraph-container {
-  display: flex;
-  align-items: center;
-  height: 100%;
+  width: 60%;
   overflow: hidden;
   display: flex;
-  width: fit-content;
   padding: 20px;
-  background-color: var(--palette-purple-3);
+  background: linear-gradient(to right, var(--palette-purple-2), var(--palette-purple-3));
   border: 2px solid #333;
   border-radius: 8px;
   opacity: 0.7;
@@ -13918,6 +13922,15 @@ body {
 /* Styles for the popup container */
 .popup-container {
   display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  cursor: pointer;
+  z-index: 3000;
+  align-items: flex-end;
+
+
+  /* display: none;
   position: fixed;
   top: 50%;
   left: 50%;
@@ -13934,7 +13947,48 @@ body {
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
-  user-select: none;
+  user-select: none; */
+}
+
+.popup-container img {
+  width: 50px; /* Set the width of your bot icon */
+  height: 50px; /* Set the height of your bot icon */
+  border-radius: 50%;
+}
+
+.bot-container {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+}
+
+.popup-container-bot {
+  cursor: pointer;
+}
+
+.speech-bubble {
+  display: flex;
+  position: relative;
+  background-color: var(--bs-purple); /* Speech bubble color */
+  color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  margin-right: 20px; /* Adjust the distance between the bot and speech bubble */
+  margin-bottom:15px;
+}
+
+.speech-bubble-tail {
+  position: absolute;
+  bottom: -30px;
+  left: 8px;
+  width: 20px;
+  border-color: var(--bs-purple);
+  border-width: 10px;
+  border-style: solid;
+  border-left: 20px solid transparent;
+  border-right: 20px solid transparent;
+  border-bottom: 20px solid transparent;
+  cursor:pointer;
 }
 
 .popup-container .show {
@@ -14010,7 +14064,7 @@ body {
 /* Next button styles */
 .next-button {
   position: absolute;
-  bottom: 0px;
+  bottom: 5px;
   right: 5px;
   cursor: pointer;
   font-size: 14px;
@@ -14180,7 +14234,18 @@ body {
   }
 
   .carousel-item {
-    height: auto;
+    height:min-content;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    border-radius: 10px;
+  }
+
+  .outer-paragraph-container {
+    align-self: center;
+    width: 100%;
+    height: min-content;
   }
 
   .custom-paragraph-container {

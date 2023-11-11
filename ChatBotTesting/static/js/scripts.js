@@ -12,11 +12,10 @@ homeDemoText = [
     "The microphone button allows you to communicate with the chatbot through voice input instead of typing.",
     "The speaking icon can be used to have the chatbot's responses read aloud.",
     "You can control the speaking volume by using the volume slider.",
-    "To have the chatbot read a single message aloud, click the speaker button.",
     "These messages serve as optional initial prompts."
 ];
 
-homePopupReferenceList = ["userInput", "chatBotSendButton", "chatBotClearButton", "toggleSpeechRecognition", "speak", "chatVolumeSlider", "readMessage", "example-message"];
+homePopupReferenceList = ["userInput", "chatBotSendButton", "chatBotClearButton", "toggleSpeechRecognition", "speak", "chatVolumeSlider", "example-message"];
 
 prescriptionInfoDemoText = [
     "This dropdown here contains the antibiotic types.",
@@ -25,7 +24,7 @@ prescriptionInfoDemoText = [
     "This is the explanation of the above selected options."
 ];
 
-prescriptionInfoReferenceList = ["antibiotics-dropdown", "notations-dropdown-container", "abbreviations-dropdown-container", "explanationText"]
+prescriptionInfoReferenceList = ["antibiotics-dropdown", "notations-dropdown-container", "abbreviations-dropdown-container", "explanationText"];
 
 mapDemoText = [
     "This here is the map.",
@@ -131,6 +130,9 @@ function startDemo(dictionary) {
     // Setting the demo completed inidicator to true to avoid reasking the user every time
     dict[window.location.pathname] = 1;
 
+    document.querySelector('.popup-container').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+
     fetch('/updateCompletedList', {
         method: 'POST',
         headers: {
@@ -150,42 +152,32 @@ function startDemo(dictionary) {
 
 // Function to position the popup based on window size 
 function positionPopup(referenceID) {
-    const location = document.getElementById(referenceID).getBoundingClientRect();
-    const visiblePopup = document.getElementById("popup1");
+    const visiblePopup = document.getElementById("popup-text");
+    visiblePopup.innerText = popupText;
 
-    const offsetY = 0;//location.height;
-    const offsetX = location.width / 2;
-
-    const scrollX = window.scrollX || window.pageXOffset;
-    const scrollY = window.scrollY || window.pageYOffset;
-
-    visiblePopup.style.display = "block";
-    visiblePopup.style.position = "absolute";
-    visiblePopup.style.top = `${location.top + scrollY - offsetY}px`;
-
-    //Custom css for smaller screen sizes
-    if (screen.width >= 767) {
-        visiblePopup.style.left = `${location.left + scrollX + offsetX}px`;
-        visiblePopup.style.width = `20%`;
+    var id = document.getElementById(referenceID);
+    
+    if (id) {
+        id.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        id.style.zIndex = 1000;
+        id.style.pointerEvents = 'none';
     }
-    else {
-        visiblePopup.style.width = `auto`;
-    }
-    visiblePopup.style.height = `auto`;
-    visiblePopup.style.overflow = "hidden";
-
-    visiblePopup.children[1].innerText = popupText;
 }
+  
 
 // Function to close current popup and display the next one
 function nextPopup() {
     if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
-        const visiblePopup = document.getElementById("popup1");
+        const visiblePopup = document.getElementById("popup-container");
         visiblePopup.style.display = "none";
+        document.getElementById(currentReferencePopup).style.zIndex = 0;
+        document.getElementById(currentReferencePopup).style.pointerEvents = 'none';
+        document.querySelector('.overlay').style.display = 'none';
     } else {
+        document.getElementById(currentReferencePopup).style.zIndex = 0;
+        document.getElementById(currentReferencePopup).style.pointerEvents = 'none';
         currentReferencePopup = popupReferenceList[window.location.pathname][popupReferenceList[window.location.pathname].indexOf(currentReferencePopup) + 1];
         popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText) + 1];
-
         positionPopup(currentReferencePopup);
     }
 }
