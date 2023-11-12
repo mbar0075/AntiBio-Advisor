@@ -7,7 +7,7 @@
 // Demo showcase variables
 homeDemoText = [
     "To start a conversation with the chatbot, you can type your questions or messages in the \"userInput\" field.",
-    "Click the \"Send\" button to send your typed message to the chatbot.",
+    "Click the \"Send\" button or press Enter on your keyboard to send your typed message to the chatbot.",
     "If you want to clear the chat and start over, use the \"Clear\" button.",
     "The microphone button allows you to communicate with the chatbot through voice input instead of typing.",
     "The speaking icon can be used to have the chatbot's responses read aloud.",
@@ -115,23 +115,13 @@ window.addEventListener('DOMContentLoaded', event => {
 
 // Function to start the demo denoting how to use the website to the user 
 function startDemo(dictionary) {
-
-    let dict = JSON.parse(dictionary)
+    let dict = JSON.parse(dictionary);
 
     if (dict[window.location.pathname] == 1) {
         return;
     }
 
-    const userResponse = confirm("Do you want to go through the tutorial?");
-    if (userResponse) {
-        positionPopup(currentReferencePopup);
-    }
-
-    // Setting the demo completed inidicator to true to avoid reasking the user every time
     dict[window.location.pathname] = 1;
-
-    document.querySelector('.popup-container').style.display = 'block';
-    document.querySelector('.overlay').style.display = 'block';
 
     fetch('/updateCompletedList', {
         method: 'POST',
@@ -148,6 +138,39 @@ function startDemo(dictionary) {
         .catch(error => {
             console.error('Error:', error);
         });
+    document.querySelector('.popup-container').style.display = 'block';
+    document.querySelector('.overlay').style.display = 'block';
+    document.querySelector('.popup-container').classList.remove('slide-out'); // Remove slide-out class
+    document.querySelector('.popup-container').classList.add('slide-in'); // Add slide-in class
+}
+
+function setupDemo() {
+    currentReferencePopup = popupReferenceList[window.location.pathname][0];
+    popupText = popupTextList[window.location.pathname][0];
+    document.querySelector('.popup-container').style.display = 'block';
+    document.getElementById("speech-bubble").style.display = "block";
+    document.querySelector('.overlay').style.display = 'block';
+    if (document.getElementById("popup-container-bot-img").src.endsWith("/static/assets/img/demo-bot-talking.png")) {
+        document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-smile.png";
+    } else {
+        document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-talking.png";
+    }
+    document.getElementById("yes-button").style.display = "none";
+    document.getElementById("no-button").style.display = "none";
+    document.getElementById("next-button").style.display = "block";
+    popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText)];
+    positionPopup(currentReferencePopup);
+    document.querySelector('.popup-container').classList.remove('slide-out'); // Remove slide-out class
+    document.querySelector('.popup-container').classList.add('slide-in'); // Add slide-in class
+}
+
+function closeDemo() {
+    const visiblePopup = document.getElementById("popup-container");
+    document.getElementById("speech-bubble").style.display = "none";
+    // Remove the slide-in class and add the slide-out class
+    visiblePopup.classList.remove('slide-in');
+    visiblePopup.classList.add('slide-out');
+    document.querySelector('.overlay').style.display = 'none';
 }
 
 // Function to position the popup based on window size 
@@ -167,15 +190,19 @@ function positionPopup(referenceID) {
 
 // Function to close current popup and display the next one
 function nextPopup() {
+    if (document.getElementById("popup-container-bot-img").src.endsWith("/static/assets/img/demo-bot-talking.png")) {
+        document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-smile.png";
+    } else {
+        document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-talking.png";
+    }
+     
     if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
-        const visiblePopup = document.getElementById("popup-container");
-        visiblePopup.style.display = "none";
         document.getElementById(currentReferencePopup).style.zIndex = 0;
-        document.getElementById(currentReferencePopup).style.pointerEvents = 'none';
-        document.querySelector('.overlay').style.display = 'none';
+        document.getElementById(currentReferencePopup).style.pointerEvents = "auto";
+        closeDemo();
     } else {
         document.getElementById(currentReferencePopup).style.zIndex = 0;
-        document.getElementById(currentReferencePopup).style.pointerEvents = 'none';
+        document.getElementById(currentReferencePopup).style.pointerEvents = "auto";
         currentReferencePopup = popupReferenceList[window.location.pathname][popupReferenceList[window.location.pathname].indexOf(currentReferencePopup) + 1];
         popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText) + 1];
         positionPopup(currentReferencePopup);

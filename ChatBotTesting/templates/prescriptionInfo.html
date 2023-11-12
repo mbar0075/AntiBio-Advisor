@@ -39,17 +39,18 @@
         });
     </script>
 
-
     <div id="popup-container" class="popup-container">
-        <div class="speech-bubble">
+        <div id="speech-bubble" class="speech-bubble">
             <div class="speech-bubble-tail"></div>
             <div class="speech-bubble-content">
-                <p id="popup-text" >Hello!</p>
-                <button class="next-button" onclick="nextPopup()">Next</button>
+                <p id="popup-text" >Would you like a demo of this page?</p>
+                <button id="yes-button" class="yes-button" onclick='setupDemo(demoCompletedList)'>Yes</button>
+                <button id="no-button" class="no-button" onclick="closeDemo()">No</button>
+                <button id="next-button" class="next-button" onclick="nextPopup()">Next</button>
             </div>
         </div>
         <div class="popup-container-bot">
-            <img class="ChatItem-avatarImage"
+            <img id="popup-container-bot-img" class="ChatItem-avatarImage popup-container-image"
                 src="{{ url_for('static', filename='assets/img/demo-bot-smile.png') }}" alt="Bot Icon">
         </div>
     </div>
@@ -75,6 +76,7 @@
                     <li class="nav-item"><a class="nav-link" href="#page-top">Prescription Info</a></li>
                     <li class="nav-item"><a class="nav-link" href="map">Map</a></li>
                     <li class="nav-item"><a class="nav-link" href="quiz">Quiz</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="setupDemo()">Start Demo</a></li>
                 </ul>
             </div>
         </div>

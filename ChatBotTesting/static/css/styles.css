@@ -13228,6 +13228,10 @@ body {
   margin-bottom: 0;
 }
 
+#explanationText {
+  position: relative;
+}
+
 .explanation-box {
   margin: 0px;
   background-color: #333;
@@ -13911,10 +13915,10 @@ body {
   overflow: hidden;
   display: flex;
   padding: 20px;
-  background: linear-gradient(to right, var(--palette-purple-2), var(--palette-purple-3));
+  background: linear-gradient(to right, var(--palette-purple-3), var(--palette-purple-4));
   border: 2px solid #333;
   border-radius: 8px;
-  opacity: 0.7;
+  opacity: 1;
   transition: opacity 0.3s ease;
 }
 
@@ -13923,36 +13927,24 @@ body {
 .popup-container {
   display: none;
   position: fixed;
-  bottom: 20px;
+  bottom: -180px;
   left: 20px;
-  cursor: pointer;
   z-index: 3000;
   align-items: flex-end;
+  transition: transform 2s ease; 
+}
 
+.slide-in {
+  transform: translate(0px, -200px);
+}
 
-  /* display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  overflow: visible;
-
-  transform: translate(-50%, -50%);
-  padding: 20px;
-  z-index: 1000;
-
-  background-color: var(--bs-gray-300);
-  opacity: 0.8;
-  border-radius: 10px;
-
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none; */
+.slide-out {
+  transform: translate(0px, 200px);
 }
 
 .popup-container img {
-  width: 50px; /* Set the width of your bot icon */
-  height: 50px; /* Set the height of your bot icon */
+  width: 70px; /* Set the width of your bot icon */
+  height: 70px; /* Set the height of your bot icon */
   border-radius: 50%;
 }
 
@@ -13974,7 +13966,9 @@ body {
   padding: 20px;
   border-radius: 10px;
   margin-right: 20px; /* Adjust the distance between the bot and speech bubble */
-  margin-bottom:15px;
+  margin-bottom: 15px;
+  max-width: 300px;
+  height: auto;
 }
 
 .speech-bubble-tail {
@@ -14061,8 +14055,38 @@ body {
   padding-right: 20px;
 }
 
+.yes-button {
+  position: absolute;
+  bottom: 5px;
+  right: 35px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bolder;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  border-width: 1px;
+  opacity: 0.7;
+  margin-right: 3px;
+}
+
+.no-button {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: bolder;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-radius: 5px;
+  border-width: 1px;
+  opacity: 0.7;
+}
+
 /* Next button styles */
 .next-button {
+  display: none;
   position: absolute;
   bottom: 5px;
   right: 5px;
@@ -14077,7 +14101,7 @@ body {
   opacity: 0.7;
 }
 
-.next-button:hover {
+.next-button:hover .yes-button:hover .no-button:hover {
   opacity: 1;
 }
 
