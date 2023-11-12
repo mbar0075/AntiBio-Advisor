@@ -158,10 +158,19 @@ function setupDemo() {
     document.getElementById("yes-button").style.display = "none";
     document.getElementById("no-button").style.display = "none";
     document.getElementById("next-button").style.display = "block";
+    document.getElementById("close-button").style.display = "block";
     popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText)];
     positionPopup(currentReferencePopup);
     document.querySelector('.popup-container').classList.remove('slide-out'); // Remove slide-out class
     document.querySelector('.popup-container').classList.add('slide-in'); // Add slide-in class
+}
+
+function changeBotImage() {
+    if (document.getElementById("popup-container-bot-img").src.endsWith("/static/assets/img/demo-bot-talking.png")) {
+        document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-smile.png";
+    } else {
+        document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-talking.png";
+    }
 }
 
 function closeDemo() {

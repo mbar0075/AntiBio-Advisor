@@ -13961,12 +13961,13 @@ body {
 .speech-bubble {
   display: flex;
   position: relative;
-  background-color: var(--bs-purple); /* Speech bubble color */
+  background-color: var(--palette-purple-3);
   color: #fff;
   padding: 20px;
   border-radius: 10px;
   margin-right: 20px; /* Adjust the distance between the bot and speech bubble */
   margin-bottom: 15px;
+  margin-top: 15px;
   max-width: 300px;
   height: auto;
 }
@@ -13976,7 +13977,7 @@ body {
   bottom: -30px;
   left: 8px;
   width: 20px;
-  border-color: var(--bs-purple);
+  border-color: var(--palette-purple-3);
   border-width: 10px;
   border-style: solid;
   border-left: 20px solid transparent;
@@ -14036,6 +14037,31 @@ body {
 
 .close-icon:hover {
   color: var(--bs-white);
+}
+
+.close-icon-popup {
+  font-size: 20px;
+  color: var(--bs-white);
+  background-color: var(--palette-purple-3);
+  border: none;
+  font-weight: bold;
+  position: relative;
+  cursor: pointer;
+  font-size: 14px;
+  padding: 0;
+  display: block;
+  bottom: 15px;
+  left: 10px;
+}
+
+.close-icon-popup:hover {
+  color: var(--palette-purple-2);
+}
+
+.align-right {
+  display: flex !important;
+  justify-content: flex-end;
+  max-width: 320px; /* Adjust as needed */
 }
 
 /* Overlay for the confirmation dialog */
@@ -14103,6 +14129,7 @@ body {
 
 .next-button:hover .yes-button:hover .no-button:hover {
   opacity: 1;
+  color: var(--palette-purple-2);
 }
 
 .antibiotic-image-wrapper {
