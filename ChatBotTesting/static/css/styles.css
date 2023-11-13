@@ -14024,6 +14024,14 @@ body {
   font-weight: bold;
 }
 
+#confirmation-yes:hover #popup-button-image {
+  content: url("/static/assets/img/demo-bot-smile.png");
+}
+
+#confirmation-no:hover #popup-button-image {
+  content: url("/static/assets/img/demo-bot-talking.png");
+}
+
 .popup-image {
   max-width: 50px;
   height: auto;

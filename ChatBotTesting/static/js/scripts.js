@@ -173,11 +173,20 @@ function changeBotImage() {
     }
 }
 
-function changeButtonImage() {
+function changeConfirmationBotImage() {
     if (document.getElementById("popup-button-image").src.endsWith("/static/assets/img/demo-bot-talking.png")) {
         document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-smile.png";
     } else {
         document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-talking.png";
+    }
+}
+
+function changeButtonImage(newImageSrc) {
+    var image = document.getElementById("popup-button-image");
+    if (image.src.endsWith("/static/assets/img/demo-bot-talking.png")) {
+        image.src = newImageSrc;
+    } else {
+        image.src = "/static/assets/img/demo-bot-talking.png";
     }
 }
 

@@ -208,10 +208,12 @@
             </div>
             <img id="popup-button-image" class="popup-image"
                 src="{{ url_for('static', filename='assets/img/demo-bot-smile.png') }}" alt="Bot Icon"
-                onclick="changeButtonImage()">
+                onclick="changeConfirmationBotImage()">
             <p>Are you sure you want to clear the conversation?</p>
-            <button class="answer-button padding-button" onclick="clearChatHistory(bot_icon_src)">Yes</button>
-            <button class="answer-button padding-button" onclick="cancelClear()">No</button>
+            <button id="confirmation-yes" class="answer-button padding-button" onclick="clearChatHistory(bot_icon_src)"
+                onmouseover="changeButtonImage('/static/assets/img/demo-bot-talking.png')">Yes</button>
+            <button if="confirmation-no" class="answer-button padding-button" onclick="cancelClear()"
+                onmouseover="changeButtonImage('/static/assets/img/demo-bot-smile.png')">No</button>
         </div>
         <!-- Overlay for the confirmation dialog -->
         <div class="overlay"></div>
