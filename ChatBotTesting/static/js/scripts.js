@@ -173,6 +173,14 @@ function changeBotImage() {
     }
 }
 
+function changeButtonImage() {
+    if (document.getElementById("popup-button-image").src.endsWith("/static/assets/img/demo-bot-talking.png")) {
+        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-smile.png";
+    } else {
+        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-talking.png";
+    }
+}
+
 function closeDemo() {
     const visiblePopup = document.getElementById("popup-container");
     document.getElementById("speech-bubble").style.display = "none";
@@ -188,14 +196,14 @@ function positionPopup(referenceID) {
     visiblePopup.innerText = popupText;
 
     var id = document.getElementById(referenceID);
-    
+
     if (id) {
         id.scrollIntoView({ behavior: 'smooth', block: 'start' });
         id.style.zIndex = 1000;
         id.style.pointerEvents = 'none';
     }
 }
-  
+
 
 // Function to close current popup and display the next one
 function nextPopup() {
@@ -204,7 +212,7 @@ function nextPopup() {
     } else {
         document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-talking.png";
     }
-     
+
     if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
         document.getElementById(currentReferencePopup).style.zIndex = 0;
         document.getElementById(currentReferencePopup).style.pointerEvents = "auto";

@@ -13336,11 +13336,11 @@ body {
   margin: 15px;
   padding: 10px;
   /* background-color: var(--palette-purple-3); */
-  
+
   width: 700px;
 }
 
-#antibiotic-button-name{
+#antibiotic-button-name {
   display: none;
 }
 
@@ -13710,7 +13710,7 @@ body {
   width: 200px;
 }
 
-.customized-scroll-bar{
+.customized-scroll-bar {
   display: block;
   width: 1px;
   overflow: auto;
@@ -13730,7 +13730,8 @@ body {
 /* Specify the color for the scrollbar track */
 .customized-scroll-bar::-webkit-scrollbar-track {
   background-color: var(--palette-purple-5);
-  border-radius: 0 0 10px 10px; /* Border-radius only at the bottom */
+  border-radius: 0 0 10px 10px;
+  /* Border-radius only at the bottom */
 }
 
 /* Custom select box on hover */
@@ -13862,7 +13863,8 @@ body {
   align-items: center;
   flex-direction: row;
   justify-content: center;
-  gap: 1rem; /* Adjust the value as needed */
+  gap: 1rem;
+  /* Adjust the value as needed */
 }
 
 /* Width of the scrollbar */
@@ -13931,7 +13933,7 @@ body {
   left: 20px;
   z-index: 3000;
   align-items: flex-end;
-  transition: transform 2s ease; 
+  transition: transform 2s ease;
 }
 
 .slide-in {
@@ -13943,8 +13945,10 @@ body {
 }
 
 .popup-container img {
-  width: 70px; /* Set the width of your bot icon */
-  height: 70px; /* Set the height of your bot icon */
+  width: 70px;
+  /* Set the width of your bot icon */
+  height: 70px;
+  /* Set the height of your bot icon */
   border-radius: 50%;
 }
 
@@ -13965,7 +13969,8 @@ body {
   color: #fff;
   padding: 20px;
   border-radius: 10px;
-  margin-right: 20px; /* Adjust the distance between the bot and speech bubble */
+  margin-right: 20px;
+  /* Adjust the distance between the bot and speech bubble */
   margin-bottom: 15px;
   margin-top: 15px;
   max-width: 300px;
@@ -13983,7 +13988,7 @@ body {
   border-left: 20px solid transparent;
   border-right: 20px solid transparent;
   border-bottom: 20px solid transparent;
-  cursor:pointer;
+  cursor: pointer;
 }
 
 .popup-container .show {
@@ -14017,6 +14022,11 @@ body {
   width: auto;
   text-align: center;
   font-weight: bold;
+}
+
+.popup-image {
+  max-width: 50px;
+  height: auto;
 }
 
 .dialog-header {
@@ -14061,7 +14071,8 @@ body {
 .align-right {
   display: flex !important;
   justify-content: flex-end;
-  max-width: 320px; /* Adjust as needed */
+  max-width: 320px;
+  /* Adjust as needed */
 }
 
 /* Overlay for the confirmation dialog */
@@ -14258,7 +14269,7 @@ body {
     max-width: 90%;
   }
 
-  .popupContainer{
+  .popupContainer {
     margin: 0%;
     max-width: 90%;
   }
@@ -14285,7 +14296,7 @@ body {
   }
 
   .carousel-item {
-    height:min-content;
+    height: min-content;
   }
 
   .carousel-item img {
@@ -14399,8 +14410,12 @@ body {
     opacity: 1;
   }
 
-  .horizontal-content-prescription{
+  .horizontal-content-prescription {
     font-size: 0.7em;
     gap: 0.7em;
+  }
+
+  .confirmation-dialog {
+    width: 100%;
   }
 }
