@@ -13582,6 +13582,16 @@ body {
   flex-direction: column;
 }
 
+.result-image {
+  width: 70px;
+  height:auto;
+}
+
+.result-text {
+  font-weight: bolder;
+  font-size: 1em;
+}
+
 .answer-button {
   border-radius: 10px;
   color: var(--bs-white);
@@ -13865,6 +13875,14 @@ body {
   justify-content: center;
   gap: 1rem;
   /* Adjust the value as needed */
+}
+
+.horizontal-content-quiz {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: left;
+  gap: 10px;
 }
 
 /* Width of the scrollbar */
@@ -14184,7 +14202,6 @@ body {
     font-style: bold;
   }
 
-  /* HOME */
   .description-text-container {
     display: flex;
     align-items: center;
@@ -14287,7 +14304,6 @@ body {
     max-width: 90%;
   }
 
-  /* LEARN MORE */
   .about-section {
     padding-top: 0%;
   }
@@ -14328,20 +14344,16 @@ body {
     font-size: 0.8rem;
   }
 
-  /* FAQs */
   #faq-container>*:not(.sub-heading) {
     width: 90%;
-    /* determine proper height */
     font-size: 0.8rem;
   }
 
-  /* MAP */
   #map {
     width: 90%;
     height: 50vh;
   }
 
-  /* QUIZ */
   #quiz-container {
     width: 90%;
   }
@@ -14425,5 +14437,15 @@ body {
 
   .confirmation-dialog {
     width: 100%;
+  }
+
+  .result-image {
+    width: 50px;
+    height:auto;
+  }
+  
+  .result-text {
+    font-weight: bolder;
+    font-size: 0.7em;
   }
 }

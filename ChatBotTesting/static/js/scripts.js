@@ -173,14 +173,6 @@ function changeBotImage() {
     }
 }
 
-function changeConfirmationBotImage() {
-    if (document.getElementById("popup-button-image").src.endsWith("/static/assets/img/demo-bot-talking.png")) {
-        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-smile.png";
-    } else {
-        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-talking.png";
-    }
-}
-
 function changeButtonImage(newImageSrc) {
     var image = document.getElementById("popup-button-image");
     if (image.src.endsWith("/static/assets/img/demo-bot-talking.png")) {
@@ -197,6 +189,34 @@ function closeDemo() {
     visiblePopup.classList.remove('slide-in');
     visiblePopup.classList.add('slide-out');
     document.querySelector('.overlay').style.display = 'none';
+
+    fixzIndexes();
+}
+
+function fixzIndexes() {
+    // Fixing the z-indexes of the elements, doing it for homePopupReferenceList, prescriptionInfoReferenceList, mapPopupReferenceList
+    if (window.location.pathname == "/"){
+        for (var i = 0; i < homePopupReferenceList.length; i++) {
+            document.getElementById(homePopupReferenceList[i]).style.zIndex = 0;
+            document.getElementById(homePopupReferenceList[i]).style.pointerEvents = "auto";
+        }
+    }
+    else if (window.location.pathname == "/prescriptionInfo"){
+        for (var i = 0; i < prescriptionInfoReferenceList.length; i++) {
+            document.getElementById(prescriptionInfoReferenceList[i]).style.zIndex = 0;
+            document.getElementById(prescriptionInfoReferenceList[i]).style.pointerEvents = "auto";
+        }
+        // For antibiotic dropdown
+        if (document.getElementById("antibiotic-box-dropdown")!=null) {
+            document.getElementById("antibiotic-box-dropdown").style.zIndex = 5;
+        }
+    }
+    else if (window.location.pathname == "/map"){
+        for (var i = 0; i < mapPopupReferenceList.length; i++) {
+            document.getElementById(mapPopupReferenceList[i]).style.zIndex = 0;
+            document.getElementById(mapPopupReferenceList[i]).style.pointerEvents = "auto";
+        }
+    }
 }
 
 // Function to position the popup based on window size 
@@ -211,8 +231,7 @@ function positionPopup(referenceID) {
         id.style.zIndex = 1000;
         id.style.pointerEvents = 'none';
     }
-}
-
+} 
 
 // Function to close current popup and display the next one
 function nextPopup() {
@@ -1035,6 +1054,15 @@ function submitQuizResults(button) {
     document.querySelector('.confirmation-dialog').style.display = 'block';
     document.querySelector('.overlay').style.display = 'block';
 
+    // Change the popup button image based on the quiz result
+    if (correctAnswersCounter == 0) {
+        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-sad.png";
+    }
+    else if (correctAnswersCounter ==4) {
+        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-talking.png";
+    } else {
+        document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-smile.png";
+    }
 
     // Call a function for each quiz item to display whether it is correct or not
     document.querySelectorAll('.quiz-item').forEach((item, index) => {
@@ -1042,7 +1070,6 @@ function submitQuizResults(button) {
     });
 }
 
-// Function to display whether a quiz item is correct or not
 function displayResult(item, questionNumber) {
     const userAnswer = selectedAnswers[questionNumber];
     const correctAnswer = item.querySelector('.user-answer p').textContent.split(': ')[1].trim();
@@ -1056,17 +1083,39 @@ function displayResult(item, questionNumber) {
         resultElement.classList.add('result');
     }
 
+    resultElement.classList.add('horizontal-content-quiz');
+
+    // Create an image element
+    const image = document.createElement("img");
+    image.classList.add("result-image");
+
     if (userAnswer === correctAnswer) {
-        resultElement.textContent = 'Correct!';
-        resultElement.style.color = 'green';
+        // Set attributes for the image element for correct answer
+        image.src = "/static/assets/img/correct.png";
+        resultElement.style.color = '#299B31';
     } else {
-        resultElement.textContent = 'Incorrect. Correct answer: ' + correctAnswer;
-        resultElement.style.color = "#bf0000";
+        // Set attributes for the image element for incorrect answer
+        image.src = "/static/assets/img/incorrect.png";
+        resultElement.style.color = "#C90F09";
     }
+
+    // Create a separate element for text content
+    const textElement = document.createElement('div');
+    textElement.classList.add('result-text');
+    // Set text content for the result element
+    textElement.textContent = (userAnswer === correctAnswer) ? ' Correct!' : ' Incorrect! The Correct answer was: ' + correctAnswer;
+
+    // Append the image and text elements to the result element
+    resultElement.appendChild(image);
+    resultElement.appendChild(textElement);
+
+    console.log(image);
 
     // Append the result element to the quiz item
     item.appendChild(resultElement);
 }
+
+
 
 document.addEventListener('DOMContentLoaded', function () {
     var defaultOption = document.getElementById('antibiotic-button-name');
@@ -1078,3 +1127,4 @@ document.addEventListener('DOMContentLoaded', function () {
 // Window onload functions
 window.onload = loadFAQFromCSV();
 window.onload = loadQuizFromJSON();
+window.onload = fixzIndexes();
