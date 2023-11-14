@@ -175,10 +175,10 @@ function changeBotImage() {
 
 function changeButtonImage(newImageSrc) {
     var image = document.getElementById("popup-button-image");
-    if (image.src.endsWith("/static/assets/img/demo-bot-talking.png")) {
+    if (image.src.endsWith("/static/assets/img/demo-bot-smile.png")) {
         image.src = newImageSrc;
     } else {
-        image.src = "/static/assets/img/demo-bot-talking.png";
+        image.src = "/static/assets/img/demo-bot-smile.png";
     }
 }
 
