@@ -10,6 +10,8 @@ import openai
 import pytesseract
 from PIL import Image
 
+import socket
+
 app = Flask(__name__)
 
 # Setting the OpenAI API key
@@ -118,4 +120,5 @@ def updateCompletedList():
     return jsonify({'message': demoCompletedList})
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    # app.run(debug=True, host=socket.gethostbyname(socket.gethostname()))
+        app.run(debug=True, host="0.0.0.0")

@@ -195,25 +195,25 @@ function closeDemo() {
 
 function fixzIndexes() {
     // Fixing the z-indexes of the elements, doing it for homePopupReferenceList, prescriptionInfoReferenceList, mapPopupReferenceList
-    if (window.location.pathname == "/"){
+    if (window.location.pathname == "/") {
         for (var i = 0; i < homePopupReferenceList.length; i++) {
-            document.getElementById(homePopupReferenceList[i]).style.zIndex = 0;
+            document.getElementById(homePopupReferenceList[i]).style.removeProperty("z-index");
             document.getElementById(homePopupReferenceList[i]).style.pointerEvents = "auto";
         }
     }
-    else if (window.location.pathname == "/prescriptionInfo"){
+    else if (window.location.pathname == "/prescriptionInfo") {
         for (var i = 0; i < prescriptionInfoReferenceList.length; i++) {
-            document.getElementById(prescriptionInfoReferenceList[i]).style.zIndex = 0;
+            document.getElementById(prescriptionInfoReferenceList[i]).style.removeProperty("z-index");
             document.getElementById(prescriptionInfoReferenceList[i]).style.pointerEvents = "auto";
         }
         // For antibiotic dropdown
-        if (document.getElementById("antibiotic-box-dropdown")!=null) {
+        if (document.getElementById("antibiotic-box-dropdown") != null) {
             document.getElementById("antibiotic-box-dropdown").style.zIndex = 5;
         }
     }
-    else if (window.location.pathname == "/map"){
+    else if (window.location.pathname == "/map") {
         for (var i = 0; i < mapPopupReferenceList.length; i++) {
-            document.getElementById(mapPopupReferenceList[i]).style.zIndex = 0;
+            document.getElementById(mapPopupReferenceList[i]).style.removeProperty("z-index");
             document.getElementById(mapPopupReferenceList[i]).style.pointerEvents = "auto";
         }
     }
@@ -231,7 +231,7 @@ function positionPopup(referenceID) {
         id.style.zIndex = 1000;
         id.style.pointerEvents = 'none';
     }
-} 
+}
 
 // Function to close current popup and display the next one
 function nextPopup() {
@@ -1058,7 +1058,7 @@ function submitQuizResults(button) {
     if (correctAnswersCounter == 0) {
         document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-sad.png";
     }
-    else if (correctAnswersCounter ==4) {
+    else if (correctAnswersCounter == 4) {
         document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-talking.png";
     } else {
         document.getElementById("popup-button-image").src = "/static/assets/img/demo-bot-smile.png";
