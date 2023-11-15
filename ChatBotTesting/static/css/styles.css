@@ -6786,7 +6786,6 @@ fieldset:disabled .btn {
   border-radius: 10px;
   width: 100%;
   height: 30em;
-  overflow: hidden;
 }
 
 .carousel-inner::after {
@@ -13584,7 +13583,7 @@ body {
 
 .result-image {
   width: 70px;
-  height:auto;
+  height: auto;
 }
 
 .result-text {
@@ -14336,6 +14335,11 @@ body {
     border-radius: 10px;
   }
 
+  .carousel-control-next,
+  .carousel-control-prev {
+    display: none;
+  }
+
   .outer-paragraph-container {
     align-self: center;
     width: 100%;
@@ -14453,9 +14457,9 @@ body {
 
   .result-image {
     width: 50px;
-    height:auto;
+    height: auto;
   }
-  
+
   .result-text {
     font-weight: bolder;
     font-size: 0.7em;

@@ -254,13 +254,6 @@ function nextPopup() {
     }
 }
 
-// Code to resise/reposition the popup when the window is resized
-window.addEventListener('resize', function () {
-    if (popupTextList[window.location.pathname].indexOf(popupText) != popupTextList[window.location.pathname].length - 1) {
-        positionPopup(currentReferencePopup);
-    }
-});
-
 /* Home Javascript - Used by home webpage */
 // Function to highlight at least one choice selection from the home page explenations
 function highlightText(id) {
