@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <title>Antibio Advisor</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Antibio Advisor</title>
+    <link rel="icon" type="image/x-icon" href="{{ url_for('static', filename='assets/favicon.ico') }}" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/styles.css') }}">
+    <script src="{{ url_for('static', filename='js/scripts.js') }}"></script>
+    <!-- Map -->
+    <script
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDbHvhyPYuKWnF3VXczZVfeM0G_Wyo8IWM&libraries=places&callback=initMap"
+        async defer>
+        </script>
+    <script src="https://cdn.rawgit.com/naptha/tesseract.js/1.0.10/dist/tesseract.js"></script>
+    <script src="https://apis.google.com/js/api.js"></script>
+</head>
+
+<body id="page-top">
+    <script>
+        var user_icon_src = "{{ user_icon }}";
+        var bot_icon_src = "{{ bot_icon }}";
+        var demoCompletedList = "{{ demoCompletedList }}"
+        window.addEventListener('load', function () {
+            startDemo(demoCompletedList.replace(/&#34;/g, '"'));
+        });
+    </script>
+
+    <div id="popup-container" class="popup-container">
+        <div id="speech-bubble" class="speech-bubble">
+            <div class="speech-bubble-tail"></div>
+            <div class="speech-bubble-content">
+                <div id="close-button" class="align-right"><button class="close-icon-popup"
+                        onclick="closeDemo()">X</button></div>
+                <p id="popup-text">Would you like a demo of this page?</p>
+                <button id="yes-button" class="yes-button" onclick='setupDemo(demoCompletedList)'>Yes</button>
+                <button id="no-button" class="no-button" onclick="closeDemo()">No</button>
+                <button id="next-button" class="next-button" onclick="nextPopup()">Next</button>
+            </div>
+        </div>
+        <div class="popup-container-bot">
+            <img id="popup-container-bot-img" class="ChatItem-avatarImage popup-container-image"
+                src="{{ url_for('static', filename='assets/img/demo-bot-smile.png') }}" alt="Bot Icon"
+                onclick="changeBotImage()">
+        </div>
+    </div>
+
+    <!-- Navigation-->
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container px-4 px-lg-5">
+            <a class="navbar-brand" href="/"><img src="{{ url_for('static', filename='assets/img/icons.gif') }}"
+                    width="70" height="70" alt="Home"></a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="#page-top">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="info">Learn More</a></li>
+                    <li class="nav-item"><a class="nav-link" href="faq">FAQs</a></li>
+                    <li class="nav-item"><a class="nav-link" href="prescriptionInfo">Prescription Info</a></li>
+                    <li class="nav-item"><a class="nav-link" href="map">Map</a></li>
+                    <li class="nav-item"><a class="nav-link" href="quiz">Quiz</a></li>
+                    <li class="nav-item"><a class="nav-link" onclick="setupDemo()">Start Demo</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Masthead-->
+    <header class="masthead">
+        <div class="container px-4 px-lg-5 d-flex h-100 align-items-center justify-content-center">
+            <div class="d-flex justify-content-center">
+                <div class="text-center">
+                    <h1 class="mx-auto my-0 text-uppercase animated-text-masthead">Antibio Advisor</h1>
+                    <h2 class="text-white-50 mx-auto mt-2 mb-5 animated-text-info">An intelligent interface project
+                        targeted towards
+                        educating people of different ages about when and why to use antibiotic medication.</h2>
+                    <a class="btn btn-primary animated-text-button chat-button" href="#chatBot">Lets Chat!</a>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="bg-purple py-4">
+        <div class="description-text-container">
+            <div class="description-text-container-inner selected" id="text1" onmouseover="highlightText('text1')">
+                <h2 class="description-text-heading">In English</h2>
+                <p>This website depicts an academic research project aimed towards reducing misinformation with regards
+                    to antibiotics and their use.
+                    In light of this this webpage only serves as a proof of concept thus, the implementation has been
+                    carried out in
+                    english given that english is Malta's second language and the main target audience is people aged 18
+                    or over.</p>
+
+                <p class="description-text-disclaimer">Disclaimer: The information provided to the user throughout the
+                    website although factual and correct, does not substite the medical opinion of a professional
+                    doctor.
+                    Please seek medical advice from trained individuals before attempting anything suggested in the
+                    website. </p>
+            </div>
+
+            <div class="description-text-container-inner" id="text2" onmouseover="highlightText('text2')">
+                <h2 class="description-text-heading">Bil-Malti</h2>
+                <p>Din il-websajt inħadmet għal xogħol akkademiku bl-iskop li titnaqqas il-firxa ta misinformazzjoni
+                    rigward l-antibijotiċi.
+                    Minħabba dan l-aspett il-websajt ġiet maħduma b'lingwa Ingliża kemm għal fatt li l-lingwa sekondarja
+                    ta' Malta hija l-Ingliz u
+                    kemm ħabba li l-grupp prinċipali ta' dan l-istudju huma nies ta' tmintax-il sena jew ikbar.</p>
+
+                <p class="description-text-disclaimer">Ċaħda ta' responsabbiltà: L-informazzjoni pprovduta lill-utent
+                    matul il-websajt għalkemm fattwali u korretta, ma tissostitwixxix l-opinjoni medika ta 'tabib
+                    professjonali.
+                    Jekk jogħġbok fittex parir mediku minn individwi mħarrġa qabel ma tipprova xi ħaġa ssuġġerita
+                    fil-websajt.</p>
+            </div>
+        </div>
+    </section>
+    <!-- Chat-Bot Text Box Section -->
+    <section class="chat-section bg-purple py-4" id="chatBot">
+        <div class="text-center header-container">
+            <h1 class="animated-text sub-title">Let's have a Chat!</h1>
+            <img id="chatIcon" src="{{ url_for('static', filename='assets/img/chat-icon-rotation.gif') }}"
+                alt="Chat Icon">
+        </div>
+        <div id="chatContainer">
+            <div id="chatBox">
+                <!-- Initial ChatBot Message -->
+                <div class="ChatItem ChatItem--customer">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                            <img class="ChatItem-avatarImage"
+                                src="{{ url_for('static', filename='assets/img/bot-icon.png') }}" alt="Bot Icon">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatItem-chatText">
+                            Hey there 👋, you can call me MediBot. How can I assist you today?
+                            <button id="speakerIcon" class="readMessage" onclick="readMessage(this)"
+                                oncontextmenu="showVolumeSlider(event)">
+                                <img src="../static/assets/img/testingSpeaker3.png" alt="Speaker Icon">
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ChatItem ChatItem--expert temporaryChoices">
+                    <div class="ChatItem-meta">
+                        <div class="ChatItem-avatar">
+                            <img class="ChatItem-avatarImage" src="{{ user_icon }}">
+                        </div>
+                    </div>
+                    <div class="ChatItem-chatContent">
+                        <div class="ChatSelection ChatItem-chatText"
+                            onclick="selectChoice('Hello, I would like to learn about AntiBiotics.')">
+                            Hello, I would like to learn about AntiBiotics.
+                        </div>
+                        <div class="ChatSelection ChatItem-chatText"
+                            onclick="selectChoice('When are antibiotics needed?')">
+                            When are antibiotics needed?
+                        </div>
+                        <div id="example-message" class="ChatSelection ChatItem-chatText"
+                            onclick="selectChoice('Can you better explain to me what Anti-Microbial Resistance means?')">
+                            Can you better explain to me what Anti-Microbial Resistance means?
+                        </div>
+                        <div class="ChatSelection ChatItem-chatText"
+                            onclick="selectChoice('What types of antibiotics are safe to give my child if prescribed by a doctor?')">
+                            Which antibiotics, when prescribed by a doctor, are safe to administer to my child?
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="chatContainerInput">
+                <input type="text" id="userInput" placeholder="Type your questions here"
+                    onkeydown="handleKeyPress(event)">
+                <button class="chatBotButton" id="chatBotSendButton"
+                    onclick="sendMessage(user_icon_src, bot_icon_src)">Send</button>
+                <button class="chatBotButton" id="chatBotClearButton" onclick="confirmClear()">Clear</button>
+                <button id="toggleSpeechRecognition" onmousedown="startSpeechToText()" onmouseup="stopSpeechToText()"
+                    ontouchstart="startSpeechToText()" ontouchend="stopSpeechToText()">
+                    <img id="recognitionIcon" src="../static/assets/img/microphone.png" alt="Recognition Icon">
+                </button>
+                <button id="speak" onclick="speak()" oncontextmenu="showVolumeSlider(event)">
+                    <img src="../static/assets/img/testingSpeaker.png" alt="Speaker Icon">
+                </button>
+                <input type="range" id="chatVolumeSlider" min="0" max="1" step="0.1" value="0.5">
+            </div>
+        </div>
+        <!-- Confirmation dialog -->
+        <div class="confirmation-dialog popupContainer">
+            <div class="dialog-header">
+                <!-- Close icon (you can replace 'X' with your preferred close icon) -->
+                <span class="close-icon" onclick="cancelClear()">X</span>
+            </div>
+            <img id="popup-button-image" class="popup-image"
+                src="{{ url_for('static', filename='assets/img/demo-bot-talking.png') }}" alt="Bot Icon"
+                onclick="changeConfirmationBotImage()">
+            <p>Are you sure you want to clear the conversation?</p>
+            <button id="confirmation-yes" class="answer-button padding-button" onclick="clearChatHistory(bot_icon_src)"
+                onmouseover="changeButtonImage('/static/assets/img/demo-bot-smile.png')">Yes</button>
+            <button if="confirmation-no" class="answer-button padding-button" onclick="cancelClear()"
+                onmouseover="changeButtonImage('/static/assets/img/demo-bot-talking.png')">No</button>
+        </div>
+        <!-- Overlay for the confirmation dialog -->
+        <div class="overlay"></div>
+    </section>
+
+    <!-- Footer-->
+    <footer class="footer small text-center text-white-50">
+        <div class="">
+            <div class="container px-4 px-lg-5">Copyright &copy; Antibio Advisor 2023 </div>
+            <div class="container px-4 px-lg-5">Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat </div>
+            <div class="container px-4 px-lg-5"></div>This project was developed under supervision of Dr Vanessa
+            Camilleri
+            and
+            Mr Gavin Schranz at the University of Malta.
+        </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <!-- <script src="js/scripts.js"></script> -->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <!-- * *                               SB Forms JS                               * *-->
+    <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+    <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+    <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>
