@@ -14196,6 +14196,286 @@ body {
   margin-right: auto;
 }
 
+@media (max-width: 900px) and (min-width: 768px) {
+  .masthead {
+    padding-top: 15rem;
+    padding-bottom: 0%;
+  }
+
+  .masthead h1 {
+    font-size: 3rem;
+    font-style: bold;
+  }
+
+  .description-text-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+  }
+
+  .description-text-container-inner {
+    width: 95%;
+  }
+
+  .description-text-heading {
+    font-size: 1.5rem;
+  }
+
+  .description-text-container {
+    font-size: 1rem;
+  }
+
+  .sub-title,
+  .sub-heading {
+    font-size: 2rem;
+  }
+
+  .ChatItem-chatText {
+    font-size: 1rem;
+  }
+
+  .readMessage {
+    margin-left: 90%;
+  }
+
+  .readMessage>img {
+    width: 1rem;
+    height: 1rem;
+  }
+
+  #chatIcon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  #chatContainer {
+    width: 90%;
+    max-width: 100vw;
+  }
+
+  #chatBox {
+    height: 40vh;
+    border: 3px solid var(--bs-white);
+  }
+
+  #chatContainerInput {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    margin-top: 10px;
+    padding-left: 5px;
+    padding-right: 5px;
+  }
+
+  #chatContainerInput>*:not(.chatBotButton) {
+    margin-bottom: 8px;
+    margin-top: 8px;
+    margin-right: 0px;
+  }
+
+  #chatContainerInput>.chatBotButton {
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+
+  .chatBotButton {
+    width: 15%;
+  }
+
+  #userInput {
+    width: 100%;
+    margin: 0%;
+  }
+
+  #chatVolumeSlider {
+    width: 40%
+  }
+
+  .quiz-item {
+    margin: 0%;
+    max-width: 90%;
+  }
+
+  .popupContainer {
+    margin: 0%;
+    max-width: 50%;
+  }
+
+  .prescription-explanation-background {
+    margin: 0%;
+    max-width: 90%;
+  }
+
+  .about-section {
+    padding-top: 0%;
+  }
+
+  #info-video {
+    width: auto;
+    height: 40%;
+  }
+
+  /* .carousel-control-prev-icon,
+  .carousel-control-next-icon {
+    width: 2rem;
+    height: 2rem;
+  }*/
+
+  .carousel-item {
+    height: 100%;
+  }
+
+  .carousel-item img {
+    width: 100%;
+    border-radius: 10px;
+  } 
+
+  /* .carousel-control-next,
+  .carousel-control-prev {
+    display: none;
+  }*/
+
+  .outer-paragraph-container {
+    /* height: 100%;*/
+    align-self: center;
+    /*width: 100%;
+    height: min-content; */
+    height: 18rem;
+  }
+
+  .carousel-item-img-container {
+    /* width: 100%; */
+    height: 18rem;
+    /* background: linear-gradient(to right, var(--palette-purple-3), var(--palette-purple-4));
+    border: 2px solid #333;
+    border-radius: 8px;
+    opacity: 1; */
+  }
+
+  .custom-paragraph-container {
+    display: flex;
+    flex-direction: column;
+    overflow-y: visible;
+  }
+
+  .custom-paragraph {
+    font-size: 1rem;
+  } 
+
+  #faq-container>*:not(.sub-heading) {
+    width: 90%;
+    font-size: 1rem;
+  }
+
+  #map {
+    width: 97%;
+    height: 50vh;
+  }
+
+  #quiz-container {
+    width: 100%;
+  }
+
+  #quiz-container>* {
+    width: 100%;
+    margin-bottom: 5vh;
+  }
+
+  .quiz-item {
+    padding-bottom: 10px;
+  }
+
+  .popupContainer {
+    padding-bottom: 10px;
+  }
+
+  .prescription-explanation-background {
+    padding-bottom: 10px;
+  }
+
+  .quiz-button-container {
+    display: flex;
+  }
+
+  .question,
+  .answer-button,
+  .user-answer {
+    font-size: 1rem;
+  }
+
+  .faq-item {
+    width: auto;
+    height: 60px;
+  }
+
+  .expanded {
+    height: 160px;
+  }
+
+  .antibiotic-image {
+    width: 70%;
+  }
+
+  .footer {
+    font-size: 0.5rem;
+  }
+
+  .option {
+    font-size: 1rem !important;
+  }
+
+  .custom-select .select-box {
+    width: 180px;
+  }
+
+  .custom-select .options {
+    width: 160px;
+    left: calc(50% - 80px);
+  }
+
+  .antibiotic-image-wrapper {
+    width: 50%;
+  }
+
+  .horizontal-content {
+    gap: 20px;
+  }
+
+  .horizontal-content-learn-more {
+    gap: 0px;
+  }
+
+  .about-section {
+    padding-bottom: 0rem;
+  }
+
+  .description-text-container-inner {
+    opacity: 1;
+  }
+
+  .horizontal-content-prescription {
+    font-size: 1em;
+    gap: 0.7em;
+  }
+
+  .confirmation-dialog {
+    width: 100%;
+  }
+
+  .result-image {
+    width: 50px;
+    height: auto;
+  }
+
+  .result-text {
+    font-weight: bolder;
+    font-size: 0.7em;
+  }
+}
+
 /* Mobile-specific styles using a media query */
 @media (max-width: 767px) {
 
@@ -14303,7 +14583,7 @@ body {
 
   .popupContainer {
     margin: 0%;
-    max-width: 90%;
+    width: 50%;
   }
 
   .prescription-explanation-background {
