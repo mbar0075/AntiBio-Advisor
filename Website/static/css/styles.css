@@ -13520,6 +13520,7 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  width: 100%;
 }
 
 .faq-item {
@@ -14331,7 +14332,7 @@ body {
   .carousel-item img {
     width: 100%;
     border-radius: 10px;
-  } 
+  }
 
   /* .carousel-control-next,
   .carousel-control-prev {
@@ -14363,7 +14364,7 @@ body {
 
   .custom-paragraph {
     font-size: 1rem;
-  } 
+  }
 
   #faq-container>*:not(.sub-heading) {
     width: 90%;
