@@ -3,23 +3,26 @@ An intelligent interface project targeted towards educating people of different 
 
 This will be done by educating users through the use of a simple to use chat-bot which will answer varied questions relating to antibiotics and its use.
 
+
+https://github.com/mbar0075/AntiBio-Advisor/assets/103250564/2c108b3f-d468-40dc-aa58-7efefce3ce30
+
+
+
 ## Table of Contents
-- [AntiBio-Advisor](#antibio-advisor)
-  - [Table of Contents](#table-of-contents)
-  - [Motivation](#motivation)
-  - [Proposed Solution](#proposed-solution)
-  - [Chatbot](#chatbot)
-  - [FAQ](#faq)
-  - [Prescription Info](#prescription-info)
-  - [Map](#map)
-  - [Learn More](#learn-more)
-  - [Quiz](#quiz)
-  - [Ethical Considerations](#ethical-considerations)
-  - [Mobile Functionality](#mobile-functionality)
-  - [Interactable Design](#interactable-design)
-  - [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
-  - [Libraries used](#libraries-used)
-  - [License](#license)
+- [Motivation](#motivation)
+- [Proposed Solution](#proposed-solution)
+- [Chatbot](#chatbot)
+- [FAQ](#faq)
+- [Prescription Info](#prescription-info)
+- [Map](#map)
+- [Learn More](#learn-more)
+- [Quiz](#quiz)
+- [Ethical Considerations](#ethical-considerations)
+- [Mobile Functionality](#mobile-functionality)
+- [Interactable Design](#interactable-design)
+- [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
+- [Libraries used](#libraries-used)
+- [License](#license)
 
 ## Motivation
 Antibiotic overuse breeds treatment resistance. This is a global problem that is rapidly increasing and threatens our ability to treat common infectious diseases. 
@@ -44,7 +47,7 @@ The web app features mentioned above needed to be implemented in such a manner t
 
 
 ## Chatbot
-<img src="Assets/chatbot.png" alt="Chatbot"/>
+<center><img src="Assets/chatbot.png" alt="Chatbot"/></center>
 
 As outlined above the chatbot has a myriad of different features ranging from:
 * Set of **initial prompts** aimed at providing the user with a possible conversation starter.
@@ -68,17 +71,17 @@ These dropdowns when appropriately selected provide the user with explanations r
 The dropdowns in addition to a sample explanation can be seen in the current slide.
 
 
-<img src="Assets/prescription.png" alt="Prescription Info"/>
+<center><img src="Assets/prescription.png" alt="Prescription Info"/></center>
 
 ## Map
 The map was designed to showcase the users nearest pharmacies and general practitioners, this was carried out to provide the user with all the required information they might require to purchase, enquire or return unused antibiotics. In the map the blue markers represent general practitioners and the red markers represent pharmacies.
 
-<img src="Assets/map.png" alt="Map"/>
+<center><img src="Assets/map.png" alt="Map"/></center>
 
 ## Learn More
 The Learn More page similar to the FAQ page provides the user with a further degree of general information on the topic of AMR in contrast to the specific information presented in the FAQ page.
 
-<img src="Assets/learnMore5.jpg" alt="Learn More"/>
+<center><img src="Assets/learnMore5.jpg" alt="Learn More"/></center>
 
 This page contains an informative video alongside an interactive carousel composed of several infographics and informative paragraphs. This can be seen in the current slide.
 
@@ -95,14 +98,14 @@ The website is not intended to replace medical advice, and the chatbot is not a 
 
 Moreover, **no user data is stored or kept**, ensuring that no chatbot history or personal information is stored on the platform or any cloud storage system. 
 
-<img src="Assets/ethical_considerations.png" alt="Ethical Considerations"/>
+<center><img src="Assets/ethical_considerations.png" alt="Ethical Considerations"/></center>
 
 
 ## Mobile Functionality
 The web app is designed to be used on a variety of different devices ranging from mobile phones to tablets and computers. This is achieved through the use of a dynamic page size which adapts to the screen size of the device being used. This ensures that the web app is usable on a variety of different devices and maintains the ease of use of the web app.
 
 
-<img src="Assets/optimised_design.png" alt="Mobile Design"/>
+<center><img src="Assets/optimised_design.png" alt="Mobile Design"/></center>
 
 ## Interactable Design
 The web app offers feedback to the user in the form of different bot expressions. This is achieved through the use of different images which are displayed depending on the current state of the demo bot.
@@ -127,7 +130,7 @@ The design of the web app was a long and arduous process which required a lot of
 2. **Computer Prototyping** - This stage involved the creation of a computer prototype which was used to gather feedback in the form of recommendations and improvements. This feedback was then used to improve the design of the web app. Additionally, in this stage improvements from the previous stage were implemented into the design.
 3. **Final Design** - This stage involved the creation of the final design which utilised the feedback gathered from the previous stages to create a final design which was then implemented into the web app.
    
-<img src="Assets/design.png" alt="Design"/>
+<center><img src="Assets/design.png" alt="Design"/></center>
 
 ## Libraries used
 The following libraries were used in the development of the web app:
