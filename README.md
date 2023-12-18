@@ -9,20 +9,22 @@ https://github.com/mbar0075/AntiBio-Advisor/assets/103250564/2c108b3f-d468-40dc-
 
 
 ## Table of Contents
-- [Motivation](#motivation)
-- [Proposed Solution](#proposed-solution)
-- [Chatbot](#chatbot)
-- [FAQ](#faq)
-- [Prescription Info](#prescription-info)
-- [Map](#map)
-- [Learn More](#learn-more)
-- [Quiz](#quiz)
-- [Ethical Considerations](#ethical-considerations)
-- [Mobile Functionality](#mobile-functionality)
-- [Interactable Design](#interactable-design)
-- [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
-- [Libraries used](#libraries-used)
-- [License](#license)
+- [AntiBio-Advisor](#antibio-advisor)
+  - [Table of Contents](#table-of-contents)
+  - [Motivation](#motivation)
+  - [Proposed Solution](#proposed-solution)
+  - [Chatbot](#chatbot)
+  - [FAQ](#faq)
+  - [Prescription Info](#prescription-info)
+  - [Map](#map)
+  - [Learn More](#learn-more)
+  - [Quiz](#quiz)
+  - [Ethical Considerations](#ethical-considerations)
+  - [Mobile Functionality](#mobile-functionality)
+  - [Interactable Design](#interactable-design)
+  - [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
+  - [Libraries used](#libraries-used)
+  - [License](#license)
 
 ## Motivation
 Antibiotic overuse breeds treatment resistance. This is a global problem that is rapidly increasing and threatens our ability to treat common infectious diseases. 
@@ -141,11 +143,13 @@ The following libraries were used in the development of the web app:
 - [Python Flask for hosting](https://flask.palletsprojects.com/en/2.0.x/)
 
 ## License
+
 ```latex
 Copyright © Antibio Advisor 2023
 Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat
 This project was developed under supervision of Dr Vanessa Camilleri and Mr Gavin Schranz at the University of Malta.
 ```
+<center><img src="Assets/University-of-Malta.png" alt="University of Malta Logo" width="30%"/></center>
 
 <!-- # Note
 
