@@ -49,7 +49,7 @@ The web app features mentioned above needed to be implemented in such a manner t
 
 
 ## Chatbot
-<center><img src="Assets/chatbot.png" alt="Chatbot"/></center>
+<p align='center'><img src="Assets/chatbot.png" alt="Chatbot"/></p>
 
 As outlined above the chatbot has a myriad of different features ranging from:
 * Set of **initial prompts** aimed at providing the user with a possible conversation starter.
@@ -62,7 +62,7 @@ These features and the general chatbot layout was selected whilst keeping the po
 ## FAQ
 The FAQ page is composed of a variety of relevant questions sorted according to relevant age groups these being General, Adult, Child, Elderly. This is done as certain knowledge is more applicable to certain age demographics. Additionally the FAQ can be sorted in accordance with the symptoms these being General, Cough, Rash, Skin Condition.
 
-<center><img src="Assets/faq.png" alt="FAQ"/></center>
+<p align='center'><img src="Assets/faq.png" alt="FAQ"/></p>
 
 Further adding to the intractability of the webpage each question only displays the answer when selected by the user. This can be seen in the image showcased in this slide.
 
@@ -73,17 +73,17 @@ These dropdowns when appropriately selected provide the user with explanations r
 The dropdowns in addition to a sample explanation can be seen in the current slide.
 
 
-<center><img src="Assets/prescription.png" alt="Prescription Info"/></center>
+<p align='center'><img src="Assets/prescription.png" alt="Prescription Info"/></p>
 
 ## Map
 The map was designed to showcase the users nearest pharmacies and general practitioners, this was carried out to provide the user with all the required information they might require to purchase, enquire or return unused antibiotics. In the map the blue markers represent general practitioners and the red markers represent pharmacies.
 
-<center><img src="Assets/map.png" alt="Map"/></center>
+<p align='center'><img src="Assets/map.png" alt="Map"/></p>
 
 ## Learn More
 The Learn More page similar to the FAQ page provides the user with a further degree of general information on the topic of AMR in contrast to the specific information presented in the FAQ page.
 
-<center><img src="Assets/learnMore5.jpg" alt="Learn More"/></center>
+<p align='center'><img src="Assets/learnMore5.jpg" alt="Learn More"/></p>
 
 This page contains an informative video alongside an interactive carousel composed of several infographics and informative paragraphs. This can be seen in the current slide.
 
@@ -92,7 +92,7 @@ This page contains an informative video alongside an interactive carousel compos
 
 The webapp also includes a quiz  web page which compiles four questions from a possible set. This provides users a fun and engaging manner by which they can test their knowledge on AMR. Upon submitting the quiz users are provided with the correct answer where applicable in addition to a score showcased in the coming slide.   Furthermore the quiz can be regenerated multiple times and additional question can easily be added through the editing of a simple .json file.
 
-<center><img src="Assets/quiz.png" alt="Quiz" width="70%"/></center>
+<p align='center'><img src="Assets/quiz.png" alt="Quiz" width="70%"/></p>
 
 
 ## Ethical Considerations
@@ -100,14 +100,14 @@ The website is not intended to replace medical advice, and the chatbot is not a 
 
 Moreover, **no user data is stored or kept**, ensuring that no chatbot history or personal information is stored on the platform or any cloud storage system. 
 
-<center><img src="Assets/ethical_considerations.png" alt="Ethical Considerations"/></center>
+<p align='center'><img src="Assets/ethical_considerations.png" alt="Ethical Considerations"/></p>
 
 
 ## Mobile Functionality
 The web app is designed to be used on a variety of different devices ranging from mobile phones to tablets and computers. This is achieved through the use of a dynamic page size which adapts to the screen size of the device being used. This ensures that the web app is usable on a variety of different devices and maintains the ease of use of the web app.
 
 
-<center><img src="Assets/optimised_design.png" alt="Mobile Design"/></center>
+<p align='center'><img src="Assets/optimised_design.png" alt="Mobile Design"/></p>
 
 ## Interactable Design
 The web app offers feedback to the user in the form of different bot expressions. This is achieved through the use of different images which are displayed depending on the current state of the demo bot.
@@ -132,7 +132,7 @@ The design of the web app was a long and arduous process which required a lot of
 2. **Computer Prototyping** - This stage involved the creation of a computer prototype which was used to gather feedback in the form of recommendations and improvements. This feedback was then used to improve the design of the web app. Additionally, in this stage improvements from the previous stage were implemented into the design.
 3. **Final Design** - This stage involved the creation of the final design which utilised the feedback gathered from the previous stages to create a final design which was then implemented into the web app.
    
-<center><img src="Assets/design.png" alt="Design"/></center>
+<p align='center'><img src="Assets/design.png" alt="Design"/></p>
 
 ## Libraries used
 The following libraries were used in the development of the web app:
@@ -149,7 +149,7 @@ Copyright © Antibio Advisor 2023
 Created by: Matthias Bartolo, Jerome Agius and Isaac Muscat
 This project was developed under supervision of Dr Vanessa Camilleri and Mr Gavin Schranz at the University of Malta.
 ```
-<center><img src="Assets/University-of-Malta.png" alt="University of Malta Logo" width="30%"/></center>
+<p align='center'><img src="Assets/University-of-Malta.png" alt="University of Malta Logo" width="30%"/></p>
 
 <!-- # Note
 
