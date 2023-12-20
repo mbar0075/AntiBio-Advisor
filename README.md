@@ -70,7 +70,7 @@ Further adding to the intractability of the webpage each question only displays 
 The main components of the Prescription Info page showcased here consist of three dropdowns relating to the **antibiotic name**, **abbreviations** and **notations** used by doctors when prescribing medicine. 
 
 These dropdowns when appropriately selected provide the user with explanations regarding their antibiotics and the relevant dosages as denoted by a medical professionals prescription notation. 
-The dropdowns in addition to a sample explanation can be seen in the current slide.
+The dropdowns in addition to a sample explanation can be seen below.
 
 
 <p align='center'><img src="Assets/prescription.png" alt="Prescription Info"/></p>
@@ -85,15 +85,13 @@ The Learn More page similar to the FAQ page provides the user with a further deg
 
 <p align='center'><img src="Assets/learnMore5.jpg" alt="Learn More"/></p>
 
-This page contains an informative video alongside an interactive carousel composed of several infographics and informative paragraphs. This can be seen in the current slide.
-
+This page contains an informative video alongside an interactive carousel composed of several infographics and informative paragraphs.
 
 ## Quiz
 
-The webapp also includes a quiz  web page which compiles four questions from a possible set. This provides users a fun and engaging manner by which they can test their knowledge on AMR. Upon submitting the quiz users are provided with the correct answer where applicable in addition to a score showcased in the coming slide.   Furthermore the quiz can be regenerated multiple times and additional question can easily be added through the editing of a simple .json file.
+The webapp also includes a quiz  web page which compiles four questions from a possible set. This provides users a fun and engaging manner by which they can test their knowledge on AMR. Upon submitting the quiz users are provided with the correct answer where applicable in addition to a score showcased below. Furthermore the quiz can be regenerated multiple times and additional question can easily be added through the editing of a simple .json file.
 
 <p align='center'><img src="Assets/quiz.png" alt="Quiz" width="70%"/></p>
-
 
 ## Ethical Considerations
 The website is not intended to replace medical advice, and the chatbot is not a substitute for a doctor. The chatbot is intended to provide general information and guidance on antibiotics and their use. Additionally, a **disclaimer** is provided on the chatbot page to ensure that users are aware of the chatbot's limitations.
