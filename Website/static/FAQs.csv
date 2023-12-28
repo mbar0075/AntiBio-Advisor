@@ -1,4 +1,4 @@
-Question,Age,Symptoms,User Query,Chatbot Response
+Question,Age,Symptoms,Query,Response
 1,General,General,Do I need antibiotics for a cold?,"No, colds are caused by viruses, and antibiotics cannot kill viruses. They are used for bacterial infections. Rest and hydration are recommended for colds."
 2,General,General,Can I drink alcohol while taking antibiotics?,"It's best to avoid alcohol while on antibiotics as it can interfere with their effectiveness and might cause side effects. Follow your doctor's advice."
 3,General,General,Should I take antibiotics for the flu?,"No, the flu is viral. Antibiotics won't help; they treat bacterial infections. Rest and symptom relief are usually recommended."
