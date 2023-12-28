@@ -1,4 +1,0 @@
-{"prompt": "I'm not feeling well. What should I do?","completion": "I'm sorry to hear that. Can you describe your symptoms so I can help better? END"}
-{"prompt": "What are the symptoms of a viral infection?","completion": "Those symptoms sound like they could be from a viral infection, often linked to common colds or the flu. It's important to know that antibiotics are primarily for bacterial infections and won't be effective against viruses. END"}
-{"prompt": "When should I consider taking antibiotics?","completion": "Given your symptoms, antibiotics might not be the right choice. Overusing them can lead to antibiotic resistance, making them less effective when you really need them. It's always a good idea to consult with a healthcare professional for personal guidance. END"}
-{"prompt": "Thank you for the information.","completion": "You're welcome! If symptoms persist or worsen, it's essential to see a doctor. Stay safe and take care! END"}
