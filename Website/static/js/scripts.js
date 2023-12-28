@@ -12,7 +12,7 @@ homeDemoText = [
     "The microphone button allows you to communicate with the chatbot through voice input instead of typing.",
     "The speaking icon can be used to have the chatbot's responses read aloud.",
     "You can control the speaking volume by using the volume slider.",
-    "These messages serve as optional initial prompts."
+    "The initial four messsages provided serve as optional initial prompts."
 ];
 
 homePopupReferenceList = ["userInput", "chatBotSendButton", "chatBotClearButton", "toggleSpeechRecognition", "speak", "chatVolumeSlider", "example-message"];
@@ -29,7 +29,7 @@ prescriptionInfoReferenceList = ["antibiotics-dropdown", "notations-dropdown-con
 mapDemoText = [
     "This here is the map.",
     "Click on a marker on the map. The red markers represent pharmacies whilst the blue markers represent General Practitioners.",
-    "A route is now displayed."
+    "Clicking on a marker will display the shortest route to it."
 ];
 
 mapPopupReferenceList = ["map", "map", "map"]
@@ -241,15 +241,16 @@ function nextPopup() {
         document.getElementById("popup-container-bot-img").src = "/static/assets/img/demo-bot-talking.png";
     }
 
+    console.log(popupTextList[window.location.pathname].indexOf(popupText))
+
     if (popupTextList[window.location.pathname].indexOf(popupText) == popupTextList[window.location.pathname].length - 1) {
-        document.getElementById(currentReferencePopup).style.zIndex = 0;
-        document.getElementById(currentReferencePopup).style.pointerEvents = "auto";
         closeDemo();
     } else {
         document.getElementById(currentReferencePopup).style.zIndex = 0;
         document.getElementById(currentReferencePopup).style.pointerEvents = "auto";
         currentReferencePopup = popupReferenceList[window.location.pathname][popupReferenceList[window.location.pathname].indexOf(currentReferencePopup) + 1];
         popupText = popupTextList[window.location.pathname][popupTextList[window.location.pathname].indexOf(popupText) + 1];
+        console.log(popupText)
         positionPopup(currentReferencePopup);
     }
 }
@@ -894,12 +895,12 @@ function initMap(userLatitude, userLongitude) {
         if (isPharmacy) {
             // Check if the place is a pharmacy and set a custom pharmacy marker icon
             markerIcon = {
-                url: '../static/assets/img/red_location.png', // Replace with the actual path to your pharmacy marker icon image
+                url: '../static/assets/img/red_location.png',
             };
         } else {
             // Check if the place is a general practitioner and set a custom GP marker icon
             markerIcon = {
-                url: '../static/assets/img/blue_location.png', // Replace with the actual path to your blue GP marker icon image
+                url: '../static/assets/img/blue_location.png',
             };
         }
 
@@ -1107,8 +1108,6 @@ function displayResult(item, questionNumber) {
     // Append the result element to the quiz item
     item.appendChild(resultElement);
 }
-
-
 
 document.addEventListener('DOMContentLoaded', function () {
     var defaultOption = document.getElementById('antibiotic-button-name');

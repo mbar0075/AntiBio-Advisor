@@ -59,8 +59,6 @@ def chat():
 
     # Making the API call
     response = openai.ChatCompletion.create(
-        # model="ft:gpt-3.5-turbo-0613:personal::8AhA1t5R",#"gpt-3.5-turbo",
-        # Updated Model on Gavin Dataset (20 Rows)
         model="ft:gpt-3.5-turbo-0613:personal::8DtuUj6k",
         messages=conversation
     )
