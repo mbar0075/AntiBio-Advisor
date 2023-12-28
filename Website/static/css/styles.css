@@ -4238,6 +4238,7 @@ fieldset:disabled .btn {
   color: var(--bs-nav-link-color);
   text-decoration: none;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out;
+  cursor: pointer;
 }
 
 @media (prefers-reduced-motion: reduce) {
