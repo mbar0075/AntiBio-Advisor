@@ -4,27 +4,25 @@ An intelligent interface project targeted towards educating people of different 
 This will be done by educating users through the use of a simple to use chat-bot which will answer varied questions relating to antibiotics and its use.
 
 
-https://github.com/mbar0075/AntiBio-Advisor/assets/103250564/2c108b3f-d468-40dc-aa58-7efefce3ce30
+https://github.com/mbar0075/AntiBio-Advisor/assets/103250564/834ce46d-2536-4d0d-986c-8e461aaf2c36
 
 
 
 ## Table of Contents
-- [AntiBio-Advisor](#antibio-advisor)
-  - [Table of Contents](#table-of-contents)
-  - [Motivation](#motivation)
-  - [Proposed Solution](#proposed-solution)
-  - [Chatbot](#chatbot)
-  - [FAQ](#faq)
-  - [Prescription Info](#prescription-info)
-  - [Map](#map)
-  - [Learn More](#learn-more)
-  - [Quiz](#quiz)
-  - [Ethical Considerations](#ethical-considerations)
-  - [Mobile Functionality](#mobile-functionality)
-  - [Interactable Design](#interactable-design)
-  - [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
-  - [Libraries used](#libraries-used)
-  - [License](#license)
+- [Motivation](#motivation)
+- [Proposed Solution](#proposed-solution)
+- [Chatbot](#chatbot)
+- [FAQ](#faq)
+- [Prescription Info](#prescription-info)
+- [Map](#map)
+- [Learn More](#learn-more)
+- [Quiz](#quiz)
+- [Ethical Considerations](#ethical-considerations)
+- [Mobile Functionality](#mobile-functionality)
+- [Interactable Design](#interactable-design)
+- [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
+- [Libraries used](#libraries-used)
+- [License](#license)
 
 ## Motivation
 Antibiotic overuse breeds treatment resistance. This is a global problem that is rapidly increasing and threatens our ability to treat common infectious diseases. 
