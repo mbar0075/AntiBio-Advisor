@@ -1,7 +1,9 @@
 # AntiBio-Advisor
+<p align="justify">
 An intelligent interface project targeted towards educating people of different ages about when and why to use antibiotic medication.
 
 This will be done by educating users through the use of a simple to use chat-bot which will answer varied questions relating to antibiotics and its use.
+</p>
 
 
 https://github.com/mbar0075/AntiBio-Advisor/assets/103250564/834ce46d-2536-4d0d-986c-8e461aaf2c36
@@ -9,30 +11,36 @@ https://github.com/mbar0075/AntiBio-Advisor/assets/103250564/834ce46d-2536-4d0d-
 
 
 ## Table of Contents
-- [Motivation](#motivation)
-- [Proposed Solution](#proposed-solution)
-- [Chatbot](#chatbot)
-- [FAQ](#faq)
-- [Prescription Info](#prescription-info)
-- [Map](#map)
-- [Learn More](#learn-more)
-- [Quiz](#quiz)
-- [Ethical Considerations](#ethical-considerations)
-- [Mobile Functionality](#mobile-functionality)
-- [Interactable Design](#interactable-design)
-- [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
-- [Libraries used](#libraries-used)
-- [License](#license)
+- [AntiBio-Advisor](#antibio-advisor)
+  - [Table of Contents](#table-of-contents)
+  - [Motivation](#motivation)
+  - [Proposed Solution](#proposed-solution)
+  - [Chatbot](#chatbot)
+  - [FAQ](#faq)
+  - [Prescription Info](#prescription-info)
+  - [Map](#map)
+  - [Learn More](#learn-more)
+  - [Quiz](#quiz)
+  - [Ethical Considerations](#ethical-considerations)
+  - [Mobile Functionality](#mobile-functionality)
+  - [Interactable Design](#interactable-design)
+  - [A Good Design takes a lot of Effort, Feedback and Time](#a-good-design-takes-a-lot-of-effort-feedback-and-time)
+  - [Libraries used](#libraries-used)
+  - [License](#license)
 
 ## Motivation
+<p align="justify">
 Antibiotic overuse breeds treatment resistance. This is a global problem that is rapidly increasing and threatens our ability to treat common infectious diseases. 
 
 According to the **World Health Organisation**: "**Antimicrobials** - including antibiotics, antivirals, antifungals and antiparasitics - are medicines used to prevent and treat infections in humans, animals and plants."
 Excessive antibiotic use leads to heightened drug resistance, impacting treatment efficacy and complicating infection management, posing severe health risks.
 
 **Antimicrobial Resistance (AMR)** generates drug-resistant organisms globally, limiting treatment options, inflating healthcare costs, and elevating risks during medical procedures, necessitating urgent prevention and treatment strategies.
+</p>
 
 ## Proposed Solution
+<p align="justify">
+
 **Antibio Advisor**, a web app tailored for individuals 18 or older but available for all. Our web app offers an array of vital features: an intelligent chatbot for medical guidance, an interactive map to locate pharmacies and general practitioners, and a comprehensive term guide. 
 
 Prioritising user awareness, our platform provides essential information in the form of a FAQs page, an informative Quiz and a prescription info page.
@@ -44,10 +52,13 @@ The web app features mentioned above needed to be implemented in such a manner t
 * **Colourful** and **simple** interface to ensure easy navigation.
 * **Elderly individuals** were also considered through the use of a large font to ensure ease of use.
 
+</p>
 
 
 ## Chatbot
 <p align='center'><img src="Assets/chatbot.png" alt="Chatbot"/></p>
+
+<p align="justify">
 
 As outlined above the chatbot has a myriad of different features ranging from:
 * Set of **initial prompts** aimed at providing the user with a possible conversation starter.
@@ -57,56 +68,90 @@ As outlined above the chatbot has a myriad of different features ranging from:
 
 These features and the general chatbot layout was selected whilst keeping the possible users in mind to ensure a pleasant user experience. Additionally the UIs adaptability to different screen sizes maintains the ease of use of the chatbot and its features.
 
+</p>
+
 ## FAQ
+
+<p align="justify">
 The FAQ page is composed of a variety of relevant questions sorted according to relevant age groups these being General, Adult, Child, Elderly. This is done as certain knowledge is more applicable to certain age demographics. Additionally the FAQ can be sorted in accordance with the symptoms these being General, Cough, Rash, Skin Condition.
 
 <p align='center'><img src="Assets/faq.png" alt="FAQ"/></p>
 
 Further adding to the intractability of the webpage each question only displays the answer when selected by the user. This can be seen in the image showcased in this slide.
 
+</p>
+
 ## Prescription Info
+
+<p align="justify">
+
 The main components of the Prescription Info page showcased here consist of three dropdowns relating to the **antibiotic name**, **abbreviations** and **notations** used by doctors when prescribing medicine. 
 
 These dropdowns when appropriately selected provide the user with explanations regarding their antibiotics and the relevant dosages as denoted by a medical professionals prescription notation. 
 The dropdowns in addition to a sample explanation can be seen below.
 
+</p>
 
 <p align='center'><img src="Assets/prescription.png" alt="Prescription Info"/></p>
 
 ## Map
+<p align="justify">
+
 The map was designed to showcase the users nearest pharmacies and general practitioners, this was carried out to provide the user with all the required information they might require to purchase, enquire or return unused antibiotics. In the map the blue markers represent general practitioners and the red markers represent pharmacies.
+
+</p>
 
 <p align='center'><img src="Assets/map.png" alt="Map"/></p>
 
 ## Learn More
+
+<p align="justify">
 The Learn More page similar to the FAQ page provides the user with a further degree of general information on the topic of AMR in contrast to the specific information presented in the FAQ page.
 
 <p align='center'><img src="Assets/learnMore5.jpg" alt="Learn More"/></p>
 
 This page contains an informative video alongside an interactive carousel composed of several infographics and informative paragraphs.
 
+</p>
+
 ## Quiz
 
+<p align="justify">
+
 The webapp also includes a quiz  web page which compiles four questions from a possible set. This provides users a fun and engaging manner by which they can test their knowledge on AMR. Upon submitting the quiz users are provided with the correct answer where applicable in addition to a score showcased below. Furthermore the quiz can be regenerated multiple times and additional question can easily be added through the editing of a simple .json file.
+</p>
 
 <p align='center'><img src="Assets/quiz.png" alt="Quiz" width="70%"/></p>
 
 ## Ethical Considerations
+
+<p align="justify">
+
 The website is not intended to replace medical advice, and the chatbot is not a substitute for a doctor. The chatbot is intended to provide general information and guidance on antibiotics and their use. Additionally, a **disclaimer** is provided on the chatbot page to ensure that users are aware of the chatbot's limitations.
 
 Moreover, **no user data is stored or kept**, ensuring that no chatbot history or personal information is stored on the platform or any cloud storage system. 
+
+</p>
 
 <p align='center'><img src="Assets/ethical_considerations.png" alt="Ethical Considerations"/></p>
 
 
 ## Mobile Functionality
+
+<p align="justify">
+
 The web app is designed to be used on a variety of different devices ranging from mobile phones to tablets and computers. This is achieved through the use of a dynamic page size which adapts to the screen size of the device being used. This ensures that the web app is usable on a variety of different devices and maintains the ease of use of the web app.
 
+</p>
 
 <p align='center'><img src="Assets/optimised_design.png" alt="Mobile Design"/></p>
 
 ## Interactable Design
+
+<p align="justify">
 The web app offers feedback to the user in the form of different bot expressions. This is achieved through the use of different images which are displayed depending on the current state of the demo bot.
+
+</p>
 
 <table>
   <tr>
@@ -123,11 +168,15 @@ The web app offers feedback to the user in the form of different bot expressions
 
 ## A Good Design takes a lot of Effort, Feedback and Time
 
+<p align="justify">
+
 The design of the web app was a long and arduous process which required a lot of effort and feedback. The design process was broken down into 3 main stages:
 1. **Paper Prototyping** - This stage involved the creation of a paper prototype which was used to gather feedback from potential users. This feedback was then used to improve the design of the web app.
 2. **Computer Prototyping** - This stage involved the creation of a computer prototype which was used to gather feedback in the form of recommendations and improvements. This feedback was then used to improve the design of the web app. Additionally, in this stage improvements from the previous stage were implemented into the design.
 3. **Final Design** - This stage involved the creation of the final design which utilised the feedback gathered from the previous stages to create a final design which was then implemented into the web app.
    
+</p>
+
 <p align='center'><img src="Assets/design.png" alt="Design"/></p>
 
 ## Libraries used
